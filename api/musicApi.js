@@ -31,7 +31,7 @@ export const getMusics = async () => {
 
 // uuid에 해당하는 글을 두번째 파라미터의 글로 수정합니다.
 export const editMusic = (uuid, newMusic) => {
-    axios.patch(SERVER_URL + "/musics/" + uuid, newMusic)
+    axios.put(SERVER_URL + "/musics/" + uuid, newMusic)
 }
 
 // uuid에 해당하는 글을 삭제합니다.
