@@ -63,7 +63,7 @@ export const deleteUser = (id) => {
 
 // id에 해당하는 유저를 newUser로 교체합니다.
 export const updateUser = (id, newUser) => {
-    axios.patch(SERVER_URL + "/users/" + id, newUser)
+    axios.put(SERVER_URL + "/users/" + id, newUser)
 }
 // id에 해당하는 유저의 이메일로 비밀번호 재설정 메일을 보냅니다.
 // (주의: 못 할 수도 있음. 가능하면 쓰지 마)

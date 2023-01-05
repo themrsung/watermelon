@@ -34,7 +34,7 @@ export const getComments = async (musicUuid) => {
 
 // commentUuid에 해당하는 댓글을 두번째 파라미터의 댓글로 수정합니다.
 export const editComment = (commentUuid, newComment) => {
-    axios.patch(SERVER_URL + "/comments/" + commentUuid, newComment)
+    axios.put(SERVER_URL + "/comments/" + commentUuid, newComment)
 }
 
 // commentUuid에 해당하는 댓글을 삭제합니다.

@@ -30,7 +30,7 @@ export const getPlaylists = async () => {
 
 // playlistUuid에 해당하는 playlist를 newPlaylist로 수정합니다.
 export const editPlaylist = (playlistUuid, newPlaylist) => {
-    axios.patch(SERVER_URL + "/playlists/" + playlistUuid, newPlaylist)
+    axios.put(SERVER_URL + "/playlists/" + playlistUuid, newPlaylist)
 }
 
 // playlistUuid에 해당하는 playlist를 삭제합니다.
