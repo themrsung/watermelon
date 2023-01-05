@@ -3,17 +3,12 @@ import {} from "react-native"
 import styled from "@emotion/native"
 import Header from "./components/Header"
 
-const SafeAreaView = styled.SafeAreaView`
-    display: flex;
-    flex-direction: row;
-
-    margin: 30px 0;
-`
+const SafeAreaView = styled.SafeAreaView``
 
 export default function App() {
     return (
         <SafeAreaView>
-            <Header />
+            <Header></Header>
             <StatusBar style="auto" />
         </SafeAreaView>
     )

@@ -12,12 +12,7 @@
             "backgroundColor": "#ffffff"
         },
         "updates": {
-            "fallbackToCacheTimeout": 0,
-<<<<<<< HEAD
-            "url": "https://u.expo.dev/ff3d93e2-70df-4c6c-963d-79df23fa1258"
-=======
-            "url": "https://u.expo.dev/aabc0ffa-3a87-4dbb-9031-faa66c1050cd"
->>>>>>> 1a3cc90ba729b08756e51b4d22254ff0826b657e
+            "fallbackToCacheTimeout": 0
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
@@ -34,11 +29,7 @@
         },
         "extra": {
             "eas": {
-<<<<<<< HEAD
-                "projectId": "ff3d93e2-70df-4c6c-963d-79df23fa1258"
-=======
                 "projectId": "aabc0ffa-3a87-4dbb-9031-faa66c1050cd"
->>>>>>> 1a3cc90ba729b08756e51b4d22254ff0826b657e
             }
         },
         "owner": "themrsung"

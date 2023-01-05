@@ -7,7 +7,7 @@ const SafeAreaView = styled.SafeAreaView`
     display: flex;
     flex-direction: row;
 
-    margin: 30px 0;
+    padding: 30px 0;
 `
 
 export default function App() {
