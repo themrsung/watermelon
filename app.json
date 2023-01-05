@@ -12,7 +12,8 @@
             "backgroundColor": "#ffffff"
         },
         "updates": {
-            "fallbackToCacheTimeout": 0
+            "fallbackToCacheTimeout": 0,
+            "url": "https://u.expo.dev/ff3d93e2-70df-4c6c-963d-79df23fa1258"
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
@@ -29,7 +30,7 @@
         },
         "extra": {
             "eas": {
-                "projectId": "d7b9f829-d942-40ac-9969-a8b91358d994"
+                "projectId": "ff3d93e2-70df-4c6c-963d-79df23fa1258"
             }
         },
         "owner": "themrsung"
