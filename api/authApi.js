@@ -16,7 +16,17 @@ export const login = (id, password) => {
         return "user found, but not valid"
     }
 
-    if (matchingUser.password !== HashPassword.v1(password)) {
+    let hashedPassword = ""
+
+    switch (matchingUser.passwordHashVersion) {
+        case "v1":
+            hashedPassword = HashPassword.v1(password)
+            break
+        default:
+            hashedPassword = HashPassword.v1(password)
+    }
+
+    if (hashedPassword !== matchingUser.password) {
         return "wrong password"
     }
 
@@ -39,7 +49,8 @@ export const register = (id, password, name, email) => {
         id: id,
         password: HashPassword.v1(password),
         name: name,
-        email: email
+        email: email,
+        passwordHashVersion: "v1"
     }
 
     axios.post(SERVER_URL + "/users/" + id, user)
