@@ -1,7 +1,7 @@
 // Authentication API
 
 import axios from "axios"
-import { SERVER_URL } from "./serverUrl"
+import { SERVER_URL } from "./apiSettings"
 
 // 로그인하는 함수입니다. 알아서 쓰세요.
 export const login = (id, password) => {
@@ -73,16 +73,21 @@ export const sendChangePasswordEmailToUser = (id) => {
 
 export const getUser = async (id) => {
     const response = await axios.get(SERVER_URL + "/users/" + id)
-    if (response) {
-        return response.data
+
+    if (!response) {
+        return {}
     }
+
+    return response.data
 }
 
 export const getUsers = async () => {
     const response = await axios.get(SERVER_URL + "/users")
-    if (response) {
-        return response.data
+    if (!response) {
+        return []
     }
+
+    return response.data
 }
 
 export class HashPassword {

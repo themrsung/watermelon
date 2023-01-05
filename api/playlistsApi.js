@@ -1,7 +1,7 @@
 // Playlists API
 
 import axios from "axios"
-import { SERVER_URL } from "./serverUrl"
+import { SERVER_URL } from "./apiSettings"
 import uuid from "react-native-uuid"
 // playlist를 등록합니다.
 export const createPlaylist = (playlist) => {
@@ -15,17 +15,23 @@ export const createPlaylist = (playlist) => {
 // playlistUuid에 해당하는 playlist를 가져옵니다.
 export const getPlaylist = async (playlistUuid) => {
     const response = await axios.get(SERVER_URL + "/playlists/" + playlistUuid)
-    if (response) {
-        return response.data
+
+    if (!response) {
+        return {}
     }
+
+    return response.data
 }
 
 // playlist를 전부 가져옵니다.
 export const getPlaylists = async () => {
     const response = await axios.get(SERVER_URL + "/playlists")
-    if (response) {
-        return response.data
+
+    if (!response) {
+        return []
     }
+
+    return response.data
 }
 
 // playlistUuid에 해당하는 playlist를 newPlaylist로 수정합니다.
