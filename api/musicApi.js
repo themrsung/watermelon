@@ -49,34 +49,20 @@ export const getMusics = async () => {
 }
 
 export const getMusicMetadataFromYouTube = async (musicUuid) => {
-    // const music = await getMusic(musicUuid)
-    // console.log(music.musicLink)
-    // const response = await fetch(music.musicLink)
-    // const htmlString = await response.text()
+    const music = await getMusic(musicUuid)
+    console.log(music.musicLink)
+    const response = await fetch(music.musicLink)
+    const htmlString = await response.text()
 
-    // const $ = load(htmlString)
+    const $ = load(htmlString)
 
-    // const title = $("#title > h1 > yt-formatted-string").text()
-    // const artist = $("#text > a").text()
-
-    // return {
-    //     title: title,
-    //     artist: artist
-    // }
-
-    // const response = await fetch(
-    //     "https://music.youtube.com/watch?v=RF32rudhICE&list=RDAMVMRF32rudhICE"
-    // )
-    // const htmlString = await response.text()
-    // const $ = load(htmlString)
-    // const title = $(
-    //     "#layout > ytmusic-player-bar > div.middle-controls.style-scope.ytmusic-player-bar > div.content-info-wrapper.style-scope.ytmusic-player-bar > yt-formatted-string"
-    // ).text()
-    // console.log("asd", title)
+    const artistAndTitle = $("title").text()
+    const artist = artistAndTitle.split(" - ")[0]
+    const title = artistAndTitle.split(" - ")[1]
 
     return {
-        title: "title",
-        artist: "artist"
+        title: title,
+        artist: artist
     }
 }
 
