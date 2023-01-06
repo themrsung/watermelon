@@ -3,6 +3,7 @@ import { View, Text } from "react-native"
 import styled from "@emotion/native"
 import Header from "./components/Header"
 import ScrollContents from "./components/ScrollContents"
+import PlayList from "./components/PlayList"
 import PlayMusic from "./components/PlayMusic"
 import { getMusicMetadataFromYouTube, getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
@@ -32,7 +33,7 @@ export default function App() {
     return (
         <SafeAreaView>
             <Header />
-
+            {/* <PlayList /> */}
             <ScrollContents />
             <PlayMusic />
             <StatusBar style="auto" />
