@@ -35,7 +35,7 @@ export default function App() {
             <Header />
             {/* <PlayList /> */}
             <ScrollContents />
-            <PlayMusic />
+            {/* <PlayMusic /> */}
             <StatusBar style="auto" />
             {/* <View>
                 <Text>test</Text>
