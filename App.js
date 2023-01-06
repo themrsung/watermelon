@@ -20,8 +20,8 @@ export default function App() {
         <SafeAreaView>
             <Header />
 
-            {/* <ScrollContents /> */}
-            <PlayMusic />
+            <ScrollContents />
+            {/* <PlayMusic /> */}
             <StatusBar style="auto" />
         </SafeAreaView>
     )
