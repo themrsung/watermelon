@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, Text } from "react-native"
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native"
 import styled from "@emotion/native"
 
 const PlayMusicView = styled.View`
