@@ -31,12 +31,17 @@ export const login = (id, password) => {
         return "wrong password"
     }
 
+    currentSessionStore.handleSetCurrentSession({
+        id: id
+    })
+
     return "login succeeded"
 }
 
 // 로그아웃입니다. 콜하시면 세션이 사라져요!
 export const logout = () => {
-    // clear session
+    currentSessionStore.handleClearCurrentSession()
+
     return "성공"
 }
 
