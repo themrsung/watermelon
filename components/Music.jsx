@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { getMusic, getMusicMetadataFromYouTube } from "../api/musicApi"
 
 export default function Music({ musicUuid }) {
@@ -17,6 +18,10 @@ export default function Music({ musicUuid }) {
         setMusic(fetchedMusic)
         setMusicMetadata(fetchedMusicMetadata)
     }
+
+    useEffect(() => {
+        fetchMusicAndMetadata()
+    }, [])
 
     // 음악 => music
     // 음악 제목 => musicMetadata.title
