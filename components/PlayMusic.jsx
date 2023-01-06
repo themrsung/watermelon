@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, Text } from "react-native"
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native"
 import styled from "@emotion/native"
 
 const PlayMusicView = styled.View`
@@ -18,7 +18,7 @@ const MusicControlView = styled.View`
 
 export default function PlayMusic() {
     return (
-        <PlayMusicView>
+        <View style={styles.container}>
             <MusicTitleView>
                 <HorizontalView>
                     <TouchableOpacity>
@@ -78,6 +78,15 @@ export default function PlayMusic() {
                     </TouchableOpacity>
                 </View>
             </MusicControlView>
-        </PlayMusicView>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "stretch",
+        justifyContent: "center"
+    },
+    musicTitle: {}
+})
