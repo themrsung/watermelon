@@ -9,6 +9,7 @@ import {
     SERVER_URL
 } from "./apiSettings"
 import uuid from "react-native-uuid"
+import { Cheerio } from "cheerio"
 
 // 글쓰기입니다. 오류내시면 서버에 그대로 들어가요.
 export const createMusic = async (music) => {
@@ -28,7 +29,21 @@ export const getMusic = async (uuid) => {
         return {}
     }
 
-    return response.data
+    let music = response.data
+    music.musicTitle = await getMusicTitleFromYouTube(music.musicLink)
+    music.musicArtist = await getMusicArtistFromYouTube(music.musicLink)
+
+    return music
+}
+
+const getMusicTitleFromYouTube = async (ytLink) => {
+    // crawl youtube for title
+    return "title (테스트)"
+}
+
+const getMusicArtistFromYouTube = async (ytLink) => {
+    // crawl youtube for channel name
+    return "artist (테스트)"
 }
 
 // 글을 전부 가져옵니다. filter는 알아서 돌리세요ㅋ
