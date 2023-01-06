@@ -83,7 +83,7 @@ export const register = async (id, password, name, email) => {
     return REGISTER_SUCCEEDED
 }
 
-// 회원을 삭제시킵(?)니다.
+// id에 해당하는 유저를 삭제합니다.
 export const deleteUser = async (id) => {
     const response = await axios.delete(SERVER_URL + "/users/" + id)
 
