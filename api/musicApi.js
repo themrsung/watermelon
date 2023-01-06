@@ -23,35 +23,19 @@ export const createMusic = async (music) => {
 
 // 글 1개를 가져옵니다.
 export const getMusic = async (uuid) => {
-    const response = await axios.get(SERVER_URL + "/musics/" + uuid)
+    const response = await axios.get(SERVER_URL + "/musics")
 
     if (!response) {
         return {}
     }
 
-    let music = response.data
-    const musicMetadata = await getMusicMetadataFromYouTube(music.musicLink)
-    music.musicTitle = musicMetadata.title
-    music.musicArtist = musicMetadata.artist
-
-    return music
-}
-
-const getMusicMetadataFromYouTube = async (ytLink) => {
-    const response = await fetch(ytLink)
-    const htmlString = await response.text()
-
-    const $ = load(htmlString)
-
-    const title = $("#title > h1").text()
-    const artist = $(
-        "#channel-name > div > div > yt-formatted-string > a"
-    ).text()
-
-    return {
-        title: title,
-        artist: artist
+    const matchingMusics = response.data.filter((m) => m.uuid === uuid)
+    if (matchingMusics.length < 1) {
+        return {}
     }
+
+    const matchingMusic = matchingMusics[0]
+    return matchingMusic
 }
 
 // 글을 전부 가져옵니다. filter는 알아서 돌리세요ㅋ
@@ -62,6 +46,38 @@ export const getMusics = async () => {
     }
 
     return response.data
+}
+
+export const getMusicMetadataFromYouTube = async (musicUuid) => {
+    // const music = await getMusic(musicUuid)
+    // console.log(music.musicLink)
+    // const response = await fetch(music.musicLink)
+    // const htmlString = await response.text()
+
+    // const $ = load(htmlString)
+
+    // const title = $("#title > h1 > yt-formatted-string").text()
+    // const artist = $("#text > a").text()
+
+    // return {
+    //     title: title,
+    //     artist: artist
+    // }
+
+    // const response = await fetch(
+    //     "https://music.youtube.com/watch?v=RF32rudhICE&list=RDAMVMRF32rudhICE"
+    // )
+    // const htmlString = await response.text()
+    // const $ = load(htmlString)
+    // const title = $(
+    //     "#layout > ytmusic-player-bar > div.middle-controls.style-scope.ytmusic-player-bar > div.content-info-wrapper.style-scope.ytmusic-player-bar > yt-formatted-string"
+    // ).text()
+    // console.log("asd", title)
+
+    return {
+        title: "title",
+        artist: "artist"
+    }
 }
 
 // uuid에 해당하는 글을 두번째 파라미터의 글로 수정합니다.
