@@ -1,6 +1,7 @@
 // Authentication API
 
 import axios from "axios"
+import currentSessionStore from "../store/currentSessionStore"
 import { SERVER_URL } from "./apiSettings"
 
 // 로그인하는 함수입니다. 알아서 쓰세요.
@@ -88,6 +89,10 @@ export const getUsers = async () => {
     }
 
     return response.data
+}
+
+export const getCurrentUserId = () => {
+    return currentSessionStore.currentSession.id
 }
 
 export class HashPassword {
