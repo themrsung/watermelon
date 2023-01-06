@@ -6,7 +6,6 @@ import {
     DELETE_COMMENT_SUCCEEDED,
     EDIT_COMMENT_FAILED,
     EDIT_COMMENT_SUCCEEDED,
-    SERVER_GET_FAILURE_RESPONSE_NOT_OK,
     SERVER_URL
 } from "./apiSettings"
 import uuid from "react-native-uuid"
