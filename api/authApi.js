@@ -77,6 +77,7 @@ export const sendChangePasswordEmailToUser = (id) => {
     return "실패ㅋ"
 }
 
+// id에 해당하는 유저를 리턴합니다.
 export const getUser = async (id) => {
     const response = await axios.get(SERVER_URL + "/users/" + id)
 
@@ -87,6 +88,7 @@ export const getUser = async (id) => {
     return response.data
 }
 
+// 모든 user를 리턴합니다.
 export const getUsers = async () => {
     const response = await axios.get(SERVER_URL + "/users")
     if (!response) {
@@ -96,6 +98,7 @@ export const getUsers = async () => {
     return response.data
 }
 
+// 현재 로그인된 유저가 있을 경우 유저 id를, 없을 경우 “”를 리턴합니다.
 export const getCurrentUserId = () => {
     return currentSessionStore.currentSession.id
 }
