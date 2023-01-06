@@ -13,7 +13,7 @@
         },
         "updates": {
             "fallbackToCacheTimeout": 0,
-            "url": "https://u.expo.dev/aabc0ffa-3a87-4dbb-9031-faa66c1050cd"
+            "url": "https://u.expo.dev/d7b9f829-d942-40ac-9969-a8b91358d994"
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
@@ -30,7 +30,7 @@
         },
         "extra": {
             "eas": {
-                "projectId": "ab03ac63-88bf-4584-993b-b8b364fc3b84"
+                "projectId": "d7b9f829-d942-40ac-9969-a8b91358d994"
             }
         },
         "owner": "themrsung"
