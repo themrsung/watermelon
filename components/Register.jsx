@@ -20,7 +20,7 @@ export default function Register() {
                 <TextInput
                     placeholder="id"
                     value={userId}
-                    onChangeText={setUsetId}
+                    onChangeText={setUserId}
                 />
             </View>
             <View>
