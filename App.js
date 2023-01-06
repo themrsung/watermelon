@@ -33,10 +33,10 @@ export default function App() {
         <SafeAreaView>
             <Header />
 
-            {/* <ScrollContents /> */}
-            {/* <PlayMusic /> */}
-            {/* <StatusBar style="auto" /> */}
-            <View>
+            <ScrollContents />
+            <PlayMusic />
+            <StatusBar style="auto" />
+            {/* <View>
                 <Text>test</Text>
                 {musics.map((music) => {
                     return (
@@ -45,7 +45,7 @@ export default function App() {
                         </View>
                     )
                 })}
-            </View>
+            </View> */}
         </SafeAreaView>
     )
 }
