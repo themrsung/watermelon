@@ -3,6 +3,7 @@ import {} from "react-native"
 import styled from "@emotion/native"
 import FavoriteMusic from "./FavoriteMusic"
 import EventBanner from "./EventBanner"
+import UserProfile from "./UserProfile"
 
 const ContentsWrap = styled.ScrollView`
     width: 100%;
@@ -11,9 +12,9 @@ const ContentsWrap = styled.ScrollView`
 export default function ScrollContents() {
     return (
         <ContentsWrap>
-            <FavoriteMusic />
-
-            <EventBanner />
+            {/* <FavoriteMusic />
+            <EventBanner /> */}
+            <UserProfile />
         </ContentsWrap>
     )
 }
