@@ -1,5 +1,5 @@
 import React from "react"
-import {} from "react-native"
+import { FlatList } from "react-native"
 import styled from "@emotion/native"
 import Swiper from "react-native-swiper"
 import FavoriteMusicList from "./FavoriteMusicList"
@@ -29,6 +29,7 @@ export default function FavoriteMusic() {
             <TitleWrap>
                 <Title>내가 좋아할 음악</Title>
             </TitleWrap>
+
             <Swiper autoplay showsPagination={false} width={350} height={370}>
                 <FavoriteMusicList />
                 <FavoriteMusicList />
