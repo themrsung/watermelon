@@ -38,3 +38,21 @@ export const EDIT_PLAYLIST_FAILED = "플레이리스트 수정 실패"
 
 export const DELETE_PLAYLIST_SUCCEEDED = "플레이리스트 삭제 성공"
 export const DELETE_PLAYLIST_FAILED = "플레이리스트 삭제 실패"
+
+export const ADD_MUSIC_TO_PLAYLIST_SUCCEEDED =
+    "플레이리스트에 음악을 추가했습니다."
+export const ADD_MUSIC_TO_PLAYLIST_FAILED_PLAYLIST_NOT_FOUND =
+    "플레이리스트를 찾을 수 없습니다."
+export const ADD_MUSIC_TO_PLAYLIST_FAILED_MUSIC_NOT_FOUND =
+    "음악을 찾을 수 없습니다."
+export const ADD_MUSIC_TO_PLAYLIST_FAILED =
+    "플레이리스트에 음악을 추가하지 못했습니다."
+
+export const REMOVE_MUSIC_FROM_PLAYLIST_SUCCEEDED =
+    "플레이리스트에서 음악을 삭제했습니다."
+export const REMOVE_MUSIC_FROM_PLAYLIST_FAILED_PLAYLIST_NOT_FOUND =
+    "플레이리스트를 찾을 수 없습니다."
+export const REMOVE_MUSIC_FROM_PLAYLIST_FAILED_MUSIC_NOT_IN_PLAYLIST =
+    "음악이 플레이리스트에 등록되어있지 않습니다."
+export const REMOVE_MUSIC_FROM_PLAYLIST_FAILED =
+    "플레이리스트에서 음악을 삭제하지 못했습니다."
