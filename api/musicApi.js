@@ -9,7 +9,7 @@ import {
     SERVER_URL
 } from "./apiSettings"
 import uuid from "react-native-uuid"
-import { Cheerio } from "cheerio"
+import { load } from "cheerio"
 
 // 글쓰기입니다. 오류내시면 서버에 그대로 들어가요.
 export const createMusic = async (music) => {
@@ -30,20 +30,30 @@ export const getMusic = async (uuid) => {
     }
 
     let music = response.data
-    music.musicTitle = await getMusicTitleFromYouTube(music.musicLink)
-    music.musicArtist = await getMusicArtistFromYouTube(music.musicLink)
+    const musicMetadata = await getMusicTitleAndArtistFromYouTube(
+        music.musicLink
+    )
+    music.musicTitle = musicMetadata.title
+    music.musicArtist = musicMetadata.artist
 
     return music
 }
 
-const getMusicTitleFromYouTube = async (ytLink) => {
-    // crawl youtube for title
-    return "title (테스트)"
-}
+const getMusicMetadataFromYouTube = async (ytLink) => {
+    const response = await fetch(ytLink)
+    const htmlString = await response.text()
 
-const getMusicArtistFromYouTube = async (ytLink) => {
-    // crawl youtube for channel name
-    return "artist (테스트)"
+    const $ = load(htmlString)
+
+    const title = $("#title > h1").text()
+    const artist = $(
+        "#channel-name > div > div > yt-formatted-string > a"
+    ).text()
+
+    return {
+        title: title,
+        artist: artist
+    }
 }
 
 // 글을 전부 가져옵니다. filter는 알아서 돌리세요ㅋ
