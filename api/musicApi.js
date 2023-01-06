@@ -30,9 +30,7 @@ export const getMusic = async (uuid) => {
     }
 
     let music = response.data
-    const musicMetadata = await getMusicTitleAndArtistFromYouTube(
-        music.musicLink
-    )
+    const musicMetadata = await getMusicMetadataFromYouTube(music.musicLink)
     music.musicTitle = musicMetadata.title
     music.musicArtist = musicMetadata.artist
 
