@@ -3,6 +3,7 @@ import {} from "react-native"
 import styled from "@emotion/native"
 import Header from "./components/Header"
 import ScrollContents from "./components/ScrollContents"
+import PlayList from "./components/PlayList"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -18,7 +19,7 @@ export default function App() {
     return (
         <SafeAreaView>
             <Header />
-
+            {/* <PlayList /> */}
             <ScrollContents />
 
             <StatusBar style="auto" />
