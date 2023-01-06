@@ -1,14 +1,24 @@
 // Comments API
 
 import axios from "axios"
-import { SERVER_GET_FAILURE_RESPONSE_NOT_OK, SERVER_URL } from "./apiSettings"
+import {
+    DELETE_COMMENT_FAILED,
+    DELETE_COMMENT_SUCCEEDED,
+    EDIT_COMMENT_FAILED,
+    EDIT_COMMENT_SUCCEEDED,
+    SERVER_URL
+} from "./apiSettings"
+import uuid from "react-native-uuid"
 
 // musicUuid에 해당하는 글에 댓글을 작성합니다.
-export const writeComment = (musicUuid, comment) => {
+export const writeComment = async (musicUuid, comment) => {
     // add musicUuid to comment
     let newComment = comment
     newComment.musicUuid = musicUuid
-    axios.post(SERVER_URL + "/comments", newComment)
+    const newUuid = uuid.v4()
+    newComment.uuid = newUuid
+    await axios.post(SERVER_URL + "/comments", newComment)
+    return newUuid
 }
 
 // musicUuid에 해당하는 글에 댓글을 작성합니다.
@@ -41,11 +51,26 @@ export const getComments = async (musicUuid) => {
 }
 
 // commentUuid에 해당하는 댓글을 두번째 파라미터의 댓글로 수정합니다.
-export const editComment = (commentUuid, newComment) => {
-    axios.put(SERVER_URL + "/comments/" + commentUuid, newComment)
+export const editComment = async (commentUuid, newComment) => {
+    const response = await axios.put(
+        SERVER_URL + "/comments/" + commentUuid,
+        newComment
+    )
+
+    if (!response) {
+        return EDIT_COMMENT_FAILED
+    }
+
+    return EDIT_COMMENT_SUCCEEDED
 }
 
 // commentUuid에 해당하는 댓글을 삭제합니다.
-export const deleteComment = (commentUuid) => {
-    axios.delete(SERVER_URL + "/comments/" + commentUuid)
+export const deleteComment = async (commentUuid) => {
+    const response = await axios.delete(SERVER_URL + "/comments/" + commentUuid)
+
+    if (!response) {
+        return DELETE_COMMENT_FAILED
+    }
+
+    return DELETE_COMMENT_SUCCEEDED
 }
