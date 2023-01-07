@@ -4,7 +4,7 @@ import styled from "@emotion/native"
 
 const Container = styled.View`
     width: 100%;
-    height: 100px;
+    height: 120px;
 `
 
 const ScrollView = styled.ScrollView`

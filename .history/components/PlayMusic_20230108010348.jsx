@@ -147,7 +147,6 @@ const MusicControlView2 = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 `
 
 const MusicControl2IconBtn = styled.TouchableOpacity``

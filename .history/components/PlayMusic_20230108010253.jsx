@@ -147,14 +147,13 @@ const MusicControlView2 = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 `
 
 const MusicControl2IconBtn = styled.TouchableOpacity``
 
 const MusicControl2IconImg = styled.Image`
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
 `
 
 export default function PlayMusic() {
@@ -226,7 +225,6 @@ export default function PlayMusic() {
                         <MusicControlView2>
                             <MusicControl2IconBtn>
                                 <MusicControl2IconImg
-                                    style={{ width: 26, height: 26 }}
                                     source={require("../assets/play5.png")}
                                 />
                             </MusicControl2IconBtn>
@@ -239,7 +237,6 @@ export default function PlayMusic() {
 
                             <MusicControl2IconBtn>
                                 <MusicControl2IconImg
-                                    style={{ width: 26, height: 26 }}
                                     source={require("../assets/play4.png")}
                                 />
                             </MusicControl2IconBtn>

@@ -4,7 +4,7 @@ import styled from "@emotion/native"
 
 const Container = styled.View`
     width: 100%;
-    height: 100px;
+    height: 120px;
 `
 
 const ScrollView = styled.ScrollView`
@@ -13,7 +13,6 @@ const ScrollView = styled.ScrollView`
 `
 
 const LyricText = styled.Text`
-    text-align: center;
     color: rgba(255, 255, 255, 0.6);
     line-height: 30px;
     white-space: pre-line;
