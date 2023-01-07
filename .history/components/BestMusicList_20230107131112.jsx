@@ -1,0 +1,18 @@
+import React from "react"
+import {} from "react-native"
+import styled from "@emotion/native"
+
+const Container = styled.View``
+
+export default function BestMusicList() {
+    const data = [
+        {
+            Number: 1,
+            image: <Image source={require("../assets/image6.png")} />,
+            title: "Ditto",
+            singer: "- NewJeans"
+        }
+    ] //길이가 긴 Array 라고 가정
+
+    return <Container></Container>
+}
