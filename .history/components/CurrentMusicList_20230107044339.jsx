@@ -13,8 +13,8 @@ const FavoriteMusicTitle = styled.Text`
 `
 
 const FavoriteMusicList = styled.View`
-    width: 200;
-    height: 600;
+    width: 200px;
+    height: 600px;
     padding: 16px;
     margin-top: 5px;
     box-sizing: border-box;
