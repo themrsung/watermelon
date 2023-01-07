@@ -18,13 +18,12 @@ const MusicControlView = styled.View`
 
 const styles = StyleSheet.create({
     container: {
-        height: 500,
-        justifyContent: "center",
-        backgroundColor: "pink"
+        flex: 1,
+        alignItems: "stretch",
+        justifyContent: "center"
     },
     musicTitle: {}
 })
-
 export default function PlayMusic() {
     return (
         <View style={styles.container}>

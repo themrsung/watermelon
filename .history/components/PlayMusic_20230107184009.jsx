@@ -13,7 +13,6 @@ const MusicTitleView = styled.View`
 `
 const MusicControlView = styled.View`
     flex-direction: row;
-    margin-top: auto;
 `
 
 const styles = StyleSheet.create({

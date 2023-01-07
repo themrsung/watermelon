@@ -5,7 +5,7 @@ import styled from "@emotion/native"
 const Container = styled.View`
     width: 100%;
     height: 160px;
-    //background-color: yellow;
+    background-color: yellow;
 
     display: flex;
     flex-direction: column;

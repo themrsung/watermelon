@@ -19,6 +19,8 @@ const MusicControlView = styled.View`
 const styles = StyleSheet.create({
     container: {
         height: 500,
+        flex: 1,
+        alignItems: "stretch",
         justifyContent: "center",
         backgroundColor: "pink"
     },

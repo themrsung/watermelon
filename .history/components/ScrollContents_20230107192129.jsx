@@ -11,6 +11,9 @@ import Footer from "./Footer"
 
 const ContentsWrap = styled.ScrollView`
     width: 100%;
+    padding: 14px 20px;
+    box-sizing: border-box;
+    background-color: #5aa469;
 `
 
 export default function ScrollContents() {
