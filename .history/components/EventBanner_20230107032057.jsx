@@ -1,0 +1,23 @@
+import React from "react"
+import {} from "react-native"
+import styled from "@emotion/native"
+import EventBannerList from "./EventBannerList"
+import Swiper from "react-native-swiper"
+
+const Wrap = styled.View`
+    width: 100%;
+    margin-bottom: 20px;
+`
+
+export default function EventBanner() {
+    return (
+        <Wrap>
+            <Swiper autoplay showsPagination={false} width={390} height={130}>
+                <EventBannerList />
+                <EventBannerList />
+                <EventBannerList />
+                <EventBannerList />
+            </Swiper>
+        </Wrap>
+    )
+}
