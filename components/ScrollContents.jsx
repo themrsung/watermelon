@@ -16,13 +16,9 @@ export default function ScrollContents() {
         <ContentsWrap>
             <FavoriteMusic />
             <EventBanner />
-<<<<<<< HEAD
-            <UserProfile />
-=======
             <CurrentMusic />
             <BestMusic />
             {/* <UserProfile /> */}
->>>>>>> 87a2f2e7e39a79725ddd92b66bc9b723ae78a4bd
         </ContentsWrap>
     )
 }
