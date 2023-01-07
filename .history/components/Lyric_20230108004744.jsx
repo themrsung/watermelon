@@ -13,7 +13,6 @@ const ScrollView = styled.ScrollView`
 `
 
 const LyricText = styled.Text`
-    text-align: center;
     color: rgba(255, 255, 255, 0.6);
     line-height: 30px;
     white-space: pre-line;

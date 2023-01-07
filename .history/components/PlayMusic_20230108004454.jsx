@@ -5,9 +5,6 @@ import Lyric from "./Lyric"
 const Container = styled.View`
     width: 100%;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     flex: 1;
 
     position: relative;
@@ -133,29 +130,12 @@ const MusicTitleView = styled.View`
     z-index: 99999;
 `
 const MusicControlView = styled.View`
+    flex-direction: row;
     margin-top: auto;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
 `
-
-const MusicControlView2 = styled.View`
-    width: 50%;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-`
-
 const MusicControl2IconBtn = styled.TouchableOpacity``
 
-const MusicControl2IconImg = styled.Image`
-    width: 30px;
-    height: 30px;
-`
+const MusicControl2IconImg = styled.Image``
 
 export default function PlayMusic() {
     return (
@@ -220,34 +200,6 @@ export default function PlayMusic() {
                         <MusicControl2IconBtn>
                             <MusicControl2IconImg
                                 source={require("../assets/playList.png")}
-                            />
-                        </MusicControl2IconBtn>
-
-                        <MusicControlView2>
-                            <MusicControl2IconBtn>
-                                <MusicControl2IconImg
-                                    style={{ width: 26, height: 26 }}
-                                    source={require("../assets/play5.png")}
-                                />
-                            </MusicControl2IconBtn>
-
-                            <MusicControl2IconBtn>
-                                <MusicControl2IconImg
-                                    source={require("../assets/play3.png")}
-                                />
-                            </MusicControl2IconBtn>
-
-                            <MusicControl2IconBtn>
-                                <MusicControl2IconImg
-                                    style={{ width: 26, height: 26 }}
-                                    source={require("../assets/play4.png")}
-                                />
-                            </MusicControl2IconBtn>
-                        </MusicControlView2>
-
-                        <MusicControl2IconBtn>
-                            <MusicControl2IconImg
-                                source={require("../assets/volume.png")}
                             />
                         </MusicControl2IconBtn>
                     </MusicControlView>

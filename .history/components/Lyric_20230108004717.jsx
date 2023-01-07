@@ -2,10 +2,7 @@ import React from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 
-const Container = styled.View`
-    width: 100%;
-    height: 100px;
-`
+const Container = styled.View``
 
 const ScrollView = styled.ScrollView`
     width: 100%;
@@ -13,7 +10,6 @@ const ScrollView = styled.ScrollView`
 `
 
 const LyricText = styled.Text`
-    text-align: center;
     color: rgba(255, 255, 255, 0.6);
     line-height: 30px;
     white-space: pre-line;
