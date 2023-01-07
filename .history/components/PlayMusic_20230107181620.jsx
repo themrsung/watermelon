@@ -15,19 +15,18 @@ const MusicControlView = styled.View`
     flex-direction: row;
     margin-top: auto;
 `
-
 const styles = StyleSheet.create({
     container: {
-        height: 500,
-        justifyContent: "center",
-        backgroundColor: "pink"
+        flex: 1,
+        alignItems: "stretch",
+        justifyContent: "center"
     },
     musicTitle: {}
 })
 
 export default function PlayMusic() {
     return (
-        <View style={styles.container}>
+        <View>
             <MusicTitleView>
                 <HorizontalView>
                     <TouchableOpacity>

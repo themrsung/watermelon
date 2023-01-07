@@ -7,7 +7,7 @@ const Container = styled.View`
     height: 80px;
     padding: 10px 24px 10px 0;
     box-sizing: border-box;
-    //background-color: lightpink;
+    background-color: lightpink;
 
     display: flex;
     flex-direction: row;

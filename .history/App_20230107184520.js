@@ -8,7 +8,6 @@ import PlayMusic from "./components/PlayMusic"
 import { getMusicMetadataFromYouTube, getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
 import MusicControl from "./components/MusicControl"
-import BottomNav from "./components/BottomNav"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -49,7 +48,6 @@ export default function App() {
                 })}
             </View> */}
             <MusicControl />
-            <BottomNav />
         </SafeAreaView>
     )
 }

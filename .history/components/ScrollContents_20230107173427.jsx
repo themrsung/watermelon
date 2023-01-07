@@ -8,6 +8,7 @@ import CurrentMusic from "./CurrentMusic"
 import BestMusic from "./BestMusic"
 import CurrentMV from "./CurrentMV"
 import Footer from "./Footer"
+import MusicControl from "./MusicControl"
 
 const ContentsWrap = styled.ScrollView`
     width: 100%;
@@ -22,7 +23,7 @@ export default function ScrollContents() {
             <BestMusic />
             <CurrentMV />
             <Footer />
-
+            <MusicControl />
             {/* <UserProfile /> */}
         </ContentsWrap>
     )

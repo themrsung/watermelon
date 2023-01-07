@@ -5,7 +5,6 @@ import styled from "@emotion/native"
 const Container = styled.View`
     width: 100%;
     height: 160px;
-    //background-color: yellow;
 
     display: flex;
     flex-direction: column;
@@ -13,7 +12,7 @@ const Container = styled.View`
 `
 
 const CopyrightBtn = styled.TouchableOpacity`
-    padding-top: 100px;
+    margin-top: 100px;
 
     display: flex;
     flex-direction: row;

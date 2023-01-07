@@ -16,16 +16,8 @@ const MusicControlView = styled.View`
     margin-top: auto;
 `
 
-const styles = StyleSheet.create({
-    container: {
-        height: 500,
-        justifyContent: "center",
-        backgroundColor: "pink"
-    },
-    musicTitle: {}
-})
-
 export default function PlayMusic() {
+    console.log("Afwafwafawf")
     return (
         <View style={styles.container}>
             <MusicTitleView>
@@ -90,3 +82,12 @@ export default function PlayMusic() {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "stretch",
+        justifyContent: "center"
+    },
+    musicTitle: {}
+})

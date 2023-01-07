@@ -7,8 +7,6 @@ import PlayList from "./components/PlayList"
 import PlayMusic from "./components/PlayMusic"
 import { getMusicMetadataFromYouTube, getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
-import MusicControl from "./components/MusicControl"
-import BottomNav from "./components/BottomNav"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -16,7 +14,8 @@ const SafeAreaView = styled.SafeAreaView`
 
     display: flex;
     flex-direction: column;
-    flex: 1;
+
+    margin: 30px 0;
 `
 
 export default function App() {
@@ -33,10 +32,10 @@ export default function App() {
     }, [])
     return (
         <SafeAreaView>
-            <Header />
+            {/*<Header />*/}
             {/* <PlayList /> */}
-            <ScrollContents />
-            {/* <PlayMusic />}
+            {/*<ScrollContents />*/}
+            <PlayMusic />
             <StatusBar style="auto" />
             {/* <View>
                 <Text>test</Text>
@@ -48,8 +47,6 @@ export default function App() {
                     )
                 })}
             </View> */}
-            <MusicControl />
-            <BottomNav />
         </SafeAreaView>
     )
 }
