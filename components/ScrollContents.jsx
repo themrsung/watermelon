@@ -12,8 +12,8 @@ const ContentsWrap = styled.ScrollView`
 export default function ScrollContents() {
     return (
         <ContentsWrap>
-            {/* <FavoriteMusic />
-            <EventBanner /> */}
+            <FavoriteMusic />
+            <EventBanner />
             <UserProfile />
         </ContentsWrap>
     )

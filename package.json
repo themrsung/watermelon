@@ -12,6 +12,7 @@
     "@emotion/native": "^11.10.0",
     "@emotion/react": "^11.10.5",
     "@react-navigation/native": "^6.1.1",
+    "@react-navigation/native-stack": "^6.9.7",
     "axios": "^1.2.2",
     "cheerio": "^1.0.0-rc.12",
     "expo": "~47.0.9",
