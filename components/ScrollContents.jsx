@@ -22,6 +22,7 @@ export default function ScrollContents() {
             <BestMusic />
             <CurrentMV />
             <Footer />
+
             {/* <UserProfile /> */}
         </ContentsWrap>
     )
