@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { View } from "react-native"
-import YouTube from "react-native-youtube"
 import { getMusic } from "../api/musicApi"
 
 export default function YouTubeVideo({ musicUuid }) {
