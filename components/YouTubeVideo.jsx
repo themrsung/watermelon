@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { View } from "react-native"
+import { View, Text } from "react-native"
 import { getMusic } from "../api/musicApi"
+import { WebView } from "react-native-webview"
 
 export default function YouTubeVideo({ musicUuid, isPlaying }) {
     const [music, setMusic] = useState({})
@@ -20,5 +21,5 @@ export default function YouTubeVideo({ musicUuid, isPlaying }) {
 
     // https://www.npmjs.com/package/react-native-youtube
 
-    return <View></View>
+    return <WebView source={{ uri: music.musicLink }} />
 }
