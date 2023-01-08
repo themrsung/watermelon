@@ -16,13 +16,15 @@ const ProfileContainer = styled.ScrollView`
 
 const ProfileHeader = styled.View`
     flex-direction: row;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 `
 
 const ProfileHeaderText = styled.Text`
     font-size: 30px;
     font-weight: 700;
     color: #5aa469;
-    margin-left: 5px;
 `
 
 const ProfileImgBtn = styled.TouchableOpacity`
@@ -35,7 +37,7 @@ const ProfileImg = styled.Image`
 
 const BellIconBtn = styled.TouchableOpacity`
     margin-left: 135px;
-    margin-right: 20px;
+    margin-right: 10px;
     margin-top: 5px;
 `
 
