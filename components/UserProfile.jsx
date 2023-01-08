@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "@emotion/native"
 import MusicControl from "./MusicControl"
 import BottomNav from "./BottomNav"
@@ -8,23 +8,41 @@ import { AntDesign } from "@expo/vector-icons"
 import { MaterialIcons } from "@expo/vector-icons"
 import { Entypo } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons"
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native"
+import { FlatList } from "react-native"
 
-const ProfileContainer = styled.ScrollView`
-    padding: 30px 0;
+const ProfileContainer = styled.SafeAreaView`
+    width: 100%;
+    // background-color: bisque;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 `
 
 const ProfileHeader = styled.View`
-    flex-direction: row;
-    display: flex;
     width: 100%;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    //background-color: yellow;
+
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 `
 
 const ProfileHeaderText = styled.Text`
-    font-size: 30px;
+    font-size: 23px;
     font-weight: 700;
     color: #5aa469;
+`
+const ProfileHeaderIconWrap = styled.View`
+    width: 20%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `
 
 const ProfileImgBtn = styled.TouchableOpacity`
@@ -36,10 +54,10 @@ const ProfileImg = styled.Image`
 `
 
 const BellIconBtn = styled.TouchableOpacity`
-    margin-left: 135px;
-    margin-right: 10px;
     margin-top: 5px;
 `
+
+const ScrollViewWrap = styled.ScrollView``
 
 const LatelyCategory = styled.View`
     display: flex;
@@ -144,44 +162,53 @@ export default function UserProfile() {
         <ProfileContainer>
             <ProfileHeader>
                 <ProfileHeaderText>나만의 음악서랍</ProfileHeaderText>
-                <BellIconBtn>
-                    <Feather name="bell" size={26} color="#5aa469" />
-                </BellIconBtn>
-                <ProfileImgBtn>
-                    <ProfileImg source={require("../assets/profileImg.jpg")} />
-                </ProfileImgBtn>
-            </ProfileHeader>
-            <LatelyCategory>
-                <LatelyMusicTitle>최근 들은</LatelyMusicTitle>
-                <AllTitleBtn>
-                    <AllTitleText>전체보기</AllTitleText>
-                </AllTitleBtn>
-            </LatelyCategory>
-            <CurrentMusicList />
-            <ProfilePageBanner source={require("../assets/banner2.png")} />
-            <ProfilePageCategoryList>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={data}
-                    renderItem={({ item, i }) => (
-                        <ProfilePageCategoryBox key={i}>
-                            <FlatListCategoryLeft>
-                                {item.icon}
-                                <ProfilePageCategoryTitle>
-                                    {item.title}
-                                </ProfilePageCategoryTitle>
-                            </FlatListCategoryLeft>
 
-                            <ProfilePageCategoryNumber>
-                                <CategoryNumberText>
-                                    {item.number}
-                                </CategoryNumberText>
-                                {item.nexticon}
-                            </ProfilePageCategoryNumber>
-                        </ProfilePageCategoryBox>
-                    )}
-                />
-            </ProfilePageCategoryList>
+                <ProfileHeaderIconWrap>
+                    <BellIconBtn>
+                        <Feather name="bell" size={26} color="#5aa469" />
+                    </BellIconBtn>
+                    <ProfileImgBtn>
+                        <ProfileImg
+                            source={require("../assets/profileImg.jpg")}
+                        />
+                    </ProfileImgBtn>
+                </ProfileHeaderIconWrap>
+            </ProfileHeader>
+
+            <ScrollViewWrap>
+                <LatelyCategory>
+                    <LatelyMusicTitle>최근 들은</LatelyMusicTitle>
+                    <AllTitleBtn>
+                        <AllTitleText>전체보기</AllTitleText>
+                    </AllTitleBtn>
+                </LatelyCategory>
+                <CurrentMusicList />
+                <ProfilePageBanner source={require("../assets/banner2.png")} />
+                <ProfilePageCategoryList>
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={data}
+                        renderItem={({ item, i }) => (
+                            <ProfilePageCategoryBox key={i}>
+                                <FlatListCategoryLeft>
+                                    {item.icon}
+                                    <ProfilePageCategoryTitle>
+                                        {item.title}
+                                    </ProfilePageCategoryTitle>
+                                </FlatListCategoryLeft>
+
+                                <ProfilePageCategoryNumber>
+                                    <CategoryNumberText>
+                                        {item.number}
+                                    </CategoryNumberText>
+                                    {item.nexticon}
+                                </ProfilePageCategoryNumber>
+                            </ProfilePageCategoryBox>
+                        )}
+                    />
+                </ProfilePageCategoryList>
+            </ScrollViewWrap>
+
             <MusicControl />
             <BottomNav />
         </ProfileContainer>

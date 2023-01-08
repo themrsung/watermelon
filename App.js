@@ -38,16 +38,16 @@ export default function App() {
     }, [])
     return (
         <SafeAreaView>
-            {/*<YouTubeVideo musicUuid={"1"} />*/}
+            {/*<YouTubeVideo musicUuid={"1"} />
             {/*<Register />*/}
             {/*<Login />*/}
-            {/* <MyPlayList /> */}
+            {/*<MyPlayList />*/}
             {/* <Login /> */}
             <UserProfile />
-            {/* <Header /> */}
+            {/* <Header />
             {/* <PlayList /> */}
             {/* <ScrollContents /> */}
-            {/* <PlayMusic /> */}
+            {/*<PlayMusic />*/}
             <StatusBar style="auto" />
             {/* <View>
                 <Text>test</Text>
