@@ -19,7 +19,35 @@ export default function YouTubeVideo({ musicUuid, isPlaying }) {
         fetchMusic()
     }, [])
 
+    const runFirst = `
+    $( document ).ready(function() {
+        alert("test")
+        const videos = document.getElementsByClassName("ytp-unmute-inner")
+        for (let i = 0; i < videos.length; i++) {
+            videos[i].click()
+        }
+    })
+    `
+
     // https://www.npmjs.com/package/react-native-youtube
 
-    return <WebView source={{ uri: music.musicLink }} />
+    // return music.musicLink !== undefined ? (
+    //     <WebView
+    //         source={{
+    //             uri:
+    //                 "https://www.youtube.com/embed/" +
+    //                 music.musicLink.substr(music.musicLink.length - 11)
+    //         }}
+    //     />
+    // ) : (
+    //     <></>
+    // )
+
+    return (
+        <WebView
+            mixedContentMode="always"
+            source={{ uri: music.musicLink }}
+            injectedJavaScriptBeforeContentLoaded={runFirst}
+        />
+    )
 }
