@@ -12,6 +12,7 @@ import BottomNav from "./components/BottomNav"
 import MyPlayList from "./components/MyPlayList"
 import UserProfile from "./components/UserProfile"
 import Login from "./components/Login"
+import Register from "./components/Register"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -36,6 +37,8 @@ export default function App() {
     }, [])
     return (
         <SafeAreaView>
+            {/*<Register />*/}
+            {/*<Login />*/}
             <MyPlayList />
             {/* <Login /> */}
             {/* <UserProfile /> */}
