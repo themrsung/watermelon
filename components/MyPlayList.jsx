@@ -1,7 +1,6 @@
 import React from "react"
-import { Image, Touchable, TouchableOpacity, View, Text } from "react-native"
+import { Image, TouchableOpacity } from "react-native"
 import styled from "@emotion/native"
-import { SafeAreaView } from "react-native-safe-area-context"
 
 export default function PlaylistList() {
     const data = [
@@ -66,10 +65,16 @@ export default function PlaylistList() {
             <MyPlayListWrap>
                 <MyPlayStartText>재생목록</MyPlayStartText>
                 <MyPlaySettingBtn>
-                    <Image source={require("../assets/settings.png")} />
+                    <Image
+                        source={require("../assets/settings.png")}
+                        style={{ width: 18, height: 18 }}
+                    />
                 </MyPlaySettingBtn>
                 <TouchableOpacity>
-                    <Image source={require("../assets/bottom.png")} />
+                    <Image
+                        source={require("../assets/bottom.png")}
+                        style={{ width: 18, height: 18 }}
+                    />
                 </TouchableOpacity>
             </MyPlayListWrap>
 
@@ -113,7 +118,7 @@ export default function PlaylistList() {
                             <MyPlayListIconWrap>
                                 <MyPlayListIconBtn>
                                     <MyPlayListIconImg
-                                        source={require("../assets/more2.png")}
+                                        source={require("../assets/more3.png")}
                                     />
                                 </MyPlayListIconBtn>
                             </MyPlayListIconWrap>
@@ -154,10 +159,12 @@ const Container = styled.View`
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
-    background-color: #867544;
+    background-color: rgba(0, 0, 0, 0.8);
 `
 const MyPlayListWrap = styled.View`
     width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
     //background-color: pink;
 
     display: flex;
