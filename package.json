@@ -26,7 +26,8 @@
     "react-native-screens": "~3.18.0",
     "react-native-swiper": "^1.6.0",
     "react-native-uuid": "^2.0.1",
-    "react-native-webview": "^11.26.0"
+    "react-native-webview": "^11.26.0",
+    "react-native-youtube": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
