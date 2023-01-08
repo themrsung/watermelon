@@ -13,6 +13,7 @@ import MyPlayList from "./components/MyPlayList"
 import UserProfile from "./components/UserProfile"
 import Login from "./components/Login"
 import Register from "./components/Register"
+import YouTubeVideo from "./components/YouTubeVideo"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -37,9 +38,10 @@ export default function App() {
     }, [])
     return (
         <SafeAreaView>
+            <YouTubeVideo musicUuid={"1"} />
             {/*<Register />*/}
             {/*<Login />*/}
-            <MyPlayList />
+            {/* <MyPlayList /> */}
             {/* <Login /> */}
             {/* <UserProfile /> */}
             {/* <Header /> */}

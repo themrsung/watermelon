@@ -16,13 +16,15 @@ const ProfileContainer = styled.ScrollView`
 
 const ProfileHeader = styled.View`
     flex-direction: row;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 `
 
 const ProfileHeaderText = styled.Text`
     font-size: 30px;
     font-weight: 700;
     color: #5aa469;
-    margin-left: 5px;
 `
 
 const ProfileImgBtn = styled.TouchableOpacity`
@@ -35,7 +37,7 @@ const ProfileImg = styled.Image`
 
 const BellIconBtn = styled.TouchableOpacity`
     margin-left: 135px;
-    margin-right: 20px;
+    margin-right: 10px;
     margin-top: 5px;
 `
 
@@ -77,8 +79,14 @@ const ProfilePageCategoryBox = styled.TouchableOpacity`
     height: 50px;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    display: flex;
 `
-
+const FlatListCategoryLeft = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
 const ProfilePageCategoryTitle = styled.Text`
     color: #5aa469;
     font-size: 20px;
@@ -102,7 +110,7 @@ export default function UserProfile() {
             title: "좋아요한",
             number: "202",
             nexticon: (
-                <Entypo name="chevron-small-right" size={24} color="black" />
+                <Entypo name="chevron-small-right" size={24} color="gray" />
             )
         },
         {
@@ -112,7 +120,7 @@ export default function UserProfile() {
             title: "내 플레이리스트",
             number: "3",
             nexticon: (
-                <Entypo name="chevron-small-right" size={24} color="black" />
+                <Entypo name="chevron-small-right" size={24} color="gray" />
             )
         },
         {
@@ -120,7 +128,7 @@ export default function UserProfile() {
             title: "많이 들은",
             number: "0",
             nexticon: (
-                <Entypo name="chevron-small-right" size={24} color="black" />
+                <Entypo name="chevron-small-right" size={24} color="gray" />
             )
         },
         {
@@ -128,7 +136,7 @@ export default function UserProfile() {
             title: "내가 쓴 댓글",
             number: "0",
             nexticon: (
-                <Entypo name="chevron-small-right" size={24} color="black" />
+                <Entypo name="chevron-small-right" size={24} color="gray" />
             )
         }
     ]
@@ -157,10 +165,12 @@ export default function UserProfile() {
                     data={data}
                     renderItem={({ item, i }) => (
                         <ProfilePageCategoryBox key={i}>
-                            {item.icon}
-                            <ProfilePageCategoryTitle>
-                                {item.title}
-                            </ProfilePageCategoryTitle>
+                            <FlatListCategoryLeft>
+                                {item.icon}
+                                <ProfilePageCategoryTitle>
+                                    {item.title}
+                                </ProfilePageCategoryTitle>
+                            </FlatListCategoryLeft>
 
                             <ProfilePageCategoryNumber>
                                 <CategoryNumberText>
