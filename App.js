@@ -34,9 +34,9 @@ export default function App() {
     return (
         <SafeAreaView>
             {/*<Header />*/}
-            {/* <PlayList /> */}
+            <PlayList />
             {/*<ScrollContents />*/}
-            <PlayMusic />
+            {/* <PlayMusic /> */}
             <StatusBar style="auto" />
             {/* <View>
                 <Text>test</Text>
@@ -48,8 +48,8 @@ export default function App() {
                     )
                 })}
             </View> */}
-            {/*<MusicControl />*/}
-            {/*<BottomNav />*/}
+            {/* <MusicControl />
+            <BottomNav /> */}
         </SafeAreaView>
     )
 }
