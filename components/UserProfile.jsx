@@ -1,103 +1,179 @@
 import React, { useState } from "react"
-import { Text, TextInput, TouchableOpacity, View } from "react-native"
 import styled from "@emotion/native"
+import MusicControl from "./MusicControl"
+import BottomNav from "./BottomNav"
+import CurrentMusicList from "./CurrentMusicList"
+import { Feather } from "@expo/vector-icons"
 import { AntDesign } from "@expo/vector-icons"
 import { MaterialIcons } from "@expo/vector-icons"
+import { Entypo } from "@expo/vector-icons"
+import { FontAwesome } from "@expo/vector-icons"
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native"
 
-const ProfileContainer = styled.View`
-    padding: 20px 0;
+const ProfileContainer = styled.ScrollView`
+    padding: 30px 0;
 `
 
-const ProfileTitle = styled.Text`
-    font-size: 20px;
-    font-weight: bold;
-    color: #80ae4b;
-`
-
-const NicknameIconView = styled.View`
+const ProfileHeader = styled.View`
     flex-direction: row;
-    justify-content: space-around;
 `
 
-const ProfilePlayList = styled.ScrollView`
-    margin-top: 50px;
-    padding-left: 15px;
-`
-
-const ProfilePlayListTitle = styled.Text`
-    font-size: 23px;
-    font-weight: bold;
+const ProfileHeaderText = styled.Text`
+    font-size: 30px;
+    font-weight: 700;
     color: #5aa469;
-`
-const PlaylistImg = styled.Image`
-    width: 50px;
-    height: 50px;
+    margin-left: 5px;
 `
 
-const PlayListView = styled.View`
+const ProfileImgBtn = styled.TouchableOpacity`
+    margin-top: 3px;
+`
+const ProfileImg = styled.Image`
+    width: 30px;
+    height: 30px;
+`
+
+const BellIconBtn = styled.TouchableOpacity`
+    margin-left: 135px;
+    margin-right: 20px;
+    margin-top: 5px;
+`
+
+const LatelyCategory = styled.View`
+    display: flex;
     flex-direction: row;
-    width: 350px;
-    margin-top: 10px;
-    border: 1px solid #5aa469;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: rgba(214, 232, 195, 0.3);
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 `
 
-const PlayListContent = styled.View`
+const LatelyMusicTitle = styled.Text`
+    color: #5aa469;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: left;
+    line-height: 40px;
+    margin-left: 10px;
+`
+const AllTitleBtn = styled.TouchableOpacity``
+const AllTitleText = styled.Text`
+    color: #9abc74;
+    font-size: 15px;
+    margin-right: 10px;
+`
+const ProfilePageBanner = styled.Image`
+    width: 100%;
+    height: 100px;
+    margin-top: 15px;
+    border-radius: 6px;
+`
+const ProfilePageCategoryList = styled.View`
+    margin: 20px 0 30px 10px;
+`
+
+const ProfilePageCategoryBox = styled.TouchableOpacity`
+    /* border: 1px solid green; */
+    width: 100%;
+    height: 50px;
     flex-direction: row;
     align-items: center;
 `
-const PlayListContentTitle = styled.Text`
-    font-size: 18px;
+
+const ProfilePageCategoryTitle = styled.Text`
+    color: #5aa469;
+    font-size: 20px;
     font-weight: 600;
     margin-left: 5px;
+`
+const ProfilePageCategoryNumber = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+`
+const CategoryNumberText = styled.Text`
+    margin-top: 3px;
+    font-size: 15px;
     color: #5aa469;
-`
-const PlayListContentName = styled.Text`
-    font-size: 10px;
-    margin-left: 7px;
-    color: #80ae4b;
-    font-weight: 600;
-`
-
-const DeleteButton = styled.TouchableOpacity`
-    margin-left: 190px;
 `
 
 export default function UserProfile() {
+    const data = [
+        {
+            icon: <AntDesign name="hearto" size={24} color="#5aa469" />,
+            title: "좋아요한",
+            number: "202",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={24} color="black" />
+            )
+        },
+        {
+            icon: (
+                <MaterialIcons name="queue-music" size={24} color="#5aa469" />
+            ),
+            title: "내 플레이리스트",
+            number: "3",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={24} color="black" />
+            )
+        },
+        {
+            icon: <Feather name="disc" size={24} color="#5aa469" />,
+            title: "많이 들은",
+            number: "0",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={24} color="black" />
+            )
+        },
+        {
+            icon: <FontAwesome name="comment-o" size={24} color="#5aa469" />,
+            title: "내가 쓴 댓글",
+            number: "0",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={24} color="black" />
+            )
+        }
+    ]
     return (
         <ProfileContainer>
-            <NicknameIconView>
-                <ProfileTitle>NickName</ProfileTitle>
-                <TouchableOpacity>
-                    <AntDesign name="edit" size={20} color="black" />
-                </TouchableOpacity>
-            </NicknameIconView>
-            <ProfilePlayList>
-                <ProfilePlayListTitle>
-                    <MaterialIcons
-                        name="queue-music"
-                        size={24}
-                        color="#5aa469"
-                    />
-                    내 플레이리스트
-                </ProfilePlayListTitle>
-                <PlayListView>
-                    <PlaylistImg source={require("../assets/image1.png")} />
-                    <PlayListContent>
-                        <View>
-                            <PlayListContentTitle>
-                                운이 좋았지
-                            </PlayListContentTitle>
-                            <PlayListContentName>- 권진아</PlayListContentName>
-                        </View>
-                        <DeleteButton>
-                            <AntDesign name="delete" size={18} color="black" />
-                        </DeleteButton>
-                    </PlayListContent>
-                </PlayListView>
-            </ProfilePlayList>
+            <ProfileHeader>
+                <ProfileHeaderText>나만의 음악서랍</ProfileHeaderText>
+                <BellIconBtn>
+                    <Feather name="bell" size={26} color="#5aa469" />
+                </BellIconBtn>
+                <ProfileImgBtn>
+                    <ProfileImg source={require("../assets/profileImg.jpg")} />
+                </ProfileImgBtn>
+            </ProfileHeader>
+            <LatelyCategory>
+                <LatelyMusicTitle>최근 들은</LatelyMusicTitle>
+                <AllTitleBtn>
+                    <AllTitleText>전체보기</AllTitleText>
+                </AllTitleBtn>
+            </LatelyCategory>
+            <CurrentMusicList />
+            <ProfilePageBanner source={require("../assets/banner2.png")} />
+            <ProfilePageCategoryList>
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={data}
+                    renderItem={({ item, i }) => (
+                        <ProfilePageCategoryBox key={i}>
+                            {item.icon}
+                            <ProfilePageCategoryTitle>
+                                {item.title}
+                            </ProfilePageCategoryTitle>
+
+                            <ProfilePageCategoryNumber>
+                                <CategoryNumberText>
+                                    {item.number}
+                                </CategoryNumberText>
+                                {item.nexticon}
+                            </ProfilePageCategoryNumber>
+                        </ProfilePageCategoryBox>
+                    )}
+                />
+            </ProfilePageCategoryList>
+            <MusicControl />
+            <BottomNav />
         </ProfileContainer>
     )
 }
