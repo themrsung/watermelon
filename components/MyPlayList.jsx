@@ -1,5 +1,5 @@
 import React from "react"
-import { Image, TouchableOpacity } from "react-native"
+import { Image, ImageBackground, TouchableOpacity } from "react-native"
 import styled from "@emotion/native"
 
 export default function PlaylistList() {
@@ -62,115 +62,146 @@ export default function PlaylistList() {
     ] //길이가 긴 Array 라고 가정
     return (
         <Container>
-            <MyPlayListWrap>
-                <MyPlayStartText>재생목록</MyPlayStartText>
-                <MyPlaySettingBtn>
-                    <Image
-                        source={require("../assets/settings.png")}
-                        style={{ width: 18, height: 18 }}
-                    />
-                </MyPlaySettingBtn>
-                <TouchableOpacity>
-                    <Image
-                        source={require("../assets/bottom.png")}
-                        style={{ width: 18, height: 18 }}
-                    />
-                </TouchableOpacity>
-            </MyPlayListWrap>
+            <ImageBackground
+                source={require("../assets/bg1.png")}
+                style={{ width: "100%", height: "100%" }}
+            >
+                <BgDark>
+                    <MyPlayListWrap>
+                        <MyPlayStartText>재생목록</MyPlayStartText>
+                        <MyPlayListIconWrap2>
+                            <MyPlaySettingBtn>
+                                <Image
+                                    source={require("../assets/settings.png")}
+                                    style={{ width: 18, height: 18 }}
+                                />
+                            </MyPlaySettingBtn>
+                            <TouchableOpacity>
+                                <Image
+                                    source={require("../assets/bottom.png")}
+                                    style={{ width: 18, height: 18 }}
+                                />
+                            </TouchableOpacity>
+                        </MyPlayListIconWrap2>
+                    </MyPlayListWrap>
 
-            <MyPlayListImgWrap>
-                <MyPlayListSongBtn>
-                    <MyPlayListSong>곡</MyPlayListSong>
-                </MyPlayListSongBtn>
-                <TouchableOpacity>
-                    <MyPlayList>플레이리스트</MyPlayList>
-                </TouchableOpacity>
-                <MyPlayListTalkBtn>
-                    <MyPlayList>어학</MyPlayList>
-                </MyPlayListTalkBtn>
-            </MyPlayListImgWrap>
-            <MyPlayListSongIcon>
-                <MyPlayMusicImg source={require("../assets/music.png")} />
-            </MyPlayListSongIcon>
+                    <MyPlayListImgWrap>
+                        <MyPlayListSongBtn>
+                            <MyPlayListSong>곡</MyPlayListSong>
+                            <MyPlayMusicImg
+                                source={require("../assets/music.png")}
+                            />
+                        </MyPlayListSongBtn>
+                        <TouchableOpacity>
+                            <MyPlayList>플레이리스트</MyPlayList>
+                        </TouchableOpacity>
+                        <MyPlayListTalkBtn>
+                            <MyPlayList>어학</MyPlayList>
+                        </MyPlayListTalkBtn>
+                    </MyPlayListImgWrap>
 
-            <PlaylistWrap>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    // ItemSeparatorComponent={<View style={{ height: 5 }} />}
-                    data={data}
-                    renderItem={({ item, i }) => (
-                        <FlatListMyPlay key={i}>
-                            <FlatListMyPlayLeft>
-                                <FlatListMyPlayImg>
-                                    {item.image}
-                                </FlatListMyPlayImg>
+                    <PlaylistWrap>
+                        <FlatList
+                            showsVerticalScrollIndicator={false}
+                            // ItemSeparatorComponent={<View style={{ height: 5 }} />}
+                            data={data}
+                            renderItem={({ item, i }) => (
+                                <FlatListMyPlay key={i}>
+                                    <FlatListMyPlayLeft>
+                                        <FlatListMyPlayImg>
+                                            {item.image}
+                                        </FlatListMyPlayImg>
 
-                                <FlatListMyPlayWrap>
-                                    <MyPlayListMusicTitle>
-                                        {item.title}
-                                    </MyPlayListMusicTitle>
-                                    <MyPlayListMusicSinger>
-                                        {item.singer}
-                                    </MyPlayListMusicSinger>
-                                </FlatListMyPlayWrap>
-                            </FlatListMyPlayLeft>
+                                        <FlatListMyPlayWrap>
+                                            <MyPlayListMusicTitle>
+                                                {item.title}
+                                            </MyPlayListMusicTitle>
+                                            <MyPlayListMusicSinger>
+                                                {item.singer}
+                                            </MyPlayListMusicSinger>
+                                        </FlatListMyPlayWrap>
+                                    </FlatListMyPlayLeft>
 
-                            <MyPlayListIconWrap>
-                                <MyPlayListIconBtn>
-                                    <MyPlayListIconImg
-                                        source={require("../assets/more3.png")}
-                                    />
-                                </MyPlayListIconBtn>
-                            </MyPlayListIconWrap>
-                        </FlatListMyPlay>
-                    )}
-                />
-                <ContainerFooter>
-                    <MyPlayIconBtn>
-                        <IconPictureImage
-                            source={require("../assets/image6.png")}
+                                    <MyPlayListIconWrap>
+                                        <MyPlayListIconBtn>
+                                            <MyPlayListIconImg
+                                                source={require("../assets/more3.png")}
+                                            />
+                                        </MyPlayListIconBtn>
+                                    </MyPlayListIconWrap>
+                                </FlatListMyPlay>
+                            )}
                         />
-                    </MyPlayIconBtn>
+                    </PlaylistWrap>
 
-                    <MyPlayIconBtn>
-                        <IconImage source={require("../assets/play7.png")} />
-                    </MyPlayIconBtn>
+                    <ContainerFooter>
+                        <MyPlayIconBtn>
+                            <IconPictureImage
+                                source={require("../assets/image6.png")}
+                            />
+                        </MyPlayIconBtn>
 
-                    <MyPlayIconBtn>
-                        <IconPictureImage
-                            source={require("../assets/play6.png")}
-                        />
-                    </MyPlayIconBtn>
+                        <MyPlayIconBtn>
+                            <IconImage
+                                source={require("../assets/play7.png")}
+                            />
+                        </MyPlayIconBtn>
 
-                    <MyPlayIconBtn>
-                        <IconImage source={require("../assets/play8.png")} />
-                    </MyPlayIconBtn>
+                        <MyPlayIconBtn>
+                            <IconPictureImage
+                                source={require("../assets/play6.png")}
+                            />
+                        </MyPlayIconBtn>
 
-                    <MyPlayIconBtn>
-                        <IconImage source={require("../assets/volume2.png")} />
-                    </MyPlayIconBtn>
-                </ContainerFooter>
-            </PlaylistWrap>
+                        <MyPlayIconBtn>
+                            <IconImage
+                                source={require("../assets/play8.png")}
+                            />
+                        </MyPlayIconBtn>
+
+                        <MyPlayIconBtn>
+                            <IconImage
+                                source={require("../assets/volume2.png")}
+                            />
+                        </MyPlayIconBtn>
+                    </ContainerFooter>
+                </BgDark>
+            </ImageBackground>
         </Container>
     )
 }
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
     width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.8);
+
+    flex: 1;
 `
+const BgDark = styled.View`
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+`
+
 const MyPlayListWrap = styled.View`
     width: 100%;
-    padding: 0 20px;
+    padding: 20px;
     box-sizing: border-box;
     //background-color: pink;
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     margin-top: 20px;
+`
+
+const MyPlayListIconWrap2 = styled.View`
+    width: 30%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 `
 
 const MyPlayStartText = styled.Text`
@@ -187,10 +218,17 @@ const MyPlaySettingBtn = styled.TouchableOpacity`
 `
 
 const MyPlayListImgWrap = styled.View`
+    width: 100%;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+    border-bottom-style: solid;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 20px;
+    text-align: center;
 `
 
 const MyPlayMusicImg = styled.Image`
@@ -199,21 +237,15 @@ const MyPlayMusicImg = styled.Image`
 `
 
 const MyPlayListSongBtn = styled.TouchableOpacity`
-    position: relative;
-    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `
 
-const MyPlayListSongIcon = styled.View`
-    position: absolute;
-    top: 6.8%;
-    left: 16%;
-`
-
-const MyPlayListTalkBtn = styled.TouchableOpacity`
-    margin-right: 20px;
-`
+const MyPlayListTalkBtn = styled.TouchableOpacity``
 
 const MyPlayListSong = styled.Text`
+    margin-right: 10px;
     color: #3ad13a;
     font-size: 15px;
     font-weight: 700;
@@ -225,9 +257,10 @@ const MyPlayList = styled.Text`
     font-weight: 700;
 `
 
-const PlaylistWrap = styled.View`
+const PlaylistWrap = styled.ScrollView`
     width: 100%;
-    margin: 20px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
     //background-color: yellow;
 `
 
@@ -238,7 +271,7 @@ const FlatList = styled.FlatList`
 const FlatListMyPlay = styled.View`
     width: 100%;
     height: 100px;
-    padding: 4px 10px;
+    padding: 4px;
 
     background-color: transparent;
     box-sizing: border-box;
@@ -292,22 +325,25 @@ const MyPlayListIconImg = styled.Image`
 
 const ContainerFooter = styled.View`
     width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgba(255, 255, 255, 0.4);
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 70%;
+    align-items: center;
 `
 const MyPlayIconBtn = styled.TouchableOpacity``
 
 const IconPictureImage = styled.Image`
-    margin-top: 12px;
-    width: 38px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 `
 
 const IconImage = styled.Image`
-    margin-top: 17px;
     width: 25px;
     height: 25px;
 `
