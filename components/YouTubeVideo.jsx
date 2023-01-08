@@ -21,13 +21,5 @@ export default function YouTubeVideo({ musicUuid }) {
 
     // https://www.npmjs.com/package/react-native-youtube
 
-    return (
-        <View>
-            <YouTube
-                // videoId={music.musicLink.split("v=")[1]}
-                videoId="e69vhJR76IM"
-                apiKey="AIzaSyBtuMYt0BYcz1_P037IG28DLdRgPg8VxX0"
-            />
-        </View>
-    )
+    return <View></View>
 }
