@@ -38,7 +38,7 @@ export default function App() {
     }, [])
     return (
         <SafeAreaView>
-            <YouTubeVideo />
+            <YouTubeVideo musicUuid={"1"} />
             {/*<Register />*/}
             {/*<Login />*/}
             {/* <MyPlayList /> */}
