@@ -1,7 +1,7 @@
 // Authentication API
 
 import axios from "axios"
-import currentSessionStore from "../store/currentSessionStore"
+// import currentSessionStore from "../store/currentSessionStore"
 import {
     DELETE_USER_FAILED,
     DELETE_USER_SUCCEEDED,
@@ -46,16 +46,16 @@ export const login = async (id, password) => {
         return LOGIN_FAILED
     }
 
-    currentSessionStore.handleSetCurrentSession({
-        id: id
-    })
+    // currentSessionStore.handleSetCurrentSession({
+    //     id: id
+    // })
 
     return LOGIN_SUCCEEDED
 }
 
 // 로그아웃입니다. 콜하시면 세션이 사라져요!
 export const logout = () => {
-    currentSessionStore.handleClearCurrentSession()
+    // currentSessionStore.handleClearCurrentSession()
 
     return LOGOUT_SUCCEEDED
 }
