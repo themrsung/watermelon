@@ -9,6 +9,8 @@ import { getMusicMetadataFromYouTube, getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
 import MusicControl from "./components/MusicControl"
 import BottomNav from "./components/BottomNav"
+import UserProfile from "./components/UserProfile"
+import Login from "./components/Login"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -33,9 +35,11 @@ export default function App() {
     }, [])
     return (
         <SafeAreaView>
-            {/*<Header />*/}
-            <PlayList />
-            {/*<ScrollContents />*/}
+            <Login />
+            {/* <UserProfile /> */}
+            {/* <Header /> */}
+            {/* <PlayList /> */}
+            {/* <ScrollContents /> */}
             {/* <PlayMusic /> */}
             <StatusBar style="auto" />
             {/* <View>

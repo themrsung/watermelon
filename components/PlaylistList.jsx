@@ -438,7 +438,7 @@ export default function PlaylistList() {
                 <PlayWrap>
                     <PlayBtnWrap>
                         <PlayBtnIcon
-                            source={require("../assets/shuffle2.png")}
+                            source={require("../assets/shuffle3.png")}
                         />
                         <PlayText>셔플재생</PlayText>
                     </PlayBtnWrap>
