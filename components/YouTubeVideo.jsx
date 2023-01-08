@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { View } from "react-native"
 import { getMusic } from "../api/musicApi"
 
-export default function YouTubeVideo({ musicUuid }) {
+export default function YouTubeVideo({ musicUuid, isPlaying }) {
     const [music, setMusic] = useState({})
 
     const fetchMusic = async () => {
