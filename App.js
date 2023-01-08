@@ -9,6 +9,7 @@ import { getMusicMetadataFromYouTube, getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
 import MusicControl from "./components/MusicControl"
 import BottomNav from "./components/BottomNav"
+import MyPlayList from "./components/MyPlayList"
 import UserProfile from "./components/UserProfile"
 import Login from "./components/Login"
 
@@ -35,7 +36,8 @@ export default function App() {
     }, [])
     return (
         <SafeAreaView>
-            <Login />
+            <MyPlayList />
+            {/* <Login /> */}
             {/* <UserProfile /> */}
             {/* <Header /> */}
             {/* <PlayList /> */}
