@@ -5,7 +5,8 @@ import PlaylistHeader from "../components/PlaylistHeader"
 import PlaylistList from "../components/PlaylistList"
 import PlayMusic from "../components/PlayMusic"
 import Register from "../components/Register"
-import ScrollContents from "../components/ScrollContents"
+import Home from "../components/Home"
+import { createStackNavigator } from "@react-navigation/stack"
 
 // Screen names
 export const HOME_NAME = "Home"
@@ -15,22 +16,28 @@ export const MY_PLAYLIST_NAME = "My Playlist"
 export const PLAYLIST_INFO_NAME = "Playlist Info"
 export const PLAY_MUSIC_NAME = "Play Music"
 
-const Tab = createBottomTabNavigator()
+const Stack = createStackNavigator()
 
 export default function NavContainer() {
     return (
         <NavigationContainer>
-            <Tab.Navigator initialRouteName={HOME_NAME}>
-                <Tab.Screen name={HOME_NAME} component={ScrollContents} />
-                <Tab.Screen name={LOGIN_NAME} component={Login} />
-                <Tab.Screen name={REGISTER_NAME} component={Register} />
-                <Tab.Screen name={MY_PLAYLIST_NAME} component={PlaylistList} />
-                <Tab.Screen
+            <Stack.Navigator
+                initialRouteName={HOME_NAME}
+                screenOptions={{ headerShown: false }}
+            >
+                <Stack.Screen name={HOME_NAME} component={Home} />
+                <Stack.Screen name={LOGIN_NAME} component={Login} />
+                <Stack.Screen name={REGISTER_NAME} component={Register} />
+                <Stack.Screen
+                    name={MY_PLAYLIST_NAME}
+                    component={PlaylistList}
+                />
+                <Stack.Screen
                     name={PLAYLIST_INFO_NAME}
                     component={PlaylistHeader}
                 />
-                <Tab.Screen name={PLAY_MUSIC_NAME} component={PlayMusic} />
-            </Tab.Navigator>
+                <Stack.Screen name={PLAY_MUSIC_NAME} component={PlayMusic} />
+            </Stack.Navigator>
         </NavigationContainer>
     )
 }
