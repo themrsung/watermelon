@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "@emotion/native"
-import { View, Text, TextInput, TouchableOpacity } from "react-native"
+import { View } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 
 export default function CreatePlayList() {
