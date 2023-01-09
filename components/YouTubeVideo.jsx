@@ -20,13 +20,32 @@ export default function YouTubeVideo({ musicUuid, isPlaying }) {
     }, [])
 
     const runFirst = `
-    $( document ).ready(function() {
-        alert("test")
-        const videos = document.getElementsByClassName("ytp-unmute-inner")
-        for (let i = 0; i < videos.length; i++) {
-            videos[i].click()
+    window.onload = function () {
+
+        function clickUnmute () {
+            const unmuteButton = document.getElementsByClassName("ytp-unmute-inner")[0]
+            unmuteButton.click()
+            alert("unmuted")
+        }        
+
+        function clickPlayer () {
+            const player = document.getElementsByClassName("player-controls-content")[0]
+            player.click()
+            alert("Player CLicked")
         }
-    })
+
+        function clickPlayPauseButton () {
+            const playPauseButton = document.getElementsByClassName("player-control-play-pause-icon")[0]
+            playPauseButton.click()
+            alert("play pause clicked")
+        }
+
+        clickUnmute()
+        setTimeout(clickPlayer, 100)
+        setTimeout(clickPlayPauseButton, 200)
+
+
+    }
     `
 
     // https://www.npmjs.com/package/react-native-youtube
@@ -47,7 +66,7 @@ export default function YouTubeVideo({ musicUuid, isPlaying }) {
         <WebView
             mixedContentMode="always"
             source={{ uri: music.musicLink }}
-            injectedJavaScriptBeforeContentLoaded={runFirst}
+            injectedJavaScript={runFirst}
         />
     )
 }
