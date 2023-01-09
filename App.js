@@ -39,12 +39,11 @@ export default function App() {
 
     return (
         <SafeAreaView>
-            <YouTubeVideo musicUuid={"1"} />
-            {/*<Register />*/}
-            {/*<Login />*/}
-            {/*<MyPlayList />*/}
-            {/* <Login /> */}
-            <UserProfile />
+            {/* <YouTubeVideo musicUuid={"1"} /> */}
+            {/* <Register /> */}
+            <Login />
+            {/* <MyPlayList /> */}
+            {/* <UserProfile /> */}
             {/* <Header /> */}
             {/* <PlayList /> */}
             {/* <ScrollContents /> */}
