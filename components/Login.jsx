@@ -3,6 +3,8 @@ import { useState } from "react"
 import { login, logout } from "../api/authApi"
 import styled from "@emotion/native"
 import { Feather } from "@expo/vector-icons"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { FontAwesome } from "@expo/vector-icons"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -119,6 +121,51 @@ const Border = styled.View`
     right: 0;
 `
 
+const BuyBtnWrap = styled.View`
+    width: 100%;
+    padding: 10px;
+    margin-top: 30px;
+    box-sizing: border-box;
+    //background-color: rgba(84, 152, 98, 0.8);
+    border-radius: 10px;
+    border: 1px solid rgba(84, 152, 98, 0.8);
+
+    display: flex;
+    flex-direction: row;
+`
+
+const BuyBtn = styled.TouchableOpacity`
+    width: 50%;
+    padding: 4px 10px;
+    box-sizing: border-box;
+    border-right-width: 1px;
+    border-right-color: rgba(84, 152, 98, 0.8);
+    border-right-style: solid;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`
+
+const BuyBtn2 = styled.TouchableOpacity`
+    width: 50%;
+    padding: 4px 10px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`
+
+const BuyBtnText = styled.Text`
+    margin-left: 6px;
+
+    color: rgb(84, 152, 98);
+    font-size: 12px;
+`
+
 export default function Login() {
     const [userId, setUserId] = useState("")
     const [userPassword, setUserPassword] = useState("")
@@ -182,6 +229,22 @@ export default function Login() {
                     <BottomBtnText>회원가입</BottomBtnText>
                 </BottomBtn>
             </BottomBtnWrap>
+
+            <BuyBtnWrap>
+                <BuyBtn>
+                    <MaterialCommunityIcons
+                        name="ticket-confirmation-outline"
+                        size={18}
+                        color="#368245"
+                    />
+                    <BuyBtnText>이용권 구매</BuyBtnText>
+                </BuyBtn>
+
+                <BuyBtn2>
+                    <FontAwesome name="diamond" size={18} color="#368245" />
+                    <BuyBtnText>WMelon라운지</BuyBtnText>
+                </BuyBtn2>
+            </BuyBtnWrap>
         </SafeAreaView>
     )
 }
