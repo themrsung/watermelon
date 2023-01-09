@@ -1,6 +1,7 @@
 import {} from "react-native"
 import { useState } from "react"
 import { register } from "../api/authApi"
+import { View, Text, TextInput, TouchableOpacity } from "react-native"
 
 export default function Register() {
     const [userId, setUserId] = useState("")
@@ -50,6 +51,10 @@ export default function Register() {
             </View>
             <TouchableOpacity onPress={onRegister}>
                 <Text>Register</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text>로그인하러 가기</Text>
             </TouchableOpacity>
         </View>
     )

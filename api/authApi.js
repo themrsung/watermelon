@@ -131,11 +131,6 @@ export const getUsers = async () => {
     return response.data
 }
 
-// 현재 로그인된 유저가 있을 경우 유저 id를, 없을 경우 “”를 리턴합니다.
-export const getCurrentUserId = () => {
-    return currentSessionStore.currentSession.id
-}
-
 export class HashPassword {
     static v1(password) {
         let hash = 0
