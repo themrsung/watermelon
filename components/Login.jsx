@@ -8,7 +8,7 @@ import { FontAwesome } from "@expo/vector-icons"
 import { MaterialIcons } from "@expo/vector-icons"
 import { Entypo } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
-import { HOME_NAME } from "../navigation/NavContainer"
+import { HOME_NAME, REGISTER_NAME } from "../navigation/NavContainer"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -289,7 +289,11 @@ export default function Login() {
                         <Border />
                     </BottomBtn>
 
-                    <BottomBtn>
+                    <BottomBtn
+                        onPress={() => {
+                            navigation.navigate(REGISTER_NAME)
+                        }}
+                    >
                         <BottomBtnText>회원가입</BottomBtnText>
                     </BottomBtn>
                 </BottomBtnWrap>

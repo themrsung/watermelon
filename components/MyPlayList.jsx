@@ -1,8 +1,12 @@
 import React from "react"
 import { Image, ImageBackground, TouchableOpacity } from "react-native"
 import styled from "@emotion/native"
+import { useNavigation } from "@react-navigation/core"
+import { HOME_NAME } from "../navigation/NavContainer"
 
 export default function PlaylistList() {
+    const navigation = useNavigation()
+
     const data = [
         {
             image: <Image source={require("../assets/image9.png")} />,
@@ -76,7 +80,11 @@ export default function PlaylistList() {
                                     style={{ width: 18, height: 18 }}
                                 />
                             </MyPlaySettingBtn>
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.navigate(HOME_NAME)
+                                }}
+                            >
                                 <Image
                                     source={require("../assets/bottom.png")}
                                     style={{ width: 18, height: 18 }}

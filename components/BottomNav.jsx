@@ -1,6 +1,8 @@
 import React from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
+import { useNavigation } from "@react-navigation/core"
+import { HOME_NAME } from "../navigation/NavContainer"
 
 const Container = styled.View`
     width: 100%;
@@ -22,9 +24,14 @@ const IconImage = styled.Image`
 `
 
 export default function BottomNav() {
+    const navigation = useNavigation()
     return (
         <Container>
-            <IconBtn>
+            <IconBtn
+                onPress={() => {
+                    navigation.navigate(HOME_NAME)
+                }}
+            >
                 <IconImage source={require("../assets/home.png")} />
             </IconBtn>
 
