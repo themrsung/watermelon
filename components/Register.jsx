@@ -104,7 +104,9 @@ const BottomBtnWrap = styled.View`
 
     display: flex;
     flex-direction: row;
+
     justify-content: center;
+
     align-items: center;
 `
 
@@ -118,7 +120,6 @@ const BottomBtnText = styled.Text`
 
     position: relative;
 `
-
 const BuyBtnWrap = styled.View`
     width: 100%;
     padding: 10px;
@@ -290,12 +291,15 @@ export default function Register() {
                 </RegistorBtn>
 
                 <BottomBtnWrap>
+
                     <BottomBtn
                         onPress={() => {
                             navigation.navigate(LOGIN_NAME)
                         }}
                     >
+
                         <BottomBtnText>로그인하러 가기</BottomBtnText>
+
                     </BottomBtn>
                 </BottomBtnWrap>
 
