@@ -39,26 +39,12 @@ export default function App() {
 
     return (
         <SafeAreaView>
-            {/* <YouTubeVideo musicUuid={"1"} /> */}
-            {/* <Register /> */}
             <Login />
-            {/* <MyPlayList /> */}
-            {/* <UserProfile /> */}
-            {/* <Header /> */}
-            {/* <PlayList /> */}
-            {/* <ScrollContents /> */}
+            {/* <Header />
+            <ScrollContents /> */}
             {/*<PlayMusic />*/}
             <StatusBar style="auto" />
-            {/* <View>
-                <Text>test</Text>
-                {musics.map((music) => {
-                    return (
-                        <View key={music.uuid}>
-                            <Text>{music.musicLink}</Text>
-                        </View>
-                    )
-                })}
-            </View> */}
+
             {/* <MusicControl />
             <BottomNav /> */}
         </SafeAreaView>
