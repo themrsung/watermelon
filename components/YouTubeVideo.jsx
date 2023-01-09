@@ -25,25 +25,22 @@ export default function YouTubeVideo({ musicUuid, isPlaying }) {
         function clickUnmute () {
             const unmuteButton = document.getElementsByClassName("ytp-unmute-inner")[0]
             unmuteButton.click()
-            alert("unmuted")
         }        
 
         function clickPlayer () {
             const player = document.getElementsByClassName("player-controls-content")[0]
             player.click()
-            alert("Player CLicked")
         }
 
         function clickPlayPauseButton () {
             const playPauseButton = document.getElementsByClassName("player-control-play-pause-icon")[0]
             playPauseButton.click()
-            alert("play pause clicked")
+
         }
 
         clickUnmute()
         setTimeout(clickPlayer, 100)
         setTimeout(clickPlayPauseButton, 200)
-
 
     }
     `
