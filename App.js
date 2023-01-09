@@ -15,6 +15,7 @@ import Login from "./components/Login"
 import Register from "./components/Register"
 import YouTubeVideo from "./components/YouTubeVideo"
 import NavContainer from "./navigation/NavContainer"
+import CreatePlayList from "./components/CreatePlayList"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -40,7 +41,8 @@ export default function App() {
 
     return (
         <SafeAreaView>
-            <NavContainer />
+            {/* <NavContainer /> */}
+            <CreatePlayList />
             <StatusBar style="auto" />
         </SafeAreaView>
     )
