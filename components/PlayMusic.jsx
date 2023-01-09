@@ -1,6 +1,8 @@
 import { TouchableOpacity, View, Text, ImageBackground } from "react-native"
 import styled from "@emotion/native"
 import Lyric from "./Lyric"
+import { useNavigation } from "@react-navigation/core"
+import { HOME_NAME } from "../navigation/NavContainer"
 
 const Container = styled.View`
     width: 100%;
@@ -158,6 +160,7 @@ const MusicControl2IconImg = styled.Image`
 `
 
 export default function PlayMusic() {
+    const navigation = useNavigation()
     return (
         <Container>
             <ImageBackground
@@ -165,7 +168,11 @@ export default function PlayMusic() {
                 style={{ width: "100%", height: "100%" }}
             >
                 <BgDark>
-                    <BottomIconBtn>
+                    <BottomIconBtn
+                        onPress={() => {
+                            navigation.navigate(HOME_NAME)
+                        }}
+                    >
                         <BottomIconImg
                             source={require("../assets/bottom.png")}
                         />

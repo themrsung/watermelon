@@ -7,6 +7,8 @@ import PlayMusic from "../components/PlayMusic"
 import Register from "../components/Register"
 import Home from "../components/Home"
 import { createStackNavigator } from "@react-navigation/stack"
+import PlayList from "../components/PlayList"
+import MyPlayList from "../components/MyPlayList"
 
 // Screen names
 export const HOME_NAME = "Home"
@@ -28,14 +30,8 @@ export default function NavContainer() {
                 <Stack.Screen name={HOME_NAME} component={Home} />
                 <Stack.Screen name={LOGIN_NAME} component={Login} />
                 <Stack.Screen name={REGISTER_NAME} component={Register} />
-                <Stack.Screen
-                    name={MY_PLAYLIST_NAME}
-                    component={PlaylistList}
-                />
-                <Stack.Screen
-                    name={PLAYLIST_INFO_NAME}
-                    component={PlaylistHeader}
-                />
+                <Stack.Screen name={MY_PLAYLIST_NAME} component={MyPlayList} />
+                <Stack.Screen name={PLAYLIST_INFO_NAME} component={PlayList} />
                 <Stack.Screen name={PLAY_MUSIC_NAME} component={PlayMusic} />
             </Stack.Navigator>
         </NavigationContainer>

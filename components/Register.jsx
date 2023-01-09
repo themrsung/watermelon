@@ -2,8 +2,12 @@ import {} from "react-native"
 import { useState } from "react"
 import { register } from "../api/authApi"
 import { View, Text, TextInput, TouchableOpacity } from "react-native"
+import { useNavigation } from "@react-navigation/core"
+import { LOGIN_NAME } from "../navigation/NavContainer"
 
 export default function Register() {
+    const navigation = useNavigation()
+
     const [userId, setUserId] = useState("")
     const [userPassword, setUserPassword] = useState("")
     const [userName, setUserName] = useState("")
@@ -52,7 +56,11 @@ export default function Register() {
                 <Text>Register</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate(LOGIN_NAME)
+                }}
+            >
                 <Text>로그인하러 가기</Text>
             </TouchableOpacity>
         </View>
