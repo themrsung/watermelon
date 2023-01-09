@@ -275,7 +275,7 @@ export default function Login() {
                 </IDPWInputWrap>
 
                 <LoginBtn onPress={onLogin}>
-                    <LoginText>Login</LoginText>
+                    <LoginText>로그인</LoginText>
                 </LoginBtn>
 
                 <BottomBtnWrap>
