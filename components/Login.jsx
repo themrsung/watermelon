@@ -201,7 +201,7 @@ export default function Login() {
 
                 <LoginInputWrap>
                     <LoginInput
-                        type="password"
+                        secureTextEntry={true}
                         placeholder="PASSWORD를 입력해주세요."
                         placeholderTextColor={"#7da450"}
                         value={userPassword}
