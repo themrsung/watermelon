@@ -36,18 +36,19 @@ export default function App() {
     useEffect(() => {
         fetchMusics()
     }, [])
+
     return (
         <SafeAreaView>
-            {/*<YouTubeVideo musicUuid={"1"} />*/}
+            <YouTubeVideo musicUuid={"1"} />
             {/*<Register />*/}
             {/*<Login />*/}
-            {/* <MyPlayList /> */}
+            {/*<MyPlayList />*/}
             {/* <Login /> */}
             <UserProfile />
             {/* <Header /> */}
             {/* <PlayList /> */}
             {/* <ScrollContents /> */}
-            {/* <PlayMusic /> */}
+            {/*<PlayMusic />*/}
             <StatusBar style="auto" />
             {/* <View>
                 <Text>test</Text>

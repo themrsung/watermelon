@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "@emotion/native"
 import MusicControl from "./MusicControl"
 import BottomNav from "./BottomNav"
@@ -8,23 +8,46 @@ import { AntDesign } from "@expo/vector-icons"
 import { MaterialIcons } from "@expo/vector-icons"
 import { Entypo } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons"
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native"
+import { FlatList } from "react-native"
+import { FontAwesome5 } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons"
 
-const ProfileContainer = styled.ScrollView`
-    padding: 30px 0;
+const ProfileContainer = styled.SafeAreaView`
+    width: 100%;
+    // background-color: bisque;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 `
 
 const ProfileHeader = styled.View`
-    flex-direction: row;
-    display: flex;
     width: 100%;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    border-bottom-width: 1px;
+    border-bottom-color: #5aa469;
+    border-bottom-style: solid;
+    //background-color: yellow;
+
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 `
 
 const ProfileHeaderText = styled.Text`
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 700;
     color: #5aa469;
+`
+const ProfileHeaderIconWrap = styled.View`
+    width: 20%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `
 
 const ProfileImgBtn = styled.TouchableOpacity`
@@ -36,9 +59,12 @@ const ProfileImg = styled.Image`
 `
 
 const BellIconBtn = styled.TouchableOpacity`
-    margin-left: 135px;
-    margin-right: 10px;
     margin-top: 5px;
+`
+
+const ScrollViewWrap = styled.ScrollView`
+    padding: 10px;
+    box-sizing: border-box;
 `
 
 const LatelyCategory = styled.View`
@@ -55,7 +81,6 @@ const LatelyMusicTitle = styled.Text`
     font-weight: 700;
     text-align: left;
     line-height: 40px;
-    margin-left: 10px;
 `
 const AllTitleBtn = styled.TouchableOpacity``
 const AllTitleText = styled.Text`
@@ -76,7 +101,7 @@ const ProfilePageCategoryList = styled.View`
 const ProfilePageCategoryBox = styled.TouchableOpacity`
     /* border: 1px solid green; */
     width: 100%;
-    height: 50px;
+    height: 60px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -89,54 +114,84 @@ const FlatListCategoryLeft = styled.View`
 `
 const ProfilePageCategoryTitle = styled.Text`
     color: #5aa469;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    margin-left: 5px;
+    margin-left: 10px;
 `
 const ProfilePageCategoryNumber = styled.View`
+    display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 `
 const CategoryNumberText = styled.Text`
-    margin-top: 3px;
     font-size: 15px;
-    color: #5aa469;
+    color: #93d082;
 `
 
 export default function UserProfile() {
     const data = [
         {
-            icon: <AntDesign name="hearto" size={24} color="#5aa469" />,
+            icon: <AntDesign name="hearto" size={20} color="#225f2e" />,
             title: "좋아요한",
             number: "202",
             nexticon: (
-                <Entypo name="chevron-small-right" size={24} color="gray" />
+                <Entypo name="chevron-small-right" size={20} color="gray" />
             )
         },
         {
             icon: (
-                <MaterialIcons name="queue-music" size={24} color="#5aa469" />
+                <MaterialIcons name="queue-music" size={20} color="#225f2e" />
             ),
             title: "내 플레이리스트",
             number: "3",
             nexticon: (
-                <Entypo name="chevron-small-right" size={24} color="gray" />
+                <Entypo name="chevron-small-right" size={20} color="gray" />
             )
         },
         {
-            icon: <Feather name="disc" size={24} color="#5aa469" />,
+            icon: <Feather name="disc" size={20} color="#225f2e" />,
             title: "많이 들은",
             number: "0",
             nexticon: (
-                <Entypo name="chevron-small-right" size={24} color="gray" />
+                <Entypo name="chevron-small-right" size={20} color="gray" />
             )
         },
         {
-            icon: <FontAwesome name="comment-o" size={24} color="#5aa469" />,
-            title: "내가 쓴 댓글",
+            icon: <FontAwesome5 name="pen-nib" size={20} color="#225f2e" />,
+            title: "가사 하이라이팅",
             number: "0",
             nexticon: (
-                <Entypo name="chevron-small-right" size={24} color="gray" />
+                <Entypo name="chevron-small-right" size={20} color="gray" />
+            )
+        },
+        {
+            icon: <AntDesign name="staro" size={20} color="#225f2e" />,
+            title: "팬 맺은",
+            number: "7",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={20} color="gray" />
+            )
+        },
+        {
+            icon: <FontAwesome name="comment-o" size={20} color="#225f2e" />,
+            title: "내가 쓴 댓글",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={20} color="gray" />
+            )
+        },
+        {
+            icon: <Ionicons name="md-bar-chart" size={20} color="#225f2e" />,
+            title: "뮤직 DNA",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={20} color="gray" />
+            )
+        },
+        {
+            icon: <AntDesign name="clouddownloado" size={20} color="#225f2e" />,
+            title: "다운로드한",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={20} color="gray" />
             )
         }
     ]
@@ -144,44 +199,53 @@ export default function UserProfile() {
         <ProfileContainer>
             <ProfileHeader>
                 <ProfileHeaderText>나만의 음악서랍</ProfileHeaderText>
-                <BellIconBtn>
-                    <Feather name="bell" size={26} color="#5aa469" />
-                </BellIconBtn>
-                <ProfileImgBtn>
-                    <ProfileImg source={require("../assets/profileImg.jpg")} />
-                </ProfileImgBtn>
-            </ProfileHeader>
-            <LatelyCategory>
-                <LatelyMusicTitle>최근 들은</LatelyMusicTitle>
-                <AllTitleBtn>
-                    <AllTitleText>전체보기</AllTitleText>
-                </AllTitleBtn>
-            </LatelyCategory>
-            <CurrentMusicList />
-            <ProfilePageBanner source={require("../assets/banner2.png")} />
-            <ProfilePageCategoryList>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={data}
-                    renderItem={({ item, i }) => (
-                        <ProfilePageCategoryBox key={i}>
-                            <FlatListCategoryLeft>
-                                {item.icon}
-                                <ProfilePageCategoryTitle>
-                                    {item.title}
-                                </ProfilePageCategoryTitle>
-                            </FlatListCategoryLeft>
 
-                            <ProfilePageCategoryNumber>
-                                <CategoryNumberText>
-                                    {item.number}
-                                </CategoryNumberText>
-                                {item.nexticon}
-                            </ProfilePageCategoryNumber>
-                        </ProfilePageCategoryBox>
-                    )}
-                />
-            </ProfilePageCategoryList>
+                <ProfileHeaderIconWrap>
+                    <BellIconBtn>
+                        <Feather name="bell" size={26} color="#5aa469" />
+                    </BellIconBtn>
+                    <ProfileImgBtn>
+                        <ProfileImg
+                            source={require("../assets/profileImg.jpg")}
+                        />
+                    </ProfileImgBtn>
+                </ProfileHeaderIconWrap>
+            </ProfileHeader>
+
+            <ScrollViewWrap>
+                <LatelyCategory>
+                    <LatelyMusicTitle>최근 들은</LatelyMusicTitle>
+                    <AllTitleBtn>
+                        <AllTitleText>전체보기</AllTitleText>
+                    </AllTitleBtn>
+                </LatelyCategory>
+                <CurrentMusicList />
+                <ProfilePageBanner source={require("../assets/banner2.png")} />
+                <ProfilePageCategoryList>
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={data}
+                        renderItem={({ item, i }) => (
+                            <ProfilePageCategoryBox key={i}>
+                                <FlatListCategoryLeft>
+                                    {item.icon}
+                                    <ProfilePageCategoryTitle>
+                                        {item.title}
+                                    </ProfilePageCategoryTitle>
+                                </FlatListCategoryLeft>
+
+                                <ProfilePageCategoryNumber>
+                                    <CategoryNumberText>
+                                        {item.number}
+                                    </CategoryNumberText>
+                                    {item.nexticon}
+                                </ProfilePageCategoryNumber>
+                            </ProfilePageCategoryBox>
+                        )}
+                    />
+                </ProfilePageCategoryList>
+            </ScrollViewWrap>
+
             <MusicControl />
             <BottomNav />
         </ProfileContainer>
