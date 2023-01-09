@@ -11,7 +11,6 @@ export default function Register() {
 
     const onRegister = () => {
         const response = register(userId, userPassword, userName, userEmail)
-        console.log(response)
     }
 
     return (

@@ -51,7 +51,6 @@ export const getMusics = async () => {
 // 유튜브 크롤링해서 제목과 아티스트 갖다줍니다.
 export const getMusicMetadataFromYouTube = async (musicUuid) => {
     const music = await getMusic(musicUuid)
-    console.log(music.musicLink)
     const response = await fetch(music.musicLink)
     const htmlString = await response.text()
 
