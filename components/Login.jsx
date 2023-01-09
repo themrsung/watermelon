@@ -172,7 +172,6 @@ export default function Login() {
 
     const onLogin = () => {
         const response = login(userId, userPassword)
-        console.log(response)
     }
 
     logout()
