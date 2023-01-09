@@ -26,7 +26,7 @@ export const login = async (id, password) => {
     }
 
     const matchingUser = matchingUsers[0]
-    if (!matchingUser) {
+    if (matchingUser === {} || !matchingUser) {
         // user found, but not valid
         return LOGIN_FAILED
     }
