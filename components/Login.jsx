@@ -7,6 +7,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons"
 import { MaterialIcons } from "@expo/vector-icons"
 import { Entypo } from "@expo/vector-icons"
+import { useNavigation } from "@react-navigation/core"
+import { HOME_NAME } from "../navigation/NavContainer"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -232,10 +234,16 @@ export default function Login() {
 
     logout()
 
+    const navigation = useNavigation()
+
     return (
         <SafeAreaView>
             <HeaderWrap>
-                <HeaderIconVtn>
+                <HeaderIconVtn
+                    onPress={() => {
+                        navigation.navigate(HOME_NAME)
+                    }}
+                >
                     <Feather name="x" size={30} color="#5aa469" />
                 </HeaderIconVtn>
             </HeaderWrap>
