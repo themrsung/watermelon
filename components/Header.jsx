@@ -1,6 +1,8 @@
 import React from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
+import { useNavigation } from "@react-navigation/core"
+import { LOGIN_NAME } from '../navigation/NavContainer'
 
 const Container = styled.View`
     width: 100%;
@@ -47,6 +49,8 @@ const CouponImg = styled.Image`
 `
 
 export default function Header() {
+    const navigation = useNavigation()
+
     return (
         <Container>
             <LogoImg source={require("../assets/LightBG.png")} />
@@ -56,7 +60,11 @@ export default function Header() {
                     <CouponImg source={require("../assets/coupon.png")} />
                 </CouponButton>
 
-                <MenuButton>
+                <MenuButton
+                    onPress={() => {
+                        navigation.navigate(LOGIN_NAME)
+                    }}
+                >
                     <MenuBarImg source={require("../assets/menu_bar.png")} />
                 </MenuButton>
             </IconButtonWrap>
