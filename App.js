@@ -14,6 +14,7 @@ import UserProfile from "./components/UserProfile"
 import Login from "./components/Login"
 import Register from "./components/Register"
 import YouTubeVideo from "./components/YouTubeVideo"
+import NavContainer from "./navigation/NavContainer"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -39,28 +40,8 @@ export default function App() {
 
     return (
         <SafeAreaView>
-            {/* <YouTubeVideo musicUuid={"1"} /> */}
-            {/* <Register /> */}
-            <Login />
-            {/* <MyPlayList /> */}
-            {/* <UserProfile /> */}
-            {/* <Header /> */}
-            {/* <PlayList /> */}
-            {/* <ScrollContents /> */}
-            {/*<PlayMusic />*/}
+            <NavContainer />
             <StatusBar style="auto" />
-            {/* <View>
-                <Text>test</Text>
-                {musics.map((music) => {
-                    return (
-                        <View key={music.uuid}>
-                            <Text>{music.musicLink}</Text>
-                        </View>
-                    )
-                })}
-            </View> */}
-            {/* <MusicControl />
-            <BottomNav /> */}
         </SafeAreaView>
     )
 }
