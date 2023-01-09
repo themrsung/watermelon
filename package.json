@@ -13,12 +13,12 @@
         "@emotion/react": "^11.10.5",
         "@react-navigation/native": "^6.1.1",
         "@react-navigation/native-stack": "^6.9.7",
+        "@reduxjs/toolkit": "^1.9.1",
         "axios": "^1.2.2",
         "cheerio": "^1.0.0-rc.12",
         "expo": "~47.0.9",
         "expo-status-bar": "~1.4.2",
         "json-server": "^0.17.1",
-        "mobx": "^6.7.0",
         "mobx-react": "^7.6.0",
         "react": "18.1.0",
         "react-native": "0.70.5",
@@ -26,7 +26,8 @@
         "react-native-screens": "~3.18.0",
         "react-native-swiper": "^1.6.0",
         "react-native-uuid": "^2.0.1",
-        "react-native-webview": "^11.26.0"
+        "react-native-webview": "^11.26.0",
+        "react-redux": "^8.0.5"
     },
     "devDependencies": {
         "@babel/core": "^7.12.9"
