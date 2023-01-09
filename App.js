@@ -41,7 +41,6 @@ export default function App() {
     return (
         <SafeAreaView>
             <NavContainer />
-            <Login />
             <StatusBar style="auto" />
         </SafeAreaView>
     )

@@ -8,12 +8,20 @@ import CurrentMusic from "./CurrentMusic"
 import BestMusic from "./BestMusic"
 import CurrentMV from "./CurrentMV"
 import Footer from "./Footer"
+import { LOGIN_NAME } from "../navigation/NavContainer"
+import { useNavigation } from "@react-navigation/core"
 
 const ContentsWrap = styled.ScrollView`
     width: 100%;
 `
 
 export default function ScrollContents() {
+    // const navigation = useNavigation()
+    // onPress={() => {
+    //                 navigation.navigate(LOGIN_NAME)
+    //             }}
+    //         >
+
     return (
         <ContentsWrap>
             <FavoriteMusic />
