@@ -42,13 +42,13 @@ export default function App() {
             <YouTubeVideo musicUuid={"1"} />
             {/*<Register />*/}
             {/*<Login />*/}
-            {/* <MyPlayList /> */}
+            {/*<MyPlayList />*/}
             {/* <Login /> */}
-            {/* <UserProfile /> */}
+            <UserProfile />
             {/* <Header /> */}
             {/* <PlayList /> */}
             {/* <ScrollContents /> */}
-            {/* <PlayMusic /> */}
+            {/*<PlayMusic />*/}
             <StatusBar style="auto" />
             {/* <View>
                 <Text>test</Text>
