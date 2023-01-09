@@ -1,6 +1,8 @@
 import React from "react"
 import { View, Image } from "react-native"
 import styled from "@emotion/native"
+import { useNavigation } from "@react-navigation/core"
+import { PLAYLIST_INFO_NAME } from "../navigation/NavContainer"
 
 const Wrap = styled.View`
     width: 100%;
@@ -82,7 +84,11 @@ const FlatListWrap = styled.View``
 
 const FlatList = styled.FlatList``
 
+const FlatListBtn = styled.TouchableOpacity``
+
 export default function FavoriteMusic() {
+    const navigation = useNavigation()
+
     const data = [
         {
             image: <Image source={require("../assets/image1.png")} />,
@@ -115,36 +121,44 @@ export default function FavoriteMusic() {
                 <Title>내가 좋아할 음악</Title>
             </TitleWrap>
 
-            <FlatList
-                horizontal
-                //showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-                ItemSeparatorComponent={<View style={{ margin: 6 }} />}
-                data={data}
-                renderItem={({ item, i }) => (
-                    <FlatListWrap key={i}>
-                        <FavoriteMusicTitle>{item.title}</FavoriteMusicTitle>
-                        <FavoriteMusicList>
-                            <PlayButton>
-                                <PlayIconImg
-                                    source={require("../assets/play.png")}
-                                />
-                            </PlayButton>
+            <FlatListBtn
+                onPress={() => {
+                    navigation.navigate(PLAYLIST_INFO_NAME)
+                }}
+            >
+                <FlatList
+                    horizontal
+                    //showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                    ItemSeparatorComponent={<View style={{ margin: 6 }} />}
+                    data={data}
+                    renderItem={({ item, i }) => (
+                        <FlatListWrap key={i}>
+                            <FavoriteMusicTitle>
+                                {item.title}
+                            </FavoriteMusicTitle>
+                            <FavoriteMusicList>
+                                <PlayButton>
+                                    <PlayIconImg
+                                        source={require("../assets/play.png")}
+                                    />
+                                </PlayButton>
 
-                            <FavoriteMusicImage>
-                                {item.image}
-                            </FavoriteMusicImage>
+                                <FavoriteMusicImage>
+                                    {item.image}
+                                </FavoriteMusicImage>
 
-                            <TextWrap>
-                                <ContentTitle>{item.content}</ContentTitle>
-                                <ContentCategory>
-                                    {item.category}
-                                </ContentCategory>
-                            </TextWrap>
-                        </FavoriteMusicList>
-                    </FlatListWrap>
-                )}
-            />
+                                <TextWrap>
+                                    <ContentTitle>{item.content}</ContentTitle>
+                                    <ContentCategory>
+                                        {item.category}
+                                    </ContentCategory>
+                                </TextWrap>
+                            </FavoriteMusicList>
+                        </FlatListWrap>
+                    )}
+                />
+            </FlatListBtn>
         </Wrap>
     )
 }

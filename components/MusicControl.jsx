@@ -1,6 +1,8 @@
 import React from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
+import { useNavigation } from "@react-navigation/core"
+import { MY_PLAYLIST_NAME, PLAY_MUSIC_NAME } from "../navigation/NavContainer"
 
 const Container = styled.View`
     width: 100%;
@@ -50,6 +52,8 @@ const MusicPlaylistBtn = styled.TouchableOpacity``
 
 const MusicPlaylistIconImg = styled.Image``
 
+const MusicWrapBtn = styled.TouchableOpacity``
+
 const MusicWrap = styled.View`
     margin-left: 20px;
 
@@ -81,6 +85,8 @@ const MusicControlBtn = styled.TouchableOpacity``
 const MusicControlIconImg = styled.Image``
 
 export default function MusicControl() {
+    const navigation = useNavigation()
+
     return (
         <Container>
             <MusicState>
@@ -88,16 +94,26 @@ export default function MusicControl() {
             </MusicState>
 
             <TopWrap>
-                <MusicPlaylistBtn>
+                <MusicPlaylistBtn
+                    onPress={() => {
+                        navigation.navigate(MY_PLAYLIST_NAME)
+                    }}
+                >
                     <MusicPlaylistIconImg
                         source={require("../assets/playList.png")}
                     />
                 </MusicPlaylistBtn>
 
-                <MusicWrap>
-                    <MusicTitle>Candy</MusicTitle>
-                    <MusicSinger>백현 (BAEKHYUN)</MusicSinger>
-                </MusicWrap>
+                <MusicWrapBtn
+                    onPress={() => {
+                        navigation.navigate(PLAY_MUSIC_NAME)
+                    }}
+                >
+                    <MusicWrap>
+                        <MusicTitle>Candy</MusicTitle>
+                        <MusicSinger>백현 (BAEKHYUN)</MusicSinger>
+                    </MusicWrap>
+                </MusicWrapBtn>
             </TopWrap>
 
             <MusicControlWrap>

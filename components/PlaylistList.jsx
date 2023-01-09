@@ -1,6 +1,8 @@
 import React from "react"
 import { Image } from "react-native"
 import styled from "@emotion/native"
+import { useNavigation } from "@react-navigation/core"
+import { PLAY_MUSIC_NAME } from "../navigation/NavContainer"
 
 const Container = styled.ScrollView`
     width: 100%;
@@ -284,6 +286,8 @@ const FlatListImg = styled.Text`
     margin-top: -14%;
 `
 
+const FlatListTextBtn = styled.TouchableOpacity``
+
 const FlatListTextWrap = styled.View``
 
 const PlayListMusicTitle = styled.Text`
@@ -313,6 +317,8 @@ const FlatListIconImg = styled.Image`
 `
 
 export default function PlaylistList() {
+    const navigation = useNavigation()
+
     const data = [
         {
             image: <Image source={require("../assets/image9.png")} />,
@@ -474,14 +480,20 @@ export default function PlaylistList() {
                             <FlatListLeft>
                                 <FlatListImg>{item.image}</FlatListImg>
 
-                                <FlatListTextWrap>
-                                    <PlayListMusicTitle>
-                                        {item.title}
-                                    </PlayListMusicTitle>
-                                    <PlayListMusicSinger>
-                                        {item.singer}
-                                    </PlayListMusicSinger>
-                                </FlatListTextWrap>
+                                <FlatListTextBtn
+                                    onPress={() => {
+                                        navigation.navigate(PLAY_MUSIC_NAME)
+                                    }}
+                                >
+                                    <FlatListTextWrap>
+                                        <PlayListMusicTitle>
+                                            {item.title}
+                                        </PlayListMusicTitle>
+                                        <PlayListMusicSinger>
+                                            {item.singer}
+                                        </PlayListMusicSinger>
+                                    </FlatListTextWrap>
+                                </FlatListTextBtn>
                             </FlatListLeft>
 
                             <FlatListIconWrap>
