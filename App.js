@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar"
 import styled from "@emotion/native"
 import { getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
-import CreatePlayList from "./components/CreatePlayList"
 import NavContainer from "./navigation/NavContainer"
 import Out from "./components/Out"
 
@@ -33,6 +32,7 @@ export default function App() {
             <Out />
             {/* <NavContainer /> */}
             {/* <CreatePlayList /> */}
+
             <StatusBar style="auto" />
         </SafeAreaView>
     )
