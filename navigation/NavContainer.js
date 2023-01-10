@@ -28,7 +28,7 @@ export default function NavContainer() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName={COMMENT_NAME}
+                initialRouteName={MY_PLAYLIST2_NAME}
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name={HOME_NAME} component={Home} />
