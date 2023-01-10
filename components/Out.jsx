@@ -120,6 +120,7 @@ const OutTwoView = styled.View`
 const OutFirstText = styled.Text`
     font-size: 25px;
     font-weight: 800;
+    color: #083d2a;
 `
 
 const OutTwoText = styled.Text`
@@ -151,6 +152,7 @@ const OutFourView = styled.View`
 const OutFourText = styled.Text`
     font-size: 17px;
     font-weight: 600;
+    color: #083d2a;
 `
 
 const OutFiveText = styled.Text`
@@ -191,6 +193,7 @@ const OutSixView = styled.View`
 const OutEghitText = styled.Text`
     font-size: 17px;
     font-weight: 600;
+    color: #083d2a;
 `
 
 const OutNineText = styled.Text`
@@ -214,11 +217,11 @@ const OutSevenView = styled.View`
 `
 
 const OutTwoBtn = styled.TouchableOpacity`
-    width: 45%;
+    width: 48%;
     box-sizing: border-box;
     border: 1px solid rgb(90, 164, 105);
-    padding: 15px;
-    border-radius: 20px;
+    padding: 20px;
+    border-radius: 30px;
     background-color: rgb(240, 247, 242);
 `
 
@@ -229,10 +232,10 @@ const OutElevenText = styled.Text`
 `
 
 const OutThreeBtn = styled.TouchableOpacity`
-    width: 45%;
+    width: 48%;
     box-sizing: border-box;
-    padding: 15px;
-    border-radius: 20px;
+    padding: 20px;
+    border-radius: 30px;
     background-color: #f66363;
 `
 
