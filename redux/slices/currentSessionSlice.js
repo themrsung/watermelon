@@ -10,13 +10,12 @@ export const currentSessionSlice = createSlice({
     initialState,
     reducers: {
         setId: (state, action) => {
-            state.value = {
-                id: action.payload,
-                loggedIn: true
-            }
+            state.id = action.payload
+            state.loggedIn = true
         },
         clear: (state) => {
-            state.value = initialState
+            state.id = ""
+            state.loggedIn = false
         }
     }
 })
