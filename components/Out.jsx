@@ -5,12 +5,20 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { AntDesign } from "@expo/vector-icons"
 import styled from "@emotion/native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { useNavigation } from "@react-navigation/core"
+import { USER_PROFILE_NAME } from "../navigation/NavContainer"
 
 export default function Out() {
+    const navigation = useNavigation()
+
     return (
         <SafeAreaViews>
             <OutFirstView>
-                <OutFirstBtn>
+                <OutFirstBtn
+                    onPress={() => {
+                        navigation.navigate(USER_PROFILE_NAME)
+                    }}
+                >
                     <AntDesign name="close" size={30} color="#5aa469" />
                 </OutFirstBtn>
                 <OutFirstBtn>
