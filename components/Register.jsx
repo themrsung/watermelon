@@ -1,6 +1,6 @@
 import {} from "react-native"
 import { useState } from "react"
-import { register } from "../api/authApi"
+import { login, register } from "../api/authApi"
 import {} from "react-native"
 import { useNavigation } from "@react-navigation/core"
 import { LOGIN_NAME } from "../navigation/NavContainer"
@@ -11,6 +11,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons"
 import { MaterialIcons } from "@expo/vector-icons"
 import { Entypo } from "@expo/vector-icons"
+import {
+    LOGIN_FAILED,
+    LOGIN_SUCCEEDED,
+    REGISTER_FAILED_GET_USERS_FAILED,
+    REGISTER_FAILED_INVALID_USER,
+    REGISTER_SUCCEEDED
+} from "../api/apiSettings"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -226,8 +233,37 @@ export default function Register() {
     const [userName, setUserName] = useState("")
     const [userEmail, setUserEmail] = useState("")
 
-    const onRegister = () => {
-        const response = register(userId, userPassword, userName, userEmail)
+    const onRegister = async () => {
+        if (
+            userId === "" ||
+            userPassword === "" ||
+            userName === "" ||
+            userEmail === ""
+        ) {
+            // 안돼 돌아가 정보 제대로 쳐
+            return
+        }
+
+        const response = await register(
+            userId,
+            userPassword,
+            userName,
+            userEmail
+        )
+
+        if (response === REGISTER_FAILED_GET_USERS_FAILED) {
+            // 유저한테 서버에 오류가 있다고 알려주면 되겠죠 승민님
+        } else if (response === REGISTER_FAILED_INVALID_USER) {
+            // 유저한테 서버에 오류가 있다고 알려주면 되겠죠 승민님
+        }
+
+        const loginResponse = await login(userId, userPassword)
+        if (loginResponse === LOGIN_FAILED) {
+            // 회원가입 성공, 로그인 실패 => 로그인 창으로 보냄
+            navigation.navigate(LOGIN_NAME)
+        }
+
+        navigation.navigate(HOME_NAME)
     }
 
     return (
@@ -291,15 +327,12 @@ export default function Register() {
                 </RegistorBtn>
 
                 <BottomBtnWrap>
-
                     <BottomBtn
                         onPress={() => {
                             navigation.navigate(LOGIN_NAME)
                         }}
                     >
-
                         <BottomBtnText>로그인하러 가기</BottomBtnText>
-
                     </BottomBtn>
                 </BottomBtnWrap>
 

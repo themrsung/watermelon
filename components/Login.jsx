@@ -9,6 +9,7 @@ import { MaterialIcons } from "@expo/vector-icons"
 import { Entypo } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
 import { HOME_NAME, REGISTER_NAME } from "../navigation/NavContainer"
+import { LOGIN_FAILED, LOGIN_SUCCEEDED } from "../api/apiSettings"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -228,13 +229,23 @@ export default function Login() {
     const [userId, setUserId] = useState("")
     const [userPassword, setUserPassword] = useState("")
 
-    const onLogin = () => {
-        const response = login(userId, userPassword)
+    const navigation = useNavigation()
+
+    const onLogin = async () => {
+        const response = await login(userId, userPassword)
+
+        if (response === LOGIN_FAILED) {
+            // 비밀번호 틀림 -> 알림
+            //
+            // 승민님 로그인 실패하면 비번창에 텍스트 띄워주세요
+            // 여기다 하시면 됩니다
+            return
+        }
+
+        navigation.navigate(HOME_NAME)
     }
 
     logout()
-
-    const navigation = useNavigation()
 
     return (
         <SafeAreaView>
