@@ -3,6 +3,7 @@ import { Image } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import { PLAY_MUSIC_NAME } from "../navigation/NavContainer"
+import Comment from './Comment'
 
 const Container = styled.ScrollView`
     width: 100%;
@@ -427,7 +428,11 @@ export default function PlaylistList() {
                         </IconBtnWrap>
 
                         <IconBtnWrap>
-                            <IconBtn>
+                            <IconBtn
+                                 onPress={() => {
+                                    navigation.navigate(Comment)
+                                }}
+                            >
                                 <IconImg
                                     source={require("../assets/comment.png")}
                                 />
