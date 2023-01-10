@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import PlayList from "../components/PlayList"
 import MyPlayList from "../components/MyPlayList"
 import CreatePlayList from "../components/CreatePlayList"
+import MyPlayList2 from "../components/MyPlayList2"
 
 // Screen names
 export const HOME_NAME = "Home"
@@ -17,6 +18,7 @@ export const MY_PLAYLIST_NAME = "My Playlist"
 export const PLAYLIST_INFO_NAME = "Playlist Info"
 export const PLAY_MUSIC_NAME = "Play Music"
 export const CREATE_PLAYLIST_NAME = "Create PlayList"
+export const MY_PLAYLIST2_NAME = "playlist2 Info"
 
 const Stack = createStackNavigator()
 
@@ -24,7 +26,7 @@ export default function NavContainer() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName={CREATE_PLAYLIST_NAME}
+                initialRouteName={MY_PLAYLIST2_NAME}
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name={HOME_NAME} component={Home} />
@@ -36,6 +38,10 @@ export default function NavContainer() {
                 <Stack.Screen
                     name={CREATE_PLAYLIST_NAME}
                     component={CreatePlayList}
+                />
+                <Stack.Screen
+                    name={MY_PLAYLIST2_NAME}
+                    component={MyPlayList2}
                 />
             </Stack.Navigator>
         </NavigationContainer>
