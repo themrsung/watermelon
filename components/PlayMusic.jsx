@@ -2,7 +2,7 @@ import { TouchableOpacity, View, Text, ImageBackground } from "react-native"
 import styled from "@emotion/native"
 import Lyric from "./Lyric"
 import { useNavigation } from "@react-navigation/core"
-import { HOME_NAME } from "../navigation/NavContainer"
+import { HOME_NAME, MY_PLAYLIST_NAME } from "../navigation/NavContainer"
 
 const Container = styled.View`
     width: 100%;
@@ -224,7 +224,11 @@ export default function PlayMusic() {
                     <Lyric />
 
                     <MusicControlView>
-                        <MusicControl2IconBtn>
+                        <MusicControl2IconBtn
+                            onPress={() => {
+                                navigation.navigate(MY_PLAYLIST_NAME)
+                            }}
+                        >
                             <MusicControl2IconImg
                                 source={require("../assets/playList.png")}
                             />

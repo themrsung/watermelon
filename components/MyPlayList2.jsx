@@ -5,7 +5,8 @@ import { useNavigation } from "@react-navigation/core"
 import {
     CREATE_PLAYLIST_NAME,
     HOME_NAME,
-    MY_PLAYLIST_NAME
+    MY_PLAYLIST_NAME,
+    PLAY_MUSIC_NAME
 } from "../navigation/NavContainer"
 import { AntDesign } from "@expo/vector-icons"
 import CreatePlayListGroup from "./CreatePlayListGroup"
@@ -85,6 +86,42 @@ export default function MyPlayList2() {
                             <CreatePlayListGroup />
                         </PlayListGroupWrap>
                     </ScrollPlayList>
+
+                    <ContainerFooter>
+                        <MyPlayIconBtn
+                            onPress={() => {
+                                navigation.navigate(PLAY_MUSIC_NAME)
+                            }}
+                        >
+                            <IconPictureImage
+                                source={require("../assets/image6.png")}
+                            />
+                        </MyPlayIconBtn>
+
+                        <MyPlayIconBtn>
+                            <IconImage
+                                source={require("../assets/play7.png")}
+                            />
+                        </MyPlayIconBtn>
+
+                        <MyPlayIconBtn>
+                            <IconPictureImage
+                                source={require("../assets/play6.png")}
+                            />
+                        </MyPlayIconBtn>
+
+                        <MyPlayIconBtn>
+                            <IconImage
+                                source={require("../assets/play8.png")}
+                            />
+                        </MyPlayIconBtn>
+
+                        <MyPlayIconBtn>
+                            <IconImage
+                                source={require("../assets/volume2.png")}
+                            />
+                        </MyPlayIconBtn>
+                    </ContainerFooter>
                 </BgDark>
             </ImageBackground>
         </Container>
@@ -207,4 +244,28 @@ const AddPlayListText = styled.Text`
 const PlayListGroupWrap = styled.View`
     width: 100%;
     margin-top: 10px;
+`
+const ContainerFooter = styled.View`
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgba(255, 255, 255, 0.4);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`
+const MyPlayIconBtn = styled.TouchableOpacity``
+
+const IconPictureImage = styled.Image`
+    width: 40px;
+    height: 40px;
+`
+
+const IconImage = styled.Image`
+    width: 25px;
+    height: 25px;
 `
