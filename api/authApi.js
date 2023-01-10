@@ -2,6 +2,7 @@
 
 import axios from "axios"
 import { store } from "../redux/stores"
+import { setId, clear } from "../redux/slices/currentSessionSlice"
 // import currentSessionStore from "../store/currentSessionStore"
 import {
     DELETE_USER_FAILED,
