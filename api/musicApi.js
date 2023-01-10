@@ -10,6 +10,7 @@ import {
 } from "./apiSettings"
 import uuid from "react-native-uuid"
 import { load } from "cheerio"
+import WebView from "react-native-webview"
 
 // 글쓰기입니다. 오류내시면 서버에 그대로 들어가요.
 export const createMusic = async (music) => {
@@ -76,6 +77,26 @@ export const getMusicThumbnailLinkFromYouTube = async (musicUuid) => {
     }
 
     return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+}
+
+// musicUuid로 Google에서 lyrics를 가져옵니다.
+export const getMusicLyricsFromGoogle = async (musicUuid) => {
+    // const musicMetadata = await getMusicMetadataFromYouTube(musicUuid)
+    // if (!musicMetadata) {
+    //     return ""
+    // }
+
+    // const musicArtistAndTitle = `${musicMetadata.artist} - ${musicMetadata.title}`
+    // const googleSearchLink = `https://www.google.com/search?q=${musicArtistAndTitle}+lyrics`
+
+    // const GoogleLyricsPage = ({ link }) => {
+    //     return <WebView source={{ uri: link }} />
+    // }
+
+    // return <GoogleLyricsPage link={googleSearchLink} />
+
+    // 즐
+    return "지원되지 않는 기능입니다ㅋ"
 }
 
 // uuid에 해당하는 글을 두번째 파라미터의 글로 수정합니다.
