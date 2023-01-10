@@ -193,6 +193,13 @@ export default function UserProfile() {
             nexticon: (
                 <Entypo name="chevron-small-right" size={20} color="gray" />
             )
+        },
+        {
+            icon: <Feather name="log-out" size={20} color="#225f2e" />,
+            title: "회원탈퇴",
+            nexticon: (
+                <Entypo name="chevron-small-right" size={20} color="gray" />
+            )
         }
     ]
     return (
