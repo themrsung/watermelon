@@ -2,7 +2,11 @@ import React from "react"
 import { Image, ImageBackground, TouchableOpacity } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
-import { HOME_NAME, MY_PLAYLIST2_NAME } from "../navigation/NavContainer"
+import {
+    HOME_NAME,
+    MY_PLAYLIST2_NAME,
+    PLAY_MUSIC_NAME
+} from "../navigation/NavContainer"
 
 export default function PlaylistList() {
     const navigation = useNavigation()
@@ -147,7 +151,11 @@ export default function PlaylistList() {
                     </PlaylistWrap>
 
                     <ContainerFooter>
-                        <MyPlayIconBtn>
+                        <MyPlayIconBtn
+                            onPress={() => {
+                                navigation.navigate(PLAY_MUSIC_NAME)
+                            }}
+                        >
                             <IconPictureImage
                                 source={require("../assets/image6.png")}
                             />
