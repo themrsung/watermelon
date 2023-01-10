@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 import { Ionicons } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
 import { CREATE_PLAYLIST_NAME } from "../navigation/NavContainer"
+import { getPlaylist } from "../api/playlistsApi"
+import { getMusic, getMusicThumbnailLinkFromYouTube } from "../api/musicApi"
 
 const Container = styled.View`
     width: 100%;
@@ -58,15 +60,41 @@ const PlayBtn = styled.TouchableOpacity``
 
 const EditBtn = styled.TouchableOpacity``
 
-export default function CreatePlayListGroup() {
+export default function CreatePlayListGroup({ playlistUuid }) {
     const navigation = useNavigation()
+
+    const [playlist, setPlaylist] = useState({})
+    const [playlistThumbnailUrl, setPlaylistThumbnailUrl] = useState("")
+
+    const fetchPlaylist = async () => {
+        const newP = await getPlaylist(playlistUuid)
+        setPlaylist(newP)
+        fetchThumbnailUrlOfFirstMusicInPlaylist()
+    }
+
+    const fetchThumbnailUrlOfFirstMusicInPlaylist = async () => {
+        if (playlist.content.length < 1) {
+            return
+        }
+
+        const thumbnailOfFirstMusic = await getMusicThumbnailLinkFromYouTube(
+            playlist.content[0]
+        )
+        setPlaylistThumbnailUrl(thumbnailOfFirstMusic)
+    }
+
+    useEffect(() => {
+        fetchPlaylist()
+    }, [])
 
     return (
         <Container>
             <Wrap>
-                <AlbumImg source={require("../assets/image2.png")} />
-                <PlayListGroupTitle>요즘 많이 듣는 곡3</PlayListGroupTitle>
-                <PlayListGroupNumber>232</PlayListGroupNumber>
+                <AlbumImg source={{ uri: playlistThumbnailUrl }} />
+                <PlayListGroupTitle>{playlist.title}</PlayListGroupTitle>
+                <PlayListGroupNumber>
+                    {playlist.content ? playlist.content.length : 0}
+                </PlayListGroupNumber>
             </Wrap>
 
             <IconWrap>
@@ -76,7 +104,10 @@ export default function CreatePlayListGroup() {
 
                 <EditBtn
                     onPress={() => {
-                        navigation.navigate(CREATE_PLAYLIST_NAME)
+                        navigation.navigate(CREATE_PLAYLIST_NAME, {
+                            isEditing: true,
+                            originalPlaylistUuid: playlist.uuid
+                        })
                     }}
                 >
                     <FontAwesome name="edit" size={18} color="white" />
