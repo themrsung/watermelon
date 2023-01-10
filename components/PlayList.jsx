@@ -15,13 +15,12 @@ const SafeAreaView = styled.SafeAreaView`
     flex: 1;
 `
 
-export default function PlayList() {
+export default function Playlist() {
     return (
         <SafeAreaView>
             <PlaylistHeader />
 
-            <PlaylistList />
-
+            <PlaylistList playlistUuid="3" />
             <MusicControl />
             <BottomNav />
         </SafeAreaView>

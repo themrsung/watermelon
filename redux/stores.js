@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit"
 import currentSessionReducer from "./slices/currentSessionSlice"
+import currentPlaylistReducer from "./slices/currentPlaylistSlice"
 
 export const store = configureStore({
     reducer: {
-        currentSession: currentSessionReducer
+        currentSession: currentSessionReducer,
+        currentPlaylist: currentPlaylistReducer
     }
 })
 

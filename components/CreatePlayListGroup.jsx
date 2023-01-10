@@ -4,9 +4,15 @@ import styled from "@emotion/native"
 import { Ionicons } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
-import { CREATE_PLAYLIST_NAME } from "../navigation/NavContainer"
+import {
+    CREATE_PLAYLIST_NAME,
+    PLAYLIST_PAGE_NAME
+} from "../navigation/NavContainer"
 import { getPlaylist } from "../api/playlistsApi"
 import { getMusic, getMusicThumbnailLinkFromYouTube } from "../api/musicApi"
+import { store } from "../redux/stores"
+import { setPlaylist as setPlaylistRedux } from "../redux/slices/currentPlaylistSlice"
+import { useDispatch } from "react-redux"
 
 const Container = styled.View`
     width: 100%;
@@ -90,11 +96,19 @@ export default function CreatePlayListGroup({ playlistUuid }) {
         fetchThumbnailUrlOfFirstMusicInPlaylist()
     }, [playlist])
 
+    const navigateToPlaylist = () => {
+        navigation.navigate(PLAYLIST_PAGE_NAME, { playlistUuid: playlistUuid })
+        store.dispatch(setPlaylistRedux(playlist.uuid))
+    }
+
     return (
         <Container>
-            <Wrap>
+            <Wrap onPress={navigateToPlaylist}>
                 {playlistThumbnailUrl !== "" && (
-                    <AlbumImg source={{ uri: playlistThumbnailUrl }} />
+                    <AlbumImg
+                        style={{ borderRadius: 5 }}
+                        source={{ uri: playlistThumbnailUrl }}
+                    />
                 )}
                 <PlayListGroupTitle>{playlist.title}</PlayListGroupTitle>
                 <PlayListGroupNumber>
@@ -103,7 +117,14 @@ export default function CreatePlayListGroup({ playlistUuid }) {
             </Wrap>
 
             <IconWrap>
-                <PlayBtn>
+                <PlayBtn
+                    onPress={() => {
+                        navigation.navigate(PLAYLIST_PAGE_NAME, {
+                            playlistUuid: playlist.uuid
+                        })
+                        store.dispatch(setPlaylistRedux(playlistUuid))
+                    }}
+                >
                     <Ionicons name="play" size={18} color="white" />
                 </PlayBtn>
 

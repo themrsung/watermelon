@@ -6,6 +6,7 @@ import {
     CREATE_PLAYLIST_NAME,
     HOME_NAME,
     MY_PLAYLIST_NAME,
+    PLAYLIST_PAGE_NAME,
     PLAY_MUSIC_NAME
 } from "../navigation/NavContainer"
 import { AntDesign } from "@expo/vector-icons"
@@ -58,7 +59,9 @@ export default function MyPlayList2() {
                     <MyPlayListImgWrap>
                         <MyPlayListSongBtn
                             onPress={() => {
-                                navigation.navigate(MY_PLAYLIST_NAME)
+                                navigation.navigate(PLAYLIST_PAGE_NAME, {
+                                    playlistUuid: "3"
+                                })
                             }}
                         >
                             <MyPlayListSong>곡</MyPlayListSong>
