@@ -2,11 +2,7 @@ import React from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
-import {
-    CREATE_MUSIC_NAME,
-    HOME_NAME,
-    USER_PROFILE_NAME
-} from "../navigation/NavContainer"
+import { HOME_NAME, USER_PROFILE_NAME } from "../navigation/NavContainer"
 
 const Container = styled.View`
     width: 100%;
@@ -39,11 +35,7 @@ export default function BottomNav() {
                 <IconImage source={require("../assets/home.png")} />
             </IconBtn>
 
-            <IconBtn
-                onPress={() => {
-                    navigation.navigate(CREATE_MUSIC_NAME)
-                }}
-            >
+            <IconBtn>
                 <IconImage source={require("../assets/card.png")} />
             </IconBtn>
 
