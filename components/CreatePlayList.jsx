@@ -97,6 +97,8 @@ const CreatePlayIconView = styled.View`
 `
 
 const CreatePlayFirstText = styled.Text`
+    width: 86%;
+
     font-size: 14px;
     font-weight: 500;
     color: #7da450;
@@ -109,7 +111,9 @@ const CreatePlayTwoText = styled.Text`
     text-align: center;
 `
 
-const CreatePlayFirstIconBtn = styled.TouchableOpacity``
+const CreatePlayFirstIconBtn = styled.TouchableOpacity`
+    width: 10%;
+`
 
 const CreatePlayIconTwoView = styled.View`
     width: 100%;
@@ -262,7 +266,15 @@ export default function CreatePlayList() {
                         (m) => m.key === uuid
                     )[0].value
                     return (
-                        <View key={uuid}>
+                        <View
+                            key={uuid}
+                            style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "space-between"
+                            }}
+                        >
                             <CreatePlayFirstText>
                                 {artistAndTitle}
                             </CreatePlayFirstText>
