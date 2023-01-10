@@ -2,7 +2,7 @@ import React from "react"
 import { Image, ImageBackground, TouchableOpacity } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
-import { HOME_NAME } from "../navigation/NavContainer"
+import { HOME_NAME, MY_PLAYLIST2_NAME } from "../navigation/NavContainer"
 
 export default function PlaylistList() {
     const navigation = useNavigation()
@@ -100,7 +100,11 @@ export default function PlaylistList() {
                                 source={require("../assets/music.png")}
                             />
                         </MyPlayListSongBtn>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate(MY_PLAYLIST2_NAME)
+                            }}
+                        >
                             <MyPlayList>플레이리스트</MyPlayList>
                         </TouchableOpacity>
                         <MyPlayListTalkBtn>
