@@ -18,7 +18,7 @@ export const createMusic = async (music) => {
     let newMusic = music
     newMusic.uuid = musicUuid
 
-    await axios.post(SERVER_URL + "/musics/" + musicUuid, newMusic)
+    await axios.post(SERVER_URL + "/musics", newMusic)
     return musicUuid
 }
 
