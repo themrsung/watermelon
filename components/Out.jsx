@@ -6,7 +6,10 @@ import { AntDesign } from "@expo/vector-icons"
 import styled from "@emotion/native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
-import { USER_PROFILE_NAME } from "../navigation/NavContainer"
+import {
+    OUT_REGISTOR_PW_NAME,
+    USER_PROFILE_NAME
+} from "../navigation/NavContainer"
 
 export default function Out() {
     const navigation = useNavigation()
@@ -72,9 +75,19 @@ export default function Out() {
             </OutFiveView>
             <OutSevenView>
                 <OutTwoBtn>
-                    <OutElevenText>취소</OutElevenText>
+                    <OutElevenText
+                        onPress={() => {
+                            navigation.navigate(USER_PROFILE_NAME)
+                        }}
+                    >
+                        취소
+                    </OutElevenText>
                 </OutTwoBtn>
-                <OutThreeBtn>
+                <OutThreeBtn
+                    onPress={() => {
+                        navigation.navigate(OUT_REGISTOR_PW_NAME)
+                    }}
+                >
                     <OutTwelvenText>탈퇴</OutTwelvenText>
                 </OutThreeBtn>
             </OutSevenView>
