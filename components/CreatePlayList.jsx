@@ -312,31 +312,32 @@ export default function CreatePlaylist({ route }) {
             </CreatePlaySelector>
 
             <CreatePlayIconView>
-                {selectedMusicUuids.map((uuid) => {
-                    const artistAndTitle = musics.filter(
-                        (m) => m.key === uuid
-                    )[0].value
-                    return (
-                        <View key={uuid}>
-                            <CreatePlayFirstText>
-                                {artistAndTitle}
-                            </CreatePlayFirstText>
-                            <CreatePlayFirstIconBtn
-                                onPress={() => {
-                                    onDeleteMusicUuidFromSelectedMusicUuids(
-                                        uuid
-                                    )
-                                }}
-                            >
-                                <AntDesign
-                                    name="close"
-                                    size={20}
-                                    color="color: rgba(71, 135, 109, 0.993);"
-                                />
-                            </CreatePlayFirstIconBtn>
-                        </View>
-                    )
-                })}
+                {selectedMusicUuids.length > 0 &&
+                    selectedMusicUuids.map((uuid) => {
+                        const artistAndTitle = musics.filter(
+                            (m) => m.key === uuid
+                        )[0].value
+                        return (
+                            <View key={uuid}>
+                                <CreatePlayFirstText>
+                                    {artistAndTitle}
+                                </CreatePlayFirstText>
+                                <CreatePlayFirstIconBtn
+                                    onPress={() => {
+                                        onDeleteMusicUuidFromSelectedMusicUuids(
+                                            uuid
+                                        )
+                                    }}
+                                >
+                                    <AntDesign
+                                        name="close"
+                                        size={20}
+                                        color="color: rgba(71, 135, 109, 0.993);"
+                                    />
+                                </CreatePlayFirstIconBtn>
+                            </View>
+                        )
+                    })}
             </CreatePlayIconView>
             {isEditing && (
                 <Button onPress={onDeletePlaylist} title={"삭제하기"}></Button>
