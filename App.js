@@ -4,6 +4,7 @@ import { getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
 import CreatePlayList from "./components/CreatePlayList"
 import NavContainer from "./navigation/NavContainer"
+import Out from "./components/Out"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -29,7 +30,8 @@ export default function App() {
 
     return (
         <SafeAreaView>
-            <NavContainer />
+            <Out />
+            {/* <NavContainer /> */}
             {/* <CreatePlayList /> */}
             <StatusBar style="auto" />
         </SafeAreaView>
