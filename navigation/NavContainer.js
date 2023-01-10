@@ -7,7 +7,7 @@ import Home from "../components/Home"
 import { createStackNavigator } from "@react-navigation/stack"
 import PlayList from "../components/PlayList"
 import MyPlayList from "../components/MyPlayList"
-import CreatePlayList from "../components/CreatePlayList"
+import CreatePlaylist from "../components/CreatePlayList"
 import MyPlayList2 from "../components/MyPlayList2"
 import Comment from "../components/Comment"
 import UserProfile from "../components/UserProfile"
@@ -34,7 +34,7 @@ export default function NavContainer() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName={CREATE_PLAYLIST_NAME}
+                initialRouteName={HOME_NAME}
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name={HOME_NAME} component={Home} />
@@ -45,7 +45,7 @@ export default function NavContainer() {
                 <Stack.Screen name={PLAY_MUSIC_NAME} component={PlayMusic} />
                 <Stack.Screen
                     name={CREATE_PLAYLIST_NAME}
-                    component={CreatePlayList}
+                    component={CreatePlaylist}
                 />
                 <Stack.Screen
                     name={MY_PLAYLIST2_NAME}
