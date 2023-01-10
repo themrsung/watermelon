@@ -340,7 +340,17 @@ export default function CreatePlaylist({ route }) {
                             (m) => m.key === uuid
                         )[0].value
                         return (
-                            <View key={uuid}>
+                            <View
+                                key={uuid}
+                                style={{
+                                    width: "100%",
+                                    marginBottom: 10,
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "space-between"
+                                }}
+                            >
                                 <CreatePlayFirstText>
                                     {artistAndTitle}
                                 </CreatePlayFirstText>
