@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "@emotion/native"
 import MusicControl from "./MusicControl"
 import BottomNav from "./BottomNav"
@@ -8,11 +8,13 @@ import { AntDesign } from "@expo/vector-icons"
 import { MaterialIcons } from "@expo/vector-icons"
 import { Entypo } from "@expo/vector-icons"
 import { FontAwesome } from "@expo/vector-icons"
-import { FlatList } from "react-native"
+import { FlatList, TextInput } from "react-native"
 import { FontAwesome5 } from "@expo/vector-icons"
 import { Ionicons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
 import { OUT_NAME } from "../navigation/NavContainer"
+import { useSelector } from "react-redux"
+import { getUser, updateUser } from "../api/authApi"
 
 const ProfileContainer = styled.SafeAreaView`
     width: 100%;
@@ -260,15 +262,62 @@ export default function UserProfile() {
             )
         }
     ]
+
+    const currentSession = useSelector((state) => state.currentSession)
+    const [currentUser, setCurrentUser] = useState({})
+
+    const fetchCurrentUser = async () => {
+        const user = await getUser(currentSession.id)
+
+        if (!user) {
+            return
+        }
+
+        setCurrentUser(user)
+        setNewEmail(user.email)
+    }
+
+    useEffect(() => {
+        fetchCurrentUser()
+    }, [])
+
+    const [isEditingEmail, setIsEditingEmail] = useState(false)
+    const [newEmail, setNewEmail] = useState("")
+
+    const onEditEmail = async () => {
+        if (isEditingEmail) {
+            const newUser = currentUser
+            newUser.email = newEmail
+
+            await updateUser(currentSession.id, newUser)
+        }
+
+        setIsEditingEmail(!isEditingEmail)
+    }
+
     return (
         <ProfileContainer>
             <ProfileHeader>
                 <ProfileHeaderTextWrap>
                     <ProfileHeaderText>나만의 음악서랍</ProfileHeaderText>
                     <EmailWrap>
-                        <EmailText>dnjfht@naver.com</EmailText>
+                        <EmailText>
+                            {currentSession.loggedIn
+                                ? currentUser !== {}
+                                    ? currentUser.email
+                                    : currentSession.id
+                                : "비회원"}
+                        </EmailText>
+                        {isEditingEmail && (
+                            <TextInput
+                                value={newEmail}
+                                onChangeText={setNewEmail}
+                            />
+                        )}
                         <EmailEditBtn>
-                            <EmailEditText>수정</EmailEditText>
+                            <EmailEditText onPress={onEditEmail}>
+                                수정
+                            </EmailEditText>
                         </EmailEditBtn>
                     </EmailWrap>
                 </ProfileHeaderTextWrap>

@@ -94,7 +94,7 @@ export const deleteUser = async (id) => {
 
 // id에 해당하는 유저를 newUser로 교체합니다.
 export const updateUser = async (id, newUser) => {
-    const response = await axios.put(SERVER_URL + "/users/" + id, newUser)
+    const response = await axios.patch(SERVER_URL + "/users/" + id, newUser)
 
     if (!response) {
         return UPDATE_USER_FAILED

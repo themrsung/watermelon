@@ -3,6 +3,8 @@ import styled from "@emotion/native"
 import { getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
 import NavContainer from "./navigation/NavContainer"
+import { Provider } from "react-redux"
+import { store } from "./redux/stores"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -28,9 +30,11 @@ export default function App() {
 
     return (
         <SafeAreaView>
-            <NavContainer />
+            <Provider store={store}>
+                <NavContainer />
 
-            <StatusBar style="auto" />
+                <StatusBar style="auto" />
+            </Provider>
         </SafeAreaView>
     )
 }
