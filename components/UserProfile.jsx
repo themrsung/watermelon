@@ -38,11 +38,44 @@ const ProfileHeader = styled.View`
     align-items: center;
 `
 
+const ProfileHeaderTextWrap = styled.View`
+    display: flex;
+    flex-direction: column;
+`
+
 const ProfileHeaderText = styled.Text`
     font-size: 26px;
     font-weight: 700;
     color: #5aa469;
 `
+const EmailWrap = styled.View`
+    margin-top: 6px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`
+
+const EmailText = styled.Text`
+    color: #286534;
+    font-size: 16px;
+    font-weight: 400;
+`
+
+const EmailEditBtn = styled.TouchableOpacity`
+    margin-left: 10px;
+
+    padding: 4px 10px;
+    border: 1px solid #6f9e6f;
+    border-radius: 10px;
+`
+
+const EmailEditText = styled.Text`
+    color: #6f9e6f;
+    font-size: 12px;
+`
+
 const ProfileHeaderIconWrap = styled.View`
     width: 20%;
 
@@ -230,7 +263,15 @@ export default function UserProfile() {
     return (
         <ProfileContainer>
             <ProfileHeader>
-                <ProfileHeaderText>나만의 음악서랍</ProfileHeaderText>
+                <ProfileHeaderTextWrap>
+                    <ProfileHeaderText>나만의 음악서랍</ProfileHeaderText>
+                    <EmailWrap>
+                        <EmailText>dnjfht@naver.com</EmailText>
+                        <EmailEditBtn>
+                            <EmailEditText>수정</EmailEditText>
+                        </EmailEditBtn>
+                    </EmailWrap>
+                </ProfileHeaderTextWrap>
 
                 <ProfileHeaderIconWrap>
                     <BellIconBtn>
