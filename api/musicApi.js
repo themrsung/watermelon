@@ -12,6 +12,8 @@ import uuid from "react-native-uuid"
 import { load } from "cheerio"
 import WebView from "react-native-webview"
 import urlExist from "url-exist"
+import { store } from "../redux/stores"
+import { addToCache } from "../redux/slices/musicCacheSlice"
 
 // 글쓰기입니다. 오류내시면 서버에 그대로 들어가요.
 // export const createMusic = async (music) => {
@@ -79,11 +81,23 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
     //     }
     // }
 
+    // local cache
+    const matchingLocalCacheData = store
+        .getState()
+        .musicCache.musics.filter((m) => m.uuid === musicUuid)
+    if (matchingLocalCacheData.length > 0) {
+        return matchingLocalCacheData[0]
+    }
+
+    // online cache
     const cacheExists = await urlExist(SERVER_URL + "/musiccache/" + musicUuid)
     if (cacheExists) {
         const cacheRes = await axios.get(
             SERVER_URL + "/musiccache/" + musicUuid
         )
+
+        // cache offline
+        store.dispatch(addToCache(cacheRes.data))
 
         return cacheRes.data
     }
@@ -118,7 +132,13 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
         musicLink: music.musicLink
     }
 
+    // cache online
+
     await axios.post(SERVER_URL + "/musiccache", newCache)
+
+    // cache offline
+
+    store.dispatch(addToCache(newCache))
 
     return {
         title: title,
