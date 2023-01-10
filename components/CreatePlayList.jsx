@@ -1,10 +1,16 @@
 import { SelectList } from "react-native-dropdown-select-list"
-import React from "react"
+import { useEffect, useState } from "react"
 import styled from "@emotion/native"
-import {} from "react-native"
+import { View } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
 import { MY_PLAYLIST2_NAME } from "../navigation/NavContainer"
+import {
+    getMusicByArtistAndTitle,
+    getMusicMetadataFromYouTube,
+    getMusics
+} from "../api/musicApi"
+import { createPlaylist } from "../api/playlistsApi"
 
 const SafeAreaViews = styled.SafeAreaView`
     width: 100%;
@@ -85,7 +91,7 @@ const CreatePlayIconView = styled.View`
     border-radius: 10px;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 `
@@ -133,23 +139,56 @@ const SelectorTitle = styled.Text`
 export default function CreatePlayList() {
     const navigation = useNavigation()
 
-    const [selected, setSelected] = React.useState("")
+    const [selectedMusicUuids, setSelectedMusicUuids] = useState([])
 
-    const data = [
-        { key: "1", value: "Punch-Say Yes" },
-        { key: "2", value: "Luis Fonsi - DesPacito" },
-        { key: "3", value: "Subeme la Radio" },
-        { key: "4", value: "aespa - Savage" },
-        { key: "5", value: "aespa - Next Level" },
-        { key: "6", value: "aespa - ICONIC" },
-        { key: "7", value: "aespa - I'll Make You Cry" },
-        { key: "8", value: "aespa - YEPPI YEPPI" },
-        { key: "9", value: "aespa - aenergy" },
-        { key: "10", value: "aespa - Dreams Come True" },
-        { key: "11", value: "aespa - ICU" },
-        { key: "12", value: "aespa - Black Mamba" },
-        { key: "13", value: "aespa - Lucid Dream" }
-    ]
+    const [title, setTitle] = useState("")
+    const [musics, setMusics] = useState([])
+
+    const fetchMusics = async () => {
+        const fetchedMusics = await getMusics()
+
+        if (!fetchedMusics || fetchedMusics.length < 1) {
+            return
+        }
+
+        let musicsAsCompatibleList = []
+        fetchedMusics.forEach(async (fm) => {
+            const musicMetadata = await getMusicMetadataFromYouTube(fm.uuid)
+
+            musicsAsCompatibleList.push({
+                key: fm.uuid,
+                value: musicMetadata.artistAndTitle
+            })
+        })
+
+        setMusics(musicsAsCompatibleList)
+    }
+
+    useEffect(() => {
+        fetchMusics()
+    }, [])
+
+    const onDeleteMusicUuidFromSelectedMusicUuids = (musicUuidToDelete) => {
+        if (!selectedMusicUuids.includes(musicUuidToDelete)) {
+            return
+        }
+
+        const newSelectedMusicUuids = selectedMusicUuids.filter(
+            (u) => u !== musicUuidToDelete
+        )
+        setSelectedMusicUuids(newSelectedMusicUuids)
+    }
+
+    const onCompleteCreatingPlaylist = async () => {
+        const newPlaylist = {
+            title: title,
+            content: selectedMusicUuids
+        }
+
+        const response = await createPlaylist(newPlaylist)
+        console.log("response", response)
+        return response
+    }
 
     return (
         <SafeAreaViews>
@@ -164,7 +203,7 @@ export default function CreatePlayList() {
 
                 <CreatePlayText>플레이리스트 등록/수정</CreatePlayText>
 
-                <SuccessBtn>
+                <SuccessBtn onPress={onCompleteCreatingPlaylist}>
                     <SuccessBtnText>완료</SuccessBtnText>
                 </SuccessBtn>
             </TopWrap>
@@ -173,11 +212,13 @@ export default function CreatePlayList() {
                 <CreatePlayInput
                     placeholder="플레이리스트 제목을 입력해주세요."
                     placeholderTextColor={"#7da450"}
+                    value={title}
+                    onChangeText={setTitle}
                 />
-                <CreatePlayDesInput
+                {/* <CreatePlayDesInput
                     placeholder="소개글을 입력해주세요."
                     placeholderTextColor={"#7da450"}
-                />
+                /> */}
             </SafeAreaInputView>
 
             <CreatePlaySelector
@@ -185,7 +226,10 @@ export default function CreatePlayList() {
             >
                 <SelectorTitle>곡 추가</SelectorTitle>
                 <SelectList
-                    setSelected={(val) => setSelected(val)}
+                    setSelected={(val) => {
+                        const key = musics.filter((m) => m.value === val)[0].key
+                        setSelectedMusicUuids([...selectedMusicUuids, key])
+                    }}
                     boxStyles={{
                         backgroundColor: "white",
                         height: 60,
@@ -206,33 +250,38 @@ export default function CreatePlayList() {
                         color: "#7da450"
                     }}
                     maxHeight={200}
-                    data={data}
+                    data={musics}
                     save="value"
                 />
             </CreatePlaySelector>
 
             <CreatePlayIconView>
-                <CreatePlayFirstText>
-                    Luis Fonsi - Despacito
-                </CreatePlayFirstText>
-                <CreatePlayFirstIconBtn>
-                    <AntDesign
-                        name="close"
-                        size={20}
-                        color="color: rgba(71, 135, 109, 0.993);"
-                    />
-                </CreatePlayFirstIconBtn>
+                {selectedMusicUuids.map((uuid) => {
+                    const artistAndTitle = musics.filter(
+                        (m) => m.key === uuid
+                    )[0].value
+                    return (
+                        <View key={uuid}>
+                            <CreatePlayFirstText>
+                                {artistAndTitle}
+                            </CreatePlayFirstText>
+                            <CreatePlayFirstIconBtn
+                                onPress={() => {
+                                    onDeleteMusicUuidFromSelectedMusicUuids(
+                                        uuid
+                                    )
+                                }}
+                            >
+                                <AntDesign
+                                    name="close"
+                                    size={20}
+                                    color="color: rgba(71, 135, 109, 0.993);"
+                                />
+                            </CreatePlayFirstIconBtn>
+                        </View>
+                    )
+                })}
             </CreatePlayIconView>
-            <CreatePlayIconTwoView>
-                <CreatePlayTwoText>Punch - Say Yes</CreatePlayTwoText>
-                <CreatePlayFirstIconBtn>
-                    <AntDesign
-                        name="close"
-                        size={20}
-                        color="color: rgba(71, 135, 109, 0.993);"
-                    />
-                </CreatePlayFirstIconBtn>
-            </CreatePlayIconTwoView>
         </SafeAreaViews>
     )
 }

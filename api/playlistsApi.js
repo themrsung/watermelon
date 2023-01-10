@@ -106,7 +106,7 @@ export const removeMusicFromPlaylist = async (playlistUuid, musicUuid) => {
         return REMOVE_MUSIC_FROM_PLAYLIST_FAILED_PLAYLIST_NOT_FOUND
     }
 
-    const musicInPlaylist = playlist.content.contains(musicUuid)
+    const musicInPlaylist = playlist.content.includes(musicUuid)
     if (!musicInPlaylist) {
         return REMOVE_MUSIC_FROM_PLAYLIST_FAILED_MUSIC_NOT_IN_PLAYLIST
     }
