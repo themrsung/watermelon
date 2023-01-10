@@ -11,6 +11,7 @@ import {
 import uuid from "react-native-uuid"
 import { load } from "cheerio"
 import WebView from "react-native-webview"
+import urlExist from "url-exist"
 
 // 글쓰기입니다. 오류내시면 서버에 그대로 들어가요.
 // export const createMusic = async (music) => {
@@ -64,7 +65,31 @@ export const getMusics = async () => {
 
 // 유튜브 크롤링해서 제목과 아티스트 갖다줍니다.
 export const getMusicMetadataFromYouTube = async (musicUuid) => {
+    // const cacheResponse = await axios.get(
+    //     SERVER_URL + "/musiccache/" + musicUuid
+    // )
+
+    // // console.log(cacheResponse)
+    // if (cacheResponse) {
+    //     const cache = cacheResponse.data
+    //     return {
+    //         title: cache.title,
+    //         artist: cache.artist,
+    //         artistAndTitle: cache.artistAndTitle
+    //     }
+    // }
+
+    const cacheExists = await urlExist(SERVER_URL + "/musiccache/" + musicUuid)
+    if (cacheExists) {
+        const cacheRes = await axios.get(
+            SERVER_URL + "/musiccache/" + musicUuid
+        )
+
+        return cacheRes.data
+    }
+
     const music = await getMusic(musicUuid)
+
     const response = await fetch(music.musicLink)
     const htmlString = await response.text()
 
@@ -83,6 +108,17 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
             title = artistAndTitle.split(s)[1]
         }
     })
+
+    const newCache = {
+        title: title,
+        artist: artist,
+        artistAndTitle: artistAndTitle,
+        id: musicUuid,
+        uuid: musicUuid,
+        musicLink: music.musicLink
+    }
+
+    await axios.post(SERVER_URL + "/musiccache", newCache)
 
     return {
         title: title,

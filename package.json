@@ -38,7 +38,8 @@
         "react-native-uuid": "^2.0.1",
         "react-native-webview": "^11.26.0",
         "react-navigation": "^4.4.4",
-        "react-redux": "^8.0.5"
+        "react-redux": "^8.0.5",
+        "url-exist": "^3.0.1"
     },
     "devDependencies": {
         "@babel/core": "^7.12.9"
