@@ -1,6 +1,7 @@
 // Authentication API
 
 import axios from "axios"
+import { store } from "../redux/stores"
 // import currentSessionStore from "../store/currentSessionStore"
 import {
     DELETE_USER_FAILED,
@@ -50,12 +51,16 @@ export const login = async (id, password) => {
     //     id: id
     // })
 
+    store.dispatch(setId(id))
+
     return LOGIN_SUCCEEDED
 }
 
 // 로그아웃입니다. 콜하시면 세션이 사라져요!
 export const logout = () => {
     // currentSessionStore.handleClearCurrentSession()
+
+    store.dispatch(clear())
 
     return LOGOUT_SUCCEEDED
 }
