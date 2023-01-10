@@ -66,6 +66,18 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
     }
 }
 
+// musicUuid로 YT Thumbnail을 가져옵니다.
+export const getMusicThumbnailLinkFromYouTube = async (musicUuid) => {
+    const music = await getMusic(musicUuid)
+    const videoId = music.musicLink.slice(-11)
+
+    if (!videoId) {
+        return ""
+    }
+
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+}
+
 // uuid에 해당하는 글을 두번째 파라미터의 글로 수정합니다.
 export const editMusic = async (uuid, newMusic) => {
     const response = await axios.put(SERVER_URL + "/musics/" + uuid, newMusic)
