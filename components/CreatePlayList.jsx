@@ -210,10 +210,23 @@ export default function CreatePlaylist({ route }) {
         setSelectedMusicUuids(newSelectedMusicUuids)
     }
 
+    const checkIfInfoIsValid = () => {
+        return title !== "" && selectedMusicUuids.length > 0
+    }
+
+    const onInvalidInfo = () => {
+        // 제목이나 플리 빈칸 시 실행됩니다.
+    }
+
     const onCompleteCreatingPlaylist = async () => {
         const newPlaylist = {
             title: title,
             content: selectedMusicUuids
+        }
+
+        if (!checkIfInfoIsValid()) {
+            onInvalidInfo()
+            return
         }
 
         const response = await createPlaylist(newPlaylist)
@@ -221,6 +234,11 @@ export default function CreatePlaylist({ route }) {
     }
 
     const onCompleteEditingPlaylist = async () => {
+        if (!checkIfInfoIsValid()) {
+            onInvalidInfo()
+            return
+        }
+
         const response = await editPlaylist(originalPlaylistUuid, {
             title: title,
             id: originalPlaylistUuid,
