@@ -10,7 +10,7 @@ import {
     getMusicMetadataFromYouTube,
     getMusics
 } from "../api/musicApi"
-import { createPlaylist } from "../api/playlistsApi"
+import { createPlaylist, getPlaylists } from "../api/playlistsApi"
 
 const SafeAreaViews = styled.SafeAreaView`
     width: 100%;
@@ -186,9 +186,10 @@ export default function CreatePlayList() {
         }
 
         const response = await createPlaylist(newPlaylist)
-        console.log("response", response)
         return response
     }
+
+    getPlaylists()
 
     return (
         <SafeAreaViews>
