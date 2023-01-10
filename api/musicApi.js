@@ -39,6 +39,19 @@ export const getMusic = async (uuid) => {
     return matchingMusic
 }
 
+export const getMusicByArtistAndTitle = async (artistAndTitle) => {
+    const musics = await getMusics()
+
+    musics.forEach(async (m) => {
+        const metadata = await getMusicMetadataFromYouTube(m)
+        if (metadata.artistAndTitle === artistAndTitle) {
+            return m
+        }
+    })
+
+    return {}
+}
+
 // 글을 전부 가져옵니다. filter는 알아서 돌리세요ㅋ
 export const getMusics = async () => {
     const response = await axios.get(SERVER_URL + "/musics")
@@ -57,7 +70,7 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
 
     const $ = load(htmlString)
 
-    const artistAndTitle = $("title").text()
+    const artistAndTitle = $("title").text().slice(0, -10)
 
     let artist = "Various Artists"
     let title = artistAndTitle
@@ -65,7 +78,7 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
     const splitters = [" - ", " _ "]
 
     splitters.forEach((s) => {
-        if (artistAndTitle.contains(s)) {
+        if (artistAndTitle.includes(s)) {
             artist = artistAndTitle.split(s)[0]
             title = artistAndTitle.split(s)[1]
         }
@@ -73,7 +86,8 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
 
     return {
         title: title,
-        artist: artist
+        artist: artist,
+        artistAndTitle: artistAndTitle
     }
 }
 
