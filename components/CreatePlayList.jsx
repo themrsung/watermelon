@@ -4,7 +4,7 @@ import styled from "@emotion/native"
 import { SafeAreaView, View } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 
-const App = () => {
+export default function CreatePlayList() {
     const [selected, setSelected] = React.useState("")
 
     const data = [
@@ -208,5 +208,3 @@ const CreatePlayFiveText = styled.Text`
 const CreatePlaySelector = styled.View`
     width: 80%;
 `
-
-export default App
