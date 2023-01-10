@@ -164,7 +164,10 @@ export default function CreatePlaylist({ route }) {
 
         let musicsAsCompatibleList = []
         fetchedMusics.forEach(async (fm) => {
-            const musicMetadata = await getMusicMetadataFromYouTube(fm.uuid)
+            const musicMetadata = await getMusicMetadataFromYouTube(
+                fm.uuid,
+                true
+            )
 
             musicsAsCompatibleList.push({
                 key: fm.uuid,

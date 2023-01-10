@@ -66,7 +66,12 @@ export const getMusics = async () => {
 }
 
 // 유튜브 크롤링해서 제목과 아티스트 갖다줍니다.
-export const getMusicMetadataFromYouTube = async (musicUuid) => {
+export const getMusicMetadataFromYouTube = async (
+    musicUuid,
+    doNotUseLocalCache = false,
+    doNotUseOnlineCache = false,
+    doNotCache = false
+) => {
     // const cacheResponse = await axios.get(
     //     SERVER_URL + "/musiccache/" + musicUuid
     // )
@@ -82,24 +87,32 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
     // }
 
     // local cache
-    const matchingLocalCacheData = store
-        .getState()
-        .musicCache.musics.filter((m) => m.uuid === musicUuid)
-    if (matchingLocalCacheData.length > 0) {
-        return matchingLocalCacheData[0]
+    if (!doNotUseLocalCache) {
+        const matchingLocalCacheData = store
+            .getState()
+            .musicCache.musics.filter((m) => m.uuid === musicUuid)
+        if (matchingLocalCacheData.length > 0) {
+            return matchingLocalCacheData[0]
+        }
     }
 
     // online cache
-    const cacheExists = await urlExist(SERVER_URL + "/musiccache/" + musicUuid)
-    if (cacheExists) {
-        const cacheRes = await axios.get(
+    if (!doNotUseOnlineCache) {
+        const cacheExists = await urlExist(
             SERVER_URL + "/musiccache/" + musicUuid
         )
+        if (cacheExists) {
+            const cacheRes = await axios.get(
+                SERVER_URL + "/musiccache/" + musicUuid
+            )
 
-        // cache offline
-        store.dispatch(addToCache(cacheRes.data))
+            // cache offline
+            if (!doNotCache) {
+                store.dispatch(addToCache(cacheRes.data))
+            }
 
-        return cacheRes.data
+            return cacheRes.data
+        }
     }
 
     const music = await getMusic(musicUuid)
@@ -123,22 +136,24 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
         }
     })
 
-    const newCache = {
-        title: title,
-        artist: artist,
-        artistAndTitle: artistAndTitle,
-        id: musicUuid,
-        uuid: musicUuid,
-        musicLink: music.musicLink
+    if (!doNotCache) {
+        const newCache = {
+            title: title,
+            artist: artist,
+            artistAndTitle: artistAndTitle,
+            id: musicUuid,
+            uuid: musicUuid,
+            musicLink: music.musicLink
+        }
+
+        // cache online
+
+        await axios.post(SERVER_URL + "/musiccache", newCache)
+
+        // cache offline
+
+        store.dispatch(addToCache(newCache))
     }
-
-    // cache online
-
-    await axios.post(SERVER_URL + "/musiccache", newCache)
-
-    // cache offline
-
-    store.dispatch(addToCache(newCache))
 
     return {
         title: title,
