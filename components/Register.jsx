@@ -104,7 +104,9 @@ const BottomBtnWrap = styled.View`
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+
+    justify-content: center;
+
     align-items: center;
 `
 
@@ -118,17 +120,6 @@ const BottomBtnText = styled.Text`
 
     position: relative;
 `
-
-const Border = styled.View`
-    width: 1px;
-    height: 12px;
-    background-color: #abc5b1;
-
-    position: absolute;
-    top: 2px;
-    right: 0;
-`
-
 const BuyBtnWrap = styled.View`
     width: 100%;
     padding: 10px;
@@ -300,22 +291,15 @@ export default function Register() {
                 </RegistorBtn>
 
                 <BottomBtnWrap>
-                    <BottomBtn>
-                        <BottomBtnText>아이디 찾기</BottomBtnText>
-                        <Border />
-                    </BottomBtn>
-
-                    <BottomBtn>
-                        <BottomBtnText>비밀번호 찾기</BottomBtnText>
-                        <Border />
-                    </BottomBtn>
 
                     <BottomBtn
                         onPress={() => {
                             navigation.navigate(LOGIN_NAME)
                         }}
                     >
-                        <BottomBtnText>로그인</BottomBtnText>
+
+                        <BottomBtnText>로그인하러 가기</BottomBtnText>
+
                     </BottomBtn>
                 </BottomBtnWrap>
 
