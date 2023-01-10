@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { ImageBackground, Image, TouchableOpacity } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
@@ -10,9 +10,22 @@ import {
 } from "../navigation/NavContainer"
 import { AntDesign } from "@expo/vector-icons"
 import CreatePlayListGroup from "./CreatePlayListGroup"
+import { getPlaylists } from "../api/playlistsApi"
 
 export default function MyPlayList2() {
     const navigation = useNavigation()
+
+    const [playlists, setPlaylists] = useState([])
+
+    const fetchPlaylists = async () => {
+        const fetchedPlaylists = await getPlaylists()
+        setPlaylists(fetchedPlaylists)
+    }
+
+    useEffect(() => {
+        fetchPlaylists()
+    }, [])
+
     return (
         <Container>
             <ImageBackground
@@ -65,7 +78,10 @@ export default function MyPlayList2() {
                         <AddPlayList>
                             <AddPlayListBtn
                                 onPress={() => {
-                                    navigation.navigate(CREATE_PLAYLIST_NAME)
+                                    navigation.navigate(CREATE_PLAYLIST_NAME, {
+                                        isEditing: false,
+                                        originalPlaylistUuid: ""
+                                    })
                                 }}
                             >
                                 <AntDesign
@@ -80,10 +96,14 @@ export default function MyPlayList2() {
                         </AddPlayList>
 
                         <PlayListGroupWrap>
-                            <CreatePlayListGroup />
-                            <CreatePlayListGroup />
-                            <CreatePlayListGroup />
-                            <CreatePlayListGroup />
+                            {playlists.map((p) => {
+                                return (
+                                    <CreatePlayListGroup
+                                        key={p.uuid}
+                                        playlistUuid={p.uuid}
+                                    />
+                                )
+                            })}
                         </PlayListGroupWrap>
                     </ScrollPlayList>
 

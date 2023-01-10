@@ -22,6 +22,7 @@ import { getMusic } from "./musicApi"
 export const createPlaylist = async (playlist) => {
     const playlistUuid = uuid.v4()
     let newPlaylist = playlist
+    newPlaylist.id = playlistUuid
     newPlaylist.uuid = playlistUuid
 
     await axios.post(SERVER_URL + "/playlists", newPlaylist)
@@ -52,7 +53,7 @@ export const getPlaylists = async () => {
 
 // playlistUuid에 해당하는 playlist를 newPlaylist로 수정합니다.
 export const editPlaylist = async (playlistUuid, newPlaylist) => {
-    const response = await axios.put(
+    const response = await axios.patch(
         SERVER_URL + "/playlists/" + playlistUuid,
         newPlaylist
     )

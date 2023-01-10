@@ -1,7 +1,7 @@
 import { SelectList } from "react-native-dropdown-select-list"
 import { useEffect, useState } from "react"
 import styled from "@emotion/native"
-import { View } from "react-native"
+import { View, Button } from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
 import { MY_PLAYLIST2_NAME } from "../navigation/NavContainer"
@@ -10,7 +10,13 @@ import {
     getMusicMetadataFromYouTube,
     getMusics
 } from "../api/musicApi"
-import { createPlaylist, getPlaylists } from "../api/playlistsApi"
+import {
+    createPlaylist,
+    deletePlaylist,
+    editPlaylist,
+    getPlaylist,
+    getPlaylists
+} from "../api/playlistsApi"
 
 const SafeAreaViews = styled.SafeAreaView`
     width: 100%;
@@ -136,7 +142,8 @@ const SelectorTitle = styled.Text`
     font-weight: bold;
 `
 
-export default function CreatePlayList() {
+export default function CreatePlaylist({ route }) {
+    const { isEditing, originalPlaylistUuid } = route.params
     const navigation = useNavigation()
 
     const [selectedMusicUuids, setSelectedMusicUuids] = useState([])
@@ -168,6 +175,30 @@ export default function CreatePlayList() {
         fetchMusics()
     }, [])
 
+    const [originalPlaylist, setOriginalPlaylist] = useState({})
+
+    const fetchOriginalPlaylist = async () => {
+        const op = await getPlaylist(originalPlaylistUuid)
+        setOriginalPlaylist(op)
+    }
+
+    useEffect(() => {
+        fetchOriginalPlaylist()
+    }, [])
+
+    // useEffect(() => {
+    //     if (!isEditing) {
+    //         return
+    //     }
+
+    //     if (originalPlaylist === {}) {
+    //         return
+    //     }
+
+    //     setSelectedMusicUuids(originalPlaylist.content)
+    //     setTitle(originalPlaylist.title)
+    // }, [originalPlaylist])
+
     const onDeleteMusicUuidFromSelectedMusicUuids = (musicUuidToDelete) => {
         if (!selectedMusicUuids.includes(musicUuidToDelete)) {
             return
@@ -186,10 +217,26 @@ export default function CreatePlayList() {
         }
 
         const response = await createPlaylist(newPlaylist)
-        return response
+        navigation.goBack()
+    }
+
+    const onCompleteEditingPlaylist = async () => {
+        const response = await editPlaylist(originalPlaylistUuid, {
+            title: title,
+            id: originalPlaylistUuid,
+            uuid: originalPlaylistUuid,
+            content: selectedMusicUuids
+        })
+
+        navigation.goBack()
     }
 
     getPlaylists()
+
+    const onDeletePlaylist = async () => {
+        const response = await deletePlaylist(originalPlaylistUuid)
+        navigation.goBack()
+    }
 
     return (
         <SafeAreaViews>
@@ -202,11 +249,19 @@ export default function CreatePlayList() {
                     <AntDesign name="left" size={20} color="#5aa469" />
                 </PrevBtn>
 
-                <CreatePlayText>플레이리스트 등록/수정</CreatePlayText>
+                <CreatePlayText>
+                    {isEditing ? "플레이리스트 수정" : "플레이리스트 등록"}
+                </CreatePlayText>
 
-                <SuccessBtn onPress={onCompleteCreatingPlaylist}>
-                    <SuccessBtnText>완료</SuccessBtnText>
-                </SuccessBtn>
+                {isEditing ? (
+                    <SuccessBtn onPress={onCompleteEditingPlaylist}>
+                        <SuccessBtnText>완료</SuccessBtnText>
+                    </SuccessBtn>
+                ) : (
+                    <SuccessBtn onPress={onCompleteCreatingPlaylist}>
+                        <SuccessBtnText>완료</SuccessBtnText>
+                    </SuccessBtn>
+                )}
             </TopWrap>
 
             <SafeAreaInputView>
@@ -283,6 +338,9 @@ export default function CreatePlayList() {
                     )
                 })}
             </CreatePlayIconView>
+            {isEditing && (
+                <Button onPress={onDeletePlaylist} title={"삭제하기"}></Button>
+            )}
         </SafeAreaViews>
     )
 }
