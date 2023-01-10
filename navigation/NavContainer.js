@@ -11,7 +11,6 @@ import CreatePlayList from "../components/CreatePlayList"
 import MyPlayList2 from "../components/MyPlayList2"
 import Comment from "../components/Comment"
 import UserProfile from "../components/UserProfile"
-import CreateMusic from "../components/CreateMusic"
 
 // Screen names
 export const HOME_NAME = "Home"
@@ -24,7 +23,6 @@ export const CREATE_PLAYLIST_NAME = "Create PlayList"
 export const MY_PLAYLIST2_NAME = "playlist2 Info"
 export const COMMENT_NAME = "Comment"
 export const USER_PROFILE_NAME = "User Profile"
-export const CREATE_MUSIC_NAME = "Create Music"
 
 const Stack = createStackNavigator()
 
@@ -53,10 +51,6 @@ export default function NavContainer() {
                 <Stack.Screen
                     name={USER_PROFILE_NAME}
                     component={UserProfile}
-                />
-                <Stack.Screen
-                    name={CREATE_MUSIC_NAME}
-                    component={CreateMusic}
                 />
             </Stack.Navigator>
         </NavigationContainer>
