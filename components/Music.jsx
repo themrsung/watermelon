@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { getMusic, getMusicMetadataFromYouTube } from "../api/musicApi"
+import YouTubeVideo from "./YouTubeVideo"
 
 export default function Music({ musicUuid }) {
     const [music, setMusic] = useState({})
@@ -27,5 +28,9 @@ export default function Music({ musicUuid }) {
     // 음악 제목 => musicMetadata.title
     // 아티스트 => musicMetadata.artist
 
-    return <View></View>
+    return (
+        <View>
+            <YouTubeVideo musicUuid={musicUuid} />
+        </View>
+    )
 }
