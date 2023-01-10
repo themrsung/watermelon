@@ -69,7 +69,6 @@ export default function CreatePlayListGroup({ playlistUuid }) {
     const fetchPlaylist = async () => {
         const newP = await getPlaylist(playlistUuid)
         setPlaylist(newP)
-        fetchThumbnailUrlOfFirstMusicInPlaylist()
     }
 
     const fetchThumbnailUrlOfFirstMusicInPlaylist = async () => {
@@ -87,10 +86,16 @@ export default function CreatePlayListGroup({ playlistUuid }) {
         fetchPlaylist()
     }, [])
 
+    useEffect(() => {
+        fetchThumbnailUrlOfFirstMusicInPlaylist()
+    }, [playlist])
+
     return (
         <Container>
             <Wrap>
-                <AlbumImg source={{ uri: playlistThumbnailUrl }} />
+                {playlistThumbnailUrl !== "" && (
+                    <AlbumImg source={{ uri: playlistThumbnailUrl }} />
+                )}
                 <PlayListGroupTitle>{playlist.title}</PlayListGroupTitle>
                 <PlayListGroupNumber>
                     {playlist.content ? playlist.content.length : 0}

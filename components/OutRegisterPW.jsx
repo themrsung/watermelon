@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 import { Feather } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
-import { USER_PROFILE_NAME } from "../navigation/NavContainer"
+import { HOME_NAME, USER_PROFILE_NAME } from "../navigation/NavContainer"
+import { store } from "../redux/stores"
+import { deleteUser, validatePassword } from "../api/authApi"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -158,6 +160,23 @@ const ForgetPasswordText = styled.Text`
 export default function OutRegisterPW() {
     const navigation = useNavigation()
 
+    const [password, setPassword] = useState("")
+
+    const onDeleteAccount = async () => {
+        if (!store.getState().currentSession.loggedIn) {
+            return
+        }
+
+        const currentSessionId = store.getState().currentSession.id
+
+        if (!validatePassword(currentSessionId, password)) {
+            return
+        }
+
+        await deleteUser(currentSessionId)
+        navigation.navigate(HOME_NAME)
+    }
+
     return (
         <SafeAreaView>
             <TopWrap>
@@ -185,7 +204,7 @@ export default function OutRegisterPW() {
             <Contents>
                 <PasswordCheckText>비밀번호 확인</PasswordCheckText>
                 <PasswordCheckText2>
-                    회원님의 소중한 정보 보호를 위해, 카카오계정의 현재
+                    회원님의 소중한 정보 보호를 위해, 계정의 현재
                 </PasswordCheckText2>
                 <PasswordCheckText2>
                     비밀번호를 확인해 주세요.
@@ -200,12 +219,16 @@ export default function OutRegisterPW() {
                         secureTextEntry={true}
                         placeholder="비밀번호를 입력해주세요."
                         placeholderTextColor={"#7da450"}
+                        value={password}
+                        onChangeText={setPassword}
                     />
                 </PasswordCheckWrap>
 
                 <SuccessBtnWrap>
                     <SuccessBtn>
-                        <SuccessText>확인</SuccessText>
+                        <SuccessText onPress={onDeleteAccount}>
+                            계정 삭제하기
+                        </SuccessText>
                     </SuccessBtn>
                 </SuccessBtnWrap>
 
