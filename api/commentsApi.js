@@ -17,6 +17,7 @@ export const writeComment = async (playlistUuid, comment) => {
     newComment.playlistUuid = playlistUuid
     const newUuid = uuid.v4()
     newComment.uuid = newUuid
+    newComment.id = newUuid
     await axios.post(SERVER_URL + "/comments", newComment)
     return newUuid
 }
