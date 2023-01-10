@@ -5,7 +5,7 @@ import PlayMusic from "../components/PlayMusic"
 import Register from "../components/Register"
 import Home from "../components/Home"
 import { createStackNavigator } from "@react-navigation/stack"
-import PlayList from "../components/PlayList"
+import Playlist from "../components/PlayList"
 import MyPlayList from "../components/MyPlayList"
 import CreatePlaylist from "../components/CreatePlayList"
 import MyPlayList2 from "../components/MyPlayList2"
@@ -13,12 +13,14 @@ import Comment from "../components/Comment"
 import UserProfile from "../components/UserProfile"
 import OutRegisterPW from "../components/OutRegisterPW"
 import Out from "../components/Out"
+import PlaylistPage from "../components/PlaylistPage"
 
 // Screen names
 export const HOME_NAME = "Home"
 export const LOGIN_NAME = "Login"
 export const REGISTER_NAME = "Register"
 export const MY_PLAYLIST_NAME = "My Playlist"
+export const PLAYLIST_PAGE_NAME = "PLAYLIST"
 export const PLAYLIST_INFO_NAME = "Playlist Info"
 export const PLAY_MUSIC_NAME = "Play Music"
 export const CREATE_PLAYLIST_NAME = "Create PlayList"
@@ -41,7 +43,11 @@ export default function NavContainer() {
                 <Stack.Screen name={LOGIN_NAME} component={Login} />
                 <Stack.Screen name={REGISTER_NAME} component={Register} />
                 <Stack.Screen name={MY_PLAYLIST_NAME} component={MyPlayList} />
-                <Stack.Screen name={PLAYLIST_INFO_NAME} component={PlayList} />
+                <Stack.Screen
+                    name={PLAYLIST_PAGE_NAME}
+                    component={PlaylistPage}
+                />
+                <Stack.Screen name={PLAYLIST_INFO_NAME} component={Playlist} />
                 <Stack.Screen name={PLAY_MUSIC_NAME} component={PlayMusic} />
                 <Stack.Screen
                     name={CREATE_PLAYLIST_NAME}

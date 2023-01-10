@@ -1,5 +1,5 @@
-import React from "react"
-import { Image, ImageBackground, TouchableOpacity } from "react-native"
+import React, { useEffect, useState } from "react"
+import { Image, ImageBackground, TouchableOpacity, Text } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import {
@@ -7,67 +7,112 @@ import {
     MY_PLAYLIST2_NAME,
     PLAY_MUSIC_NAME
 } from "../navigation/NavContainer"
+import { getPlaylist } from "../api/playlistsApi"
+import {
+    getMusicMetadataFromYouTube,
+    getMusicThumbnailLinkFromYouTube
+} from "../api/musicApi"
+import { useSelector } from "react-redux"
 
 export default function PlaylistList() {
+    const playlistUuid = useSelector((state) => state.currentPlaylist.playlist)
+
+    const [playlist, setPlaylist] = useState([])
+    const [plmd, setPlmd] = useState([])
+
+    const [isLoading, setIsLoading] = useState(true)
+
+    const fetchPlaylist = async () => {
+        const pl = await getPlaylist(playlistUuid)
+        if (!pl) {
+            return
+        }
+
+        const nplmd = []
+
+        for (let i = 0; i < pl.content.length; i++) {
+            const md = await getMusicMetadataFromYouTube(pl.content[i])
+            const t = await getMusicThumbnailLinkFromYouTube(pl.content[i])
+
+            nplmd.push({
+                ti: md.title,
+                ar: md.artist,
+                tu: t
+            })
+        }
+
+        setPlmd(nplmd)
+        setPlaylist(pl)
+
+        setIsLoading(false)
+    }
+
+    useEffect(() => {
+        fetchPlaylist()
+    }, [playlistUuid])
+
     const navigation = useNavigation()
 
-    const data = [
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "LOVE",
-            singer: "릴러말즈(Leellarmarz)"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "예쁨 가득한 Eve",
-            singer: "한요한, 김승민"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Mise-en-Scene",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "Trip (Feat. Hannah)",
-            singer: "릴러말즈(Leellamarz)"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Island",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "새삥(Prod.Zico)",
-            singer: "지코(Zico)"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Missing You (Feat. 김윤아)",
-            singer: "G-DRAGON"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "Part Of Her",
-            singer: "한요한,김승민"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "시간이 들겠지 (Feat Colde)",
-            singer: "로꼬"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "Sequence",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Sequence",
-            singer: "IZ*ONE"
-        }
-    ] //길이가 긴 Array 라고 가정
+    // const [data, setData] = useState([
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "LOVE",
+    //         singer: "릴러말즈(Leellarmarz)"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "예쁨 가득한 Eve",
+    //         singer: "한요한, 김승민"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Mise-en-Scene",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "Trip (Feat. Hannah)",
+    //         singer: "릴러말즈(Leellamarz)"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Island",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "새삥(Prod.Zico)",
+    //         singer: "지코(Zico)"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Missing You (Feat. 김윤아)",
+    //         singer: "G-DRAGON"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "Part Of Her",
+    //         singer: "한요한,김승민"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "시간이 들겠지 (Feat Colde)",
+    //         singer: "로꼬"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "Sequence",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Sequence",
+    //         singer: "IZ*ONE"
+    //     }
+    // ])
+
+    //길이가 긴 Array 라고 가정
+
     return (
         <Container>
             <ImageBackground
@@ -117,7 +162,7 @@ export default function PlaylistList() {
                     </MyPlayListImgWrap>
 
                     <PlaylistWrap>
-                        <FlatList
+                        {/* <FlatList
                             showsVerticalScrollIndicator={false}
                             // ItemSeparatorComponent={<View style={{ height: 5 }} />}
                             data={data}
@@ -137,6 +182,38 @@ export default function PlaylistList() {
                                             </MyPlayListMusicSinger>
                                         </FlatListMyPlayWrap>
                                     </FlatListMyPlayLeft>
+
+                                    <MyPlayListIconWrap>
+                                        <MyPlayListIconBtn>
+                                            <MyPlayListIconImg
+                                                source={require("../assets/more3.png")}
+                                            />
+                                        </MyPlayListIconBtn>
+                                    </MyPlayListIconWrap>
+                                </FlatListMyPlay>
+                            )}
+                        /> */}
+                        {isLoading && (
+                            <Text style={{ color: "white" }}>Loading...</Text>
+                        )}
+                        <FlatList
+                            showsVerticalScrollIndicator={false}
+                            data={plmd}
+                            renderItem={({ item, i }) => (
+                                <FlatListMyPlay key={i}>
+                                    <Image
+                                        style={{ width: 50, height: 50 }}
+                                        source={{ uri: item.tu }}
+                                    />
+
+                                    <FlatListMyPlayWrap>
+                                        <MyPlayListMusicTitle>
+                                            {item.ti}
+                                        </MyPlayListMusicTitle>
+                                        <MyPlayListMusicSinger>
+                                            {item.ar}
+                                        </MyPlayListMusicSinger>
+                                    </FlatListMyPlayWrap>
 
                                     <MyPlayListIconWrap>
                                         <MyPlayListIconBtn>

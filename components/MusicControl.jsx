@@ -2,7 +2,13 @@ import React from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
-import { MY_PLAYLIST_NAME, PLAY_MUSIC_NAME } from "../navigation/NavContainer"
+import {
+    MY_PLAYLIST_NAME,
+    PLAYLIST_PAGE_NAME,
+    PLAY_MUSIC_NAME
+} from "../navigation/NavContainer"
+import { store } from "../redux/stores"
+import { setPlaylist } from "../redux/slices/currentPlaylistSlice"
 
 const Container = styled.View`
     width: 100%;
@@ -96,7 +102,10 @@ export default function MusicControl() {
             <TopWrap>
                 <MusicPlaylistBtn
                     onPress={() => {
-                        navigation.navigate(MY_PLAYLIST_NAME)
+                        navigation.navigate(PLAYLIST_PAGE_NAME, {
+                            playlistUuid: "3"
+                        })
+                        store.dispatch(setPlaylist("3"))
                     }}
                 >
                     <MusicPlaylistIconImg
