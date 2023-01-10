@@ -269,6 +269,8 @@ export default function CreatePlayList() {
                         <View
                             key={uuid}
                             style={{
+                                width: "100%",
+                                marginBottom: 10,
                                 display: "flex",
                                 flexDirection: "row",
                                 alignItems: "center",
