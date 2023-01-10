@@ -20,32 +20,16 @@ import {
 
 // 로그인하는 함수입니다. 알아서 쓰세요.
 export const login = async (id, password) => {
-    const users = await getUsers()
-    const matchingUsers = users.filter((u) => u.id === id)
-    if (matchingUsers.length <= 0) {
+    const user = await getUser(id)
+    if (!user) {
         // user not found
         return LOGIN_FAILED
     }
 
-    const matchingUser = matchingUsers[0]
-    if (matchingUser === {} || !matchingUser) {
-        // user found, but not valid
+    if (!validatePassword(id, password)) {
+        // password check invalid
         return LOGIN_FAILED
     }
-
-    let hashedPassword = HashPassword.hashPassword(
-        matchingUser.passwordHashVersion,
-        password
-    )
-
-    if (hashedPassword !== matchingUser.password) {
-        // wrong passwor
-        return LOGIN_FAILED
-    }
-
-    // currentSessionStore.handleSetCurrentSession({
-    //     id: id
-    // })
 
     store.dispatch(setId(id))
 
