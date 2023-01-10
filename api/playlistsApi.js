@@ -24,7 +24,7 @@ export const createPlaylist = async (playlist) => {
     let newPlaylist = playlist
     newPlaylist.uuid = playlistUuid
 
-    await axios.post(SERVER_URL + "/playlists/" + playlistUuid, newPlaylist)
+    await axios.post(SERVER_URL + "/playlists", newPlaylist)
     return playlistUuid
 }
 

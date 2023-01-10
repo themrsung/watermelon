@@ -77,7 +77,7 @@ export const register = async (id, password, name, email) => {
         return REGISTER_FAILED_INVALID_USER
     }
 
-    await axios.post(SERVER_URL + "/users/" + id, user)
+    await axios.post(SERVER_URL + "/users", user)
     return REGISTER_SUCCEEDED
 }
 
