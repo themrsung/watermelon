@@ -20,41 +20,33 @@ import {
 
 // 로그인하는 함수입니다. 알아서 쓰세요.
 export const login = async (id, password) => {
-    const users = await getUsers()
-    const matchingUsers = users.filter((u) => u.id === id)
-    if (matchingUsers.length <= 0) {
-        // user not found
+    if (!validatePassword(id, password)) {
+        // user not fonud or password check invalid
         return LOGIN_FAILED
     }
-
-    const matchingUser = matchingUsers[0]
-    if (matchingUser === {} || !matchingUser) {
-        // user found, but not valid
-        return LOGIN_FAILED
-    }
-
-    let hashedPassword = ""
-
-    switch (matchingUser.passwordHashVersion) {
-        case "v1":
-            hashedPassword = HashPassword.v1(password)
-            break
-        default:
-            hashedPassword = HashPassword.v1(password)
-    }
-
-    if (hashedPassword !== matchingUser.password) {
-        // wrong passwor
-        return LOGIN_FAILED
-    }
-
-    // currentSessionStore.handleSetCurrentSession({
-    //     id: id
-    // })
 
     store.dispatch(setId(id))
 
     return LOGIN_SUCCEEDED
+}
+
+// 비번이 맞는지 확인합니다.
+export const validatePassword = async (id, password) => {
+    const user = await getUser(id)
+    if (!user) {
+        return false
+    }
+
+    const hashedPassword = HashPassword.hashPassword(
+        user.passwordHashVersion,
+        password
+    )
+
+    if (!hashedPassword || hashedPassword !== id.password) {
+        return false
+    }
+
+    return true
 }
 
 // 로그아웃입니다. 콜하시면 세션이 사라져요!
@@ -147,5 +139,14 @@ export class HashPassword {
         }
 
         return hash
+    }
+
+    static hashPassword(version, password) {
+        switch (version) {
+            case "v1":
+                return HashPassword.v1(password)
+            default:
+                return HashPassword.v1(password)
+        }
     }
 }
