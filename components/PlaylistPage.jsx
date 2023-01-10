@@ -4,7 +4,6 @@ import PlaylistList from "./MyPlayList"
 
 export default function PlaylistPage({ route }) {
     const playlistUuid = useSelector((state) => state.currentPlaylist.playlist)
-    console.log(playlistUuid)
 
     const [a, setA] = useState(false)
     useEffect(() => {
