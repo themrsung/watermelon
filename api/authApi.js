@@ -53,8 +53,8 @@ export const login = async (id, password) => {
 }
 
 // 비번이 맞는지 확인합니다.
-export const validatePassword = async (userId, password) => {
-    const user = await getUser(userId)
+export const validatePassword = async (id, password) => {
+    const user = await getUser(id)
     if (!user) {
         return false
     }
@@ -64,7 +64,7 @@ export const validatePassword = async (userId, password) => {
         password
     )
 
-    if (!hashedPassword || hashedPassword !== userId.password) {
+    if (!hashedPassword || hashedPassword !== id.password) {
         return false
     }
 
