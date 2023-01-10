@@ -33,15 +33,10 @@ export const login = async (id, password) => {
         return LOGIN_FAILED
     }
 
-    let hashedPassword = ""
-
-    switch (matchingUser.passwordHashVersion) {
-        case "v1":
-            hashedPassword = HashPassword.v1(password)
-            break
-        default:
-            hashedPassword = HashPassword.v1(password)
-    }
+    let hashedPassword = HashPassword.hashPassword(
+        matchingUser.passwordHashVersion,
+        password
+    )
 
     if (hashedPassword !== matchingUser.password) {
         // wrong passwor
@@ -55,6 +50,25 @@ export const login = async (id, password) => {
     store.dispatch(setId(id))
 
     return LOGIN_SUCCEEDED
+}
+
+// 비번이 맞는지 확인합니다.
+export const validatePassword = async (userId, password) => {
+    const user = await getUser(userId)
+    if (!user) {
+        return false
+    }
+
+    const hashedPassword = HashPassword.hashPassword(
+        user.passwordHashVersion,
+        password
+    )
+
+    if (!hashedPassword || hashedPassword !== userId.password) {
+        return false
+    }
+
+    return true
 }
 
 // 로그아웃입니다. 콜하시면 세션이 사라져요!
@@ -147,5 +161,14 @@ export class HashPassword {
         }
 
         return hash
+    }
+
+    static hashPassword(version, password) {
+        switch (version) {
+            case "v1":
+                return HashPassword.v1(password)
+            default:
+                return HashPassword.v1(password)
+        }
     }
 }
