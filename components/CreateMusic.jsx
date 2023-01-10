@@ -4,11 +4,13 @@ import styled from "@emotion/native"
 import { AntDesign } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
 import { HOME_NAME } from "../navigation/NavContainer"
+
 import MusicControl from "./MusicControl"
 import BottomNav from "./BottomNav"
 
 const SafeAreaViews = styled.SafeAreaView`
     width: 100%;
+
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -19,6 +21,7 @@ const SafeAreaViews = styled.SafeAreaView`
 const TopWrap = styled.View`
     width: 100%;
     padding: 40px 20px 10px 20px;
+
 
     display: flex;
     flex-direction: row;
@@ -46,6 +49,7 @@ const SuccessBtnText = styled.Text`
 const YoutubeUrlInputWrap = styled.ScrollView`
     width: 100%;
     padding: 0 20px;
+
     margin-top: 30px;
 `
 
@@ -101,6 +105,7 @@ export default function CreateMusic() {
 
             <MusicControl />
             <BottomNav />
+
         </SafeAreaViews>
     )
 }
