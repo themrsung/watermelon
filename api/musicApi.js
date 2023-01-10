@@ -58,8 +58,18 @@ export const getMusicMetadataFromYouTube = async (musicUuid) => {
     const $ = load(htmlString)
 
     const artistAndTitle = $("title").text()
-    const artist = artistAndTitle.split(" - ")[0]
-    const title = artistAndTitle.split(" - ")[1]
+
+    let artist = "Various Artists"
+    let title = artistAndTitle
+
+    const splitters = [" - ", " _ "]
+
+    splitters.forEach((s) => {
+        if (artistAndTitle.contains(s)) {
+            artist = artistAndTitle.split(s)[0]
+            title = artistAndTitle.split(s)[1]
+        }
+    })
 
     return {
         title: title,
