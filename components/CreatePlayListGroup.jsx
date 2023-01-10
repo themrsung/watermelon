@@ -2,8 +2,11 @@ import React from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 import { Ionicons } from "@expo/vector-icons"
+import { FontAwesome } from "@expo/vector-icons"
+import { useNavigation } from "@react-navigation/core"
+import { CREATE_PLAYLIST_NAME } from "../navigation/NavContainer"
 
-const Container = styled.TouchableOpacity`
+const Container = styled.View`
     width: 100%;
     padding: 6px;
     margin-bottom: 10px;
@@ -42,7 +45,22 @@ const PlayListGroupNumber = styled.Text`
     color: white;
 `
 
+const IconWrap = styled.View`
+    width: 14%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`
+
+const PlayBtn = styled.TouchableOpacity``
+
+const EditBtn = styled.TouchableOpacity``
+
 export default function CreatePlayListGroup() {
+    const navigation = useNavigation()
+
     return (
         <Container>
             <Wrap>
@@ -51,7 +69,19 @@ export default function CreatePlayListGroup() {
                 <PlayListGroupNumber>232</PlayListGroupNumber>
             </Wrap>
 
-            <Ionicons name="play" size={18} color="white" />
+            <IconWrap>
+                <PlayBtn>
+                    <Ionicons name="play" size={18} color="white" />
+                </PlayBtn>
+
+                <EditBtn
+                    onPress={() => {
+                        navigation.navigate(CREATE_PLAYLIST_NAME)
+                    }}
+                >
+                    <FontAwesome name="edit" size={18} color="white" />
+                </EditBtn>
+            </IconWrap>
         </Container>
     )
 }

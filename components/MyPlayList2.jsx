@@ -228,8 +228,8 @@ const AddPlayList = styled.View`
     padding: 10px;
 `
 const AddPlayListBtn = styled.TouchableOpacity`
-    width: 54%;
-    padding: 10px;
+    width: 48%;
+    padding-top: 10px;
     //background-color: pink;
 
     display: flex;

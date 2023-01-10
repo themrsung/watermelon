@@ -4,7 +4,7 @@ import styled from "@emotion/native"
 import {} from "react-native"
 import { AntDesign } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
-import { MY_PLAYLIST_NAME } from "../navigation/NavContainer"
+import { MY_PLAYLIST2_NAME } from "../navigation/NavContainer"
 
 const SafeAreaViews = styled.SafeAreaView`
     width: 100%;
@@ -156,7 +156,7 @@ export default function CreatePlayList() {
             <TopWrap>
                 <PrevBtn
                     onPress={() => {
-                        navigation.navigate(MY_PLAYLIST_NAME)
+                        navigation.navigate(MY_PLAYLIST2_NAME)
                     }}
                 >
                     <AntDesign name="left" size={20} color="#5aa469" />
