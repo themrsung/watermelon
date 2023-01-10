@@ -48,6 +48,8 @@ export default function PlaylistList() {
     }
 
     useEffect(() => {
+        setIsLoading(true)
+
         fetchPlaylist()
     }, [playlistUuid])
 
