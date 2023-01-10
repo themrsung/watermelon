@@ -11,6 +11,8 @@ import CreatePlayList from "../components/CreatePlayList"
 import MyPlayList2 from "../components/MyPlayList2"
 import Comment from "../components/Comment"
 import UserProfile from "../components/UserProfile"
+import OutRegisterPW from "../components/OutRegisterPW"
+import Out from "../components/Out"
 
 // Screen names
 export const HOME_NAME = "Home"
@@ -23,6 +25,8 @@ export const CREATE_PLAYLIST_NAME = "Create PlayList"
 export const MY_PLAYLIST2_NAME = "playlist2 Info"
 export const COMMENT_NAME = "Comment"
 export const USER_PROFILE_NAME = "User Profile"
+export const OUT_REGISTOR_PW_NAME = "Out Registor Pw"
+export const OUT_NAME = "Out"
 
 const Stack = createStackNavigator()
 
@@ -30,7 +34,7 @@ export default function NavContainer() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName={HOME_NAME}
+                initialRouteName={OUT_NAME}
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name={HOME_NAME} component={Home} />
@@ -52,6 +56,11 @@ export default function NavContainer() {
                     name={USER_PROFILE_NAME}
                     component={UserProfile}
                 />
+                <Stack.Screen
+                    name={OUT_REGISTOR_PW_NAME}
+                    component={OutRegisterPW}
+                />
+                <Stack.Screen name={OUT_NAME} component={Out} />
             </Stack.Navigator>
         </NavigationContainer>
     )

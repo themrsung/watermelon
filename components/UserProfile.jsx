@@ -11,6 +11,8 @@ import { FontAwesome } from "@expo/vector-icons"
 import { FlatList } from "react-native"
 import { FontAwesome5 } from "@expo/vector-icons"
 import { Ionicons } from "@expo/vector-icons"
+import { useNavigation } from "@react-navigation/core"
+import { OUT_NAME } from "../navigation/NavContainer"
 
 const ProfileContainer = styled.SafeAreaView`
     width: 100%;
@@ -95,7 +97,7 @@ const ProfilePageBanner = styled.Image`
     border-radius: 6px;
 `
 const ProfilePageCategoryList = styled.View`
-    margin: 20px 0 30px 10px;
+    margin: 20px 0 0 10px;
 `
 
 const ProfilePageCategoryBox = styled.TouchableOpacity`
@@ -129,7 +131,37 @@ const CategoryNumberText = styled.Text`
     color: #93d082;
 `
 
+const OutRegisterWrap = styled.TouchableOpacity`
+    width: 100%;
+    height: 60px;
+    margin-bottom: 30px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+`
+const OutRegisterLeft = styled.View`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
+
+const OutRegisterBtn = styled.TouchableOpacity`
+    margin-left: 10px;
+`
+
+const OutRegistorText = styled.Text`
+    color: #5aa469;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 10px;
+`
+
+const NextBtn = styled.TouchableOpacity``
+
 export default function UserProfile() {
+    const navigation = useNavigation()
+
     const data = [
         {
             icon: <AntDesign name="hearto" size={20} color="#225f2e" />,
@@ -193,13 +225,6 @@ export default function UserProfile() {
             nexticon: (
                 <Entypo name="chevron-small-right" size={20} color="gray" />
             )
-        },
-        {
-            icon: <Feather name="log-out" size={20} color="#225f2e" />,
-            title: "회원탈퇴",
-            nexticon: (
-                <Entypo name="chevron-small-right" size={20} color="gray" />
-            )
         }
     ]
     return (
@@ -251,6 +276,27 @@ export default function UserProfile() {
                         )}
                     />
                 </ProfilePageCategoryList>
+
+                <OutRegisterWrap
+                    onPress={() => {
+                        navigation.navigate(OUT_NAME)
+                    }}
+                >
+                    <OutRegisterLeft>
+                        <OutRegisterBtn>
+                            <Feather name="log-out" size={20} color="#225f2e" />
+                        </OutRegisterBtn>
+                        <OutRegistorText>회원탈퇴</OutRegistorText>
+                    </OutRegisterLeft>
+
+                    <NextBtn>
+                        <Entypo
+                            name="chevron-small-right"
+                            size={20}
+                            color="gray"
+                        />
+                    </NextBtn>
+                </OutRegisterWrap>
             </ScrollViewWrap>
 
             <MusicControl />
