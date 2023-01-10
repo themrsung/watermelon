@@ -133,10 +133,7 @@ const SelectorTitle = styled.Text`
 export default function CreatePlayList() {
     // const navigation = useNavigation()
 
-<<<<<<< HEAD
 export default function CreatePlayList() {
-=======
->>>>>>> de7be1b770e6bfc26671958fee7ad076dbf162b8
     const [selected, setSelected] = React.useState("")
 
     const data = [
@@ -240,10 +237,8 @@ export default function CreatePlayList() {
         </SafeAreaViews>
     )
 }
-<<<<<<< HEAD
 
 const SafeAreaViews = styled.SafeAreaView`
-    width: 100%;
     padding-top: 50px;
     box-sizing: border-box;
     display: flex;
@@ -376,5 +371,3 @@ const CreatePlayFiveText = styled.Text`
 const CreatePlaySelector = styled.View`
     width: 80%;
 `
-=======
->>>>>>> de7be1b770e6bfc26671958fee7ad076dbf162b8
