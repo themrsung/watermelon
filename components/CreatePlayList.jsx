@@ -186,7 +186,7 @@ export default function CreatePlayList() {
         }
 
         const response = await createPlaylist(newPlaylist)
-        return response
+        navigation.goBack()
     }
 
     getPlaylists()
