@@ -1,21 +1,9 @@
 import { StatusBar } from "expo-status-bar"
-import { View, Text } from "react-native"
 import styled from "@emotion/native"
-import Header from "./components/Header"
-import ScrollContents from "./components/ScrollContents"
-import PlayList from "./components/PlayList"
-import PlayMusic from "./components/PlayMusic"
-import { getMusicMetadataFromYouTube, getMusics } from "./api/musicApi"
+import { getMusics } from "./api/musicApi"
 import { useEffect, useState } from "react"
-import MusicControl from "./components/MusicControl"
-import BottomNav from "./components/BottomNav"
-import MyPlayList from "./components/MyPlayList"
-import UserProfile from "./components/UserProfile"
-import Login from "./components/Login"
-import Register from "./components/Register"
-import YouTubeVideo from "./components/YouTubeVideo"
-import NavContainer from "./navigation/NavContainer"
 import CreatePlayList from "./components/CreatePlayList"
+import NavContainer from "./navigation/NavContainer"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -41,8 +29,8 @@ export default function App() {
 
     return (
         <SafeAreaView>
-            {/* <NavContainer /> */}
-            <CreatePlayList />
+            <NavContainer />
+            {/* <CreatePlayList /> */}
             <StatusBar style="auto" />
         </SafeAreaView>
     )
