@@ -2,13 +2,12 @@ import React from "react"
 import styled from "@emotion/native"
 import { MaterialIcons } from "@expo/vector-icons"
 import { AntDesign } from "@expo/vector-icons"
+import { SimpleLineIcons } from "@expo/vector-icons"
 
 export default function CommentList() {
     const data = [
         {
-            image: (
-                <UserProfileImg source={require("../assets/profileImg.jpg")} />
-            ),
+            image: <LogoImg source={require("../assets/LightBG.png")} />,
             userName: "한",
             date: "23.01.10",
             moreIcon: (
@@ -16,15 +15,13 @@ export default function CommentList() {
             ),
             content: "띵곡들만 모여있네요, 너무 좋아요!",
             bottomText: "답글 1",
-            likeIcon: <AntDesign name="like2" size={15} color="#5aa469cc" />,
-            disLikeIcon: (
-                <AntDesign name="dislike2" size={15} color="#5aa469cc" />
-            )
+            editIcon: (
+                <SimpleLineIcons name="pencil" size={15} color="#5aa469cc" />
+            ),
+            deleteIcon: <AntDesign name="delete" size={15} color="#5aa469cc" />
         },
         {
-            image: (
-                <UserProfileImg source={require("../assets/profileImg.jpg")} />
-            ),
+            image: <LogoImg source={require("../assets/LightBG.png")} />,
             userName: "쨔오웨이",
             date: "23.01.10",
             moreIcon: (
@@ -32,15 +29,13 @@ export default function CommentList() {
             ),
             content: "노래 내스탈임",
             bottomText: "답글 ",
-            likeIcon: <AntDesign name="like2" size={15} color="#5aa469cc" />,
-            disLikeIcon: (
-                <AntDesign name="dislike2" size={15} color="#5aa469cc" />
-            )
+            editIcon: (
+                <SimpleLineIcons name="pencil" size={15} color="#5aa469cc" />
+            ),
+            deleteIcon: <AntDesign name="delete" size={15} color="#5aa469cc" />
         },
         {
-            image: (
-                <UserProfileImg source={require("../assets/profileImg.jpg")} />
-            ),
+            image: <LogoImg source={require("../assets/LightBG.png")} />,
             userName: "카리나짱",
             date: "23.01.10",
             moreIcon: (
@@ -48,15 +43,13 @@ export default function CommentList() {
             ),
             content: "에스파 노래 리스트도 추가해주세요",
             bottomText: "답글 2",
-            likeIcon: <AntDesign name="like2" size={15} color="#5aa469cc" />,
-            disLikeIcon: (
-                <AntDesign name="dislike2" size={15} color="#5aa469cc" />
-            )
+            editIcon: (
+                <SimpleLineIcons name="pencil" size={15} color="#5aa469cc" />
+            ),
+            deleteIcon: <AntDesign name="delete" size={15} color="#5aa469cc" />
         },
         {
-            image: (
-                <UserProfileImg source={require("../assets/profileImg.jpg")} />
-            ),
+            image: <LogoImg source={require("../assets/LightBG.png")} />,
             userName: "하드코딩중",
             date: "23.01.10",
             moreIcon: (
@@ -64,15 +57,13 @@ export default function CommentList() {
             ),
             content: "코딩 할 때 듣기 좋음",
             bottomText: "답글 ",
-            likeIcon: <AntDesign name="like2" size={15} color="#5aa469cc" />,
-            disLikeIcon: (
-                <AntDesign name="dislike2" size={15} color="#5aa469cc" />
-            )
+            editIcon: (
+                <SimpleLineIcons name="pencil" size={15} color="#5aa469cc" />
+            ),
+            deleteIcon: <AntDesign name="delete" size={15} color="#5aa469cc" />
         },
         {
-            image: (
-                <UserProfileImg source={require("../assets/profileImg.jpg")} />
-            ),
+            image: <LogoImg source={require("../assets/LightBG.png")} />,
             userName: "닉네임짓기도어렵다",
             date: "23.01.10",
             moreIcon: (
@@ -80,10 +71,10 @@ export default function CommentList() {
             ),
             content: "노래 넘나 좋습니다",
             bottomText: "답글 1",
-            likeIcon: <AntDesign name="like2" size={15} color="#5aa469cc" />,
-            disLikeIcon: (
-                <AntDesign name="dislike2" size={15} color="#5aa469cc" />
-            )
+            editIcon: (
+                <SimpleLineIcons name="pencil" size={15} color="#5aa469cc" />
+            ),
+            deleteIcon: <AntDesign name="delete" size={15} color="#5aa469cc" />
         }
     ]
 
@@ -130,10 +121,8 @@ export default function CommentList() {
                                 </ReplyCommentText>
                             </ReplyCommentBtn>
                             <IconView>
-                                <LikeIconBtn>{item.likeIcon}</LikeIconBtn>
-                                <DisLikeIconBtn>
-                                    {item.disLikeIcon}
-                                </DisLikeIconBtn>
+                                <EditIconBtn>{item.editIcon}</EditIconBtn>
+                                <DeleteIconBtn>{item.deleteIcon}</DeleteIconBtn>
                             </IconView>
                         </CommentListBoxBottom>
                     </CommentListWrap>
@@ -182,12 +171,13 @@ const CommentListHeaderBtn = styled.TouchableOpacity`
 `
 
 const CommentListFlatList = styled.FlatList`
-margin-top: 10px;
+    margin-top: 10px;
 `
 
 const CommentListWrap = styled.View`
     margin-top: 10px;
     width: 100%;
+    height: 150px;
     box-sizing: border-box;
 
     border-bottom-width: 2px;
@@ -196,7 +186,6 @@ const CommentListWrap = styled.View`
 
     display: flex;
 `
-
 
 const CommentListBoxHeader = styled.View`
     box-sizing: border-box;
@@ -209,7 +198,7 @@ const UserNameBtn = styled.TouchableOpacity`
     flex-direction: row;
     align-items: center;
 `
-const UserProfileImg = styled.Image`
+const LogoImg = styled.Image`
     width: 30px;
     height: 30px;
 `
@@ -253,9 +242,9 @@ const IconView = styled.View`
     align-items: center;
 `
 
-const LikeIconBtn = styled.TouchableOpacity`
+const EditIconBtn = styled.TouchableOpacity`
     margin-right: 15px;
 `
-const DisLikeIconBtn = styled.TouchableOpacity`
+const DeleteIconBtn = styled.TouchableOpacity`
     margin-right: 5px;
 `
