@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
@@ -9,6 +9,8 @@ import {
 } from "../navigation/NavContainer"
 import { store } from "../redux/stores"
 import { setPlaylist } from "../redux/slices/currentPlaylistSlice"
+import { useSelector } from "react-redux"
+import { getMusicMetadataFromYouTube } from "../api/musicApi"
 
 const Container = styled.View`
     width: 100%;
@@ -93,6 +95,22 @@ const MusicControlIconImg = styled.Image``
 export default function MusicControl() {
     const navigation = useNavigation()
 
+    const currentMusicUuid = useSelector((state) => state.currentMusic.music)
+    const [musicMetadata, setMusicMetadata] = useState({})
+
+    const fetchMusicMetadata = async () => {
+        const res = await getMusicMetadataFromYouTube(currentMusicUuid)
+        if (!res) {
+            return
+        }
+
+        setMusicMetadata(res)
+    }
+
+    useEffect(() => {
+        fetchMusicMetadata()
+    }, [currentMusicUuid])
+
     return (
         <Container>
             <MusicState>
@@ -119,8 +137,8 @@ export default function MusicControl() {
                     }}
                 >
                     <MusicWrap>
-                        <MusicTitle>Candy</MusicTitle>
-                        <MusicSinger>백현 (BAEKHYUN)</MusicSinger>
+                        <MusicTitle>{musicMetadata.title}</MusicTitle>
+                        <MusicSinger>{musicMetadata.artist}</MusicSinger>
                     </MusicWrap>
                 </MusicWrapBtn>
             </TopWrap>
