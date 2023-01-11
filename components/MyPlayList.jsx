@@ -13,6 +13,8 @@ import {
     getMusicThumbnailLinkFromYouTube
 } from "../api/musicApi"
 import { useSelector } from "react-redux"
+import { store } from "../redux/stores"
+import { setMusic } from "../redux/slices/currentMusicSlice"
 
 export default function PlaylistList() {
     const playlistUuid = useSelector((state) => state.currentPlaylist.playlist)
@@ -37,7 +39,8 @@ export default function PlaylistList() {
             nplmd.push({
                 ti: md.title,
                 ar: md.artist,
-                tu: t
+                tu: t,
+                uuid: pl.content[i]
             })
         }
 
@@ -208,7 +211,12 @@ export default function PlaylistList() {
                                         source={{ uri: item.tu }}
                                     />
 
-                                    <FlatListMyPlayWrap>
+                                    <FlatListMyPlayWrap
+                                        onPress={() => {
+                                            navigation.navigate(PLAY_MUSIC_NAME)
+                                            store.dispatch(setMusic(item.uuid))
+                                        }}
+                                    >
                                         <MyPlayListMusicTitle>
                                             {item.ti}
                                         </MyPlayListMusicTitle>
@@ -393,7 +401,7 @@ const FlatListMyPlayImg = styled.Text`
     margin-top: -12%;
 `
 
-const FlatListMyPlayWrap = styled.View``
+const FlatListMyPlayWrap = styled.TouchableOpacity``
 
 const MyPlayListMusicTitle = styled.Text`
     color: white;
