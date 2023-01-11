@@ -5,7 +5,7 @@ import { Feather } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
 import { HOME_NAME, USER_PROFILE_NAME } from "../navigation/NavContainer"
 import { store } from "../redux/stores"
-import { deleteUser, getUser, validatePassword } from "../api/authApi"
+import { deleteUser, getUser, logout, validatePassword } from "../api/authApi"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -174,6 +174,7 @@ export default function OutRegisterPW() {
         }
 
         await deleteUser(currentSessionId)
+        await logout()
         navigation.navigate(HOME_NAME)
     }
 

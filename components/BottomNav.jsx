@@ -3,6 +3,7 @@ import {} from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import { HOME_NAME, USER_PROFILE_NAME } from "../navigation/NavContainer"
+import { logout } from "../api/authApi"
 
 const Container = styled.View`
     width: 100%;
@@ -43,7 +44,12 @@ export default function BottomNav() {
                 <IconImage source={require("../assets/movie.png")} />
             </IconBtn>
 
-            <IconBtn>
+            <IconBtn
+                onPress={() => {
+                    logout()
+                    navigation.navigate(HOME_NAME)
+                }}
+            >
                 <IconImage source={require("../assets/search.png")} />
             </IconBtn>
 
