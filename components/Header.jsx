@@ -2,7 +2,8 @@ import React from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
-import { LOGIN_NAME } from '../navigation/NavContainer'
+import { LOGIN_NAME, USER_PROFILE_NAME } from "../navigation/NavContainer"
+import { store } from "../redux/stores"
 
 const Container = styled.View`
     width: 100%;
@@ -62,6 +63,12 @@ export default function Header() {
 
                 <MenuButton
                     onPress={() => {
+                        const isLoggedIn =
+                            store.getState().currentSession.isLoggedIn
+                        if (isLoggedIn) {
+                            navigation.navigate(USER_PROFILE_NAME)
+                            return
+                        }
                         navigation.navigate(LOGIN_NAME)
                     }}
                 >

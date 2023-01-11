@@ -163,7 +163,7 @@ export default function OutRegisterPW() {
     const [password, setPassword] = useState("")
 
     const onDeleteAccount = async () => {
-        if (!store.getState().currentSession.loggedIn) {
+        if (!store.getState().currentSession.isLoggedIn) {
             return
         }
 
