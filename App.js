@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import NavContainer from "./navigation/NavContainer"
 import { Provider } from "react-redux"
 import { store } from "./redux/stores"
+import YouTubeVideo from "./components/YouTubeVideo"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;

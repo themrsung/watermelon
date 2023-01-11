@@ -171,122 +171,127 @@ export default function PlayMusic() {
 
     const navigation = useNavigation()
     return (
-        <Container>
-            <ImageBackground
-                source={require("../assets/bg1.png")}
-                style={{ width: "100%", height: "100%" }}
-            >
-                <BgDark>
-                    <BottomIconBtn
-                        onPress={() => {
-                            navigation.navigate(HOME_NAME)
-                        }}
-                    >
-                        <BottomIconImg
-                            source={require("../assets/bottom.png")}
-                        />
-                    </BottomIconBtn>
+        <>
+            <YouTubeVideo
+                musicUuid={currentMusicUuid}
+                style={{ flex: 0, position: "fixed" }}
+            />
 
-                    <MusicTitleView>
-                        <HorizontalView>
-                            <MP3Wrap>
-                                <MP3Text>MP3</MP3Text>
-                            </MP3Wrap>
-
-                            <MP3Title>PLAY ME</MP3Title>
-                        </HorizontalView>
-                        <MP3Singer>WOOGIE(우기)</MP3Singer>
-                    </MusicTitleView>
-                    <Wrap>
-                        {/* <MP3Img source={require("../assets/mp3_image1.png")} /> */}
-                        {currentMusicUuid && (
-                            <YouTubeVideo
-                                musicUuid={currentMusicUuid}
-                                style={{
-                                    width: 270,
-                                    height: 270,
-                                    marginTop: 80
-                                }}
-                            />
-                        )}
-
-                        <TimeWrap>
-                            <Time>0:58</Time>
-                            <Time2>· 3:58</Time2>
-                        </TimeWrap>
-
-                        <BtnWrap>
-                            <MusicControlIconBtn1>
-                                <MusicControlIconImg
-                                    source={require("../assets/repeat.png")}
-                                />
-                            </MusicControlIconBtn1>
-
-                            <HeartWrap>
-                                <MusicControlIconBtn2>
-                                    <MusicControlIconImg
-                                        source={require("../assets/heart.png")}
-                                    />
-                                </MusicControlIconBtn2>
-
-                                <HeartNumber>1,086</HeartNumber>
-                            </HeartWrap>
-
-                            <MusicControlIconBtn3>
-                                <MusicControlIconImg
-                                    source={require("../assets/shuffle.png")}
-                                />
-                            </MusicControlIconBtn3>
-                        </BtnWrap>
-                    </Wrap>
-
-                    <Lyric />
-
-                    <MusicControlView>
-                        <MusicControl2IconBtn
+            <Container>
+                <ImageBackground
+                    source={require("../assets/bg1.png")}
+                    style={{ width: "100%", height: "100%" }}
+                >
+                    <BgDark>
+                        <BottomIconBtn
                             onPress={() => {
-                                navigation.navigate(PLAYLIST_PAGE_NAME, {
-                                    playlistUuid: "3"
-                                })
-
-                                setPlaylist("3")
+                                navigation.navigate(HOME_NAME)
                             }}
                         >
-                            <MusicControl2IconImg
-                                source={require("../assets/playList.png")}
+                            <BottomIconImg
+                                source={require("../assets/bottom.png")}
                             />
-                        </MusicControl2IconBtn>
+                        </BottomIconBtn>
 
-                        <MusicControlView2>
-                            <MusicControl2IconBtn>
+                        <MusicTitleView>
+                            <HorizontalView>
+                                <MP3Wrap>
+                                    <MP3Text>MP3</MP3Text>
+                                </MP3Wrap>
+
+                                <MP3Title>PLAY ME</MP3Title>
+                            </HorizontalView>
+                            <MP3Singer>WOOGIE(우기)</MP3Singer>
+                        </MusicTitleView>
+                        <Wrap>
+                            {/* <MP3Img source={require("../assets/mp3_image1.png")} /> */}
+                            {/* <YouTubeVideo
+                            musicUuid={currentMusicUuid}
+                            style={{
+                                width: 270,
+                                height: 270,
+                                marginTop: 80
+                            }}
+                        /> */}
+
+                            <TimeWrap>
+                                <Time>0:58</Time>
+                                <Time2>· 3:58</Time2>
+                            </TimeWrap>
+
+                            <BtnWrap>
+                                <MusicControlIconBtn1>
+                                    <MusicControlIconImg
+                                        source={require("../assets/repeat.png")}
+                                    />
+                                </MusicControlIconBtn1>
+
+                                <HeartWrap>
+                                    <MusicControlIconBtn2>
+                                        <MusicControlIconImg
+                                            source={require("../assets/heart.png")}
+                                        />
+                                    </MusicControlIconBtn2>
+
+                                    <HeartNumber>1,086</HeartNumber>
+                                </HeartWrap>
+
+                                <MusicControlIconBtn3>
+                                    <MusicControlIconImg
+                                        source={require("../assets/shuffle.png")}
+                                    />
+                                </MusicControlIconBtn3>
+                            </BtnWrap>
+                        </Wrap>
+
+                        <Lyric />
+
+                        <MusicControlView>
+                            <MusicControl2IconBtn
+                                onPress={() => {
+                                    navigation.navigate(PLAYLIST_PAGE_NAME, {
+                                        playlistUuid: "3"
+                                    })
+
+                                    setPlaylist("3")
+                                }}
+                            >
                                 <MusicControl2IconImg
-                                    style={{ width: 26, height: 26 }}
-                                    source={require("../assets/play5.png")}
+                                    source={require("../assets/playList.png")}
                                 />
                             </MusicControl2IconBtn>
 
-                            <MusicControl2IconBtn>
-                                <MusicControl2IconImg
-                                    source={require("../assets/play3.png")}
-                                />
-                            </MusicControl2IconBtn>
+                            <MusicControlView2>
+                                <MusicControl2IconBtn>
+                                    <MusicControl2IconImg
+                                        style={{ width: 26, height: 26 }}
+                                        source={require("../assets/play5.png")}
+                                    />
+                                </MusicControl2IconBtn>
+
+                                <MusicControl2IconBtn>
+                                    <MusicControl2IconImg
+                                        source={require("../assets/play3.png")}
+                                    />
+                                </MusicControl2IconBtn>
+
+                                <MusicControl2IconBtn>
+                                    <MusicControl2IconImg
+                                        style={{ width: 26, height: 26 }}
+                                        source={require("../assets/play4.png")}
+                                    />
+                                </MusicControl2IconBtn>
+                            </MusicControlView2>
 
                             <MusicControl2IconBtn>
                                 <MusicControl2IconImg
-                                    style={{ width: 26, height: 26 }}
-                                    source={require("../assets/play4.png")}
+                                    source={require("../assets/volume.png")}
                                 />
                             </MusicControl2IconBtn>
-                        </MusicControlView2>
-
-                        <MusicControl2IconBtn>
-                            <MusicControl2IconImg
-                                source={require("../assets/volume.png")}
-                            />
-                        </MusicControl2IconBtn>
-                    </MusicControlView>
-                </BgDark>
-            </ImageBackground>
-        </Container>
+                        </MusicControlView>
+                    </BgDark>
+                </ImageBackground>
+            </Container>
+        </>
     )
 }
