@@ -3,7 +3,7 @@ import { View, Text } from "react-native"
 import { getMusic } from "../api/musicApi"
 import { WebView } from "react-native-webview"
 
-export default function YouTubeVideo({ musicUuid, isPlaying }) {
+export default function YouTubeVideo({ musicUuid = "10", isPlaying }) {
     const [music, setMusic] = useState({})
 
     const fetchMusic = async () => {
@@ -62,9 +62,7 @@ export default function YouTubeVideo({ musicUuid, isPlaying }) {
     return (
         <WebView
             source={{
-                uri:
-                    music.musicLink ||
-                    "https://www.youtube.com/watch?v=f1J4dRTMy9A&list=RD_ffbcWy_oAU&index=2"
+                uri: music.musicLink
             }}
             injectedJavaScript={runFirst}
         />
