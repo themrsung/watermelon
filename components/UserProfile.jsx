@@ -302,7 +302,7 @@ export default function UserProfile() {
                     <ProfileHeaderText>나만의 음악서랍</ProfileHeaderText>
                     <EmailWrap>
                         <EmailText>
-                            {currentSession.loggedIn
+                            {currentSession.isLoggedIn
                                 ? currentUser !== {}
                                     ? currentUser.email
                                     : currentSession.id
