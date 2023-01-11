@@ -20,8 +20,14 @@ import {
 
 // 로그인하는 함수입니다. 알아서 쓰세요.
 export const login = async (id, password) => {
+    const user = await getUser(id)
+    if (!user) {
+        // user not found
+        return LOGIN_FAILED
+    }
+
     if (!validatePassword(id, password)) {
-        // user not fonud or password check invalid
+        // password check invalid
         return LOGIN_FAILED
     }
 
