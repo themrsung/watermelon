@@ -35,6 +35,7 @@ const Comments = () => {
     const onDeleteComment = async (commentUuid) => {
         const response = await deleteComment(commentUuid)
         fetchComments()
+        setIsEditingComment(false)
     }
 
     const [comments, setComments] = useState([])
@@ -172,6 +173,7 @@ const Comments = () => {
                             <TextInput
                                 value={newCommentContent}
                                 onChangeText={setNewCommentContent}
+                                onSubmitEditing={onEditComment(item.uuid)}
                             ></TextInput>
                         ) : (
                             <CommentText>{item.content}</CommentText>
