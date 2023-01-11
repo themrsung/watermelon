@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {} from "react-native"
 import styled from "@emotion/native"
 import { Feather } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/core"
 import { HOME_NAME, USER_PROFILE_NAME } from "../navigation/NavContainer"
 import { store } from "../redux/stores"
-import { deleteUser, validatePassword } from "../api/authApi"
+import { deleteUser, getUser, validatePassword } from "../api/authApi"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -177,6 +177,21 @@ export default function OutRegisterPW() {
         navigation.navigate(HOME_NAME)
     }
 
+    const [currentUser, setCurrentUser] = useState({ email: "찾을 수 없음" })
+
+    const fetchUser = async () => {
+        const res = await getUser(store.getState().currentSession.id)
+        if (!res) {
+            return
+        }
+
+        setCurrentUser(res)
+    }
+
+    useEffect(() => {
+        fetchUser()
+    }, [])
+
     return (
         <SafeAreaView>
             <TopWrap>
@@ -212,7 +227,7 @@ export default function OutRegisterPW() {
 
                 <PasswordCheckWrap>
                     <EmailText>이메일</EmailText>
-                    <EmailDetailText>dnjfht@naver.com</EmailDetailText>
+                    <EmailDetailText>{currentUser.email}</EmailDetailText>
 
                     <PasswordText>비밀번호</PasswordText>
                     <PasswordCheckInput
