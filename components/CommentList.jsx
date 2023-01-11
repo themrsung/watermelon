@@ -3,10 +3,40 @@ import styled from "@emotion/native"
 import { MaterialIcons } from "@expo/vector-icons"
 import { AntDesign } from "@expo/vector-icons"
 import { SimpleLineIcons } from "@expo/vector-icons"
-import { getComments } from "../api/commentsApi"
+import { deleteComment, editComment, getComments } from "../api/commentsApi"
 import { useSelector } from "react-redux"
+import { TextInput } from "react-native-gesture-handler"
 
 const Comments = () => {
+    const currentSession = useSelector((state) => state.currentSession)
+
+    const [editingCommentUuid, setEditingCommentUuid] = useState("")
+
+    const [isEditingComment, setIsEditingComment] = useState(false)
+
+    const [newCommentContent, setNewCommentContent] = useState("")
+
+    const onEditComment = async (commentUuid) => {
+        const comment = comments.filter((c) => c.uuid === commentUuid)[0]
+        if (!comment) {
+            return
+        }
+
+        if (isEditingComment) {
+            comment.content = newCommentContent
+            const response = await editComment(commentUuid, comment)
+        } else {
+            setNewCommentContent(comment.content)
+            setEditingCommentUuid(commentUuid)
+        }
+        setIsEditingComment(!isEditingComment)
+    }
+
+    const onDeleteComment = async (commentUuid) => {
+        const response = await deleteComment(commentUuid)
+        fetchComments()
+    }
+
     const [comments, setComments] = useState([])
     const currentPlaylist = useSelector(
         (state) => state.currentPlaylist.playlist
@@ -136,28 +166,78 @@ const Comments = () => {
                             </MoreIcon>
                         </CommentListBoxHeader>
 
-                        <CommentText>{item.content}</CommentText>
+                        {!isEditingComment ? (
+                            <CommentText>{item.content}</CommentText>
+                        ) : editingCommentUuid === item.uuid ? (
+                            <TextInput
+                                value={newCommentContent}
+                                onChangeText={setNewCommentContent}
+                            ></TextInput>
+                        ) : (
+                            <CommentText>{item.content}</CommentText>
+                        )}
 
                         <CommentListBoxBottom>
                             <ReplyCommentBtn>
                                 <ReplyCommentText>답글</ReplyCommentText>
                             </ReplyCommentBtn>
-                            <IconView>
-                                <EditIconBtn>
-                                    <SimpleLineIcons
-                                        name="pencil"
-                                        size={15}
-                                        color="#5aa469cc"
-                                    />
-                                </EditIconBtn>
-                                <DeleteIconBtn>
-                                    <AntDesign
-                                        name="delete"
-                                        size={15}
-                                        color="#5aa469cc"
-                                    />
-                                </DeleteIconBtn>
-                            </IconView>
+                            {currentSession.id === item.createdBy ? (
+                                !isEditingComment ? (
+                                    <IconView>
+                                        <EditIconBtn
+                                            onPress={() => {
+                                                onEditComment(item.uuid)
+                                            }}
+                                        >
+                                            <SimpleLineIcons
+                                                name="pencil"
+                                                size={15}
+                                                color="#5aa469cc"
+                                            />
+                                        </EditIconBtn>
+                                        <DeleteIconBtn
+                                            onPress={() => {
+                                                onDeleteComment(item.uuid)
+                                            }}
+                                        >
+                                            <AntDesign
+                                                name="delete"
+                                                size={15}
+                                                color="#5aa469cc"
+                                            />
+                                        </DeleteIconBtn>
+                                    </IconView>
+                                ) : (
+                                    editingCommentUuid === item.uuid && (
+                                        <IconView>
+                                            <EditIconBtn
+                                                onPress={() => {
+                                                    onEditComment(item.uuid)
+                                                }}
+                                            >
+                                                <SimpleLineIcons
+                                                    name="pencil"
+                                                    size={15}
+                                                    color="#5aa469cc"
+                                                />
+                                            </EditIconBtn>
+                                            <DeleteIconBtn
+                                                onPress={() => {
+                                                    onDeleteComment(item.uuid)
+                                                }}
+                                            >
+                                                <AntDesign
+                                                    name="delete"
+                                                    size={15}
+                                                    color="#5aa469cc"
+                                                />
+                                            </DeleteIconBtn>
+                                        </IconView>
+                                    )
+                                )
+                            ) : (
+                                <></>
+                            )}
                         </CommentListBoxBottom>
                     </CommentListWrap>
                 )}
