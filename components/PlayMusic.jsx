@@ -10,6 +10,8 @@ import {
 import { setPlaylist } from "../redux/slices/currentPlaylistSlice"
 import YouTubeVideo from "./YouTubeVideo"
 import { useSelector } from "react-redux"
+import { getMusic, getMusicMetadataFromYouTube } from "../api/musicApi"
+import { useEffect, useState } from "react"
 
 const Container = styled.View`
     width: 100%;
@@ -169,15 +171,27 @@ const MusicControl2IconImg = styled.Image`
 export default function PlayMusic() {
     const currentMusicUuid = useSelector((state) => state.currentMusic.music)
 
+    const [musicMetadata, setMusicMetadata] = useState({})
+
+    const fetchMusicAndMetadata = async () => {
+        const mres = await getMusicMetadataFromYouTube(currentMusicUuid)
+        if (!mres) {
+            return
+        }
+
+        setMusicMetadata(mres)
+    }
+
+    useEffect(() => {
+        fetchMusicAndMetadata()
+    }, [currentMusicUuid])
+
     const navigation = useNavigation()
     return (
         <>
-            <YouTubeVideo
-                musicUuid={currentMusicUuid}
-                style={{ flex: 0, position: "fixed" }}
-            />
+            <YouTubeVideo musicUuid={currentMusicUuid} style={{ flex: 3 }} />
 
-            <Container>
+            <Container style={{ flex: 4 }}>
                 <ImageBackground
                     source={require("../assets/bg1.png")}
                     style={{ width: "100%", height: "100%" }}
@@ -199,9 +213,13 @@ export default function PlayMusic() {
                                     <MP3Text>MP3</MP3Text>
                                 </MP3Wrap>
 
-                                <MP3Title>PLAY ME</MP3Title>
+                                <MP3Title>
+                                    {musicMetadata.title || "title"}
+                                </MP3Title>
                             </HorizontalView>
-                            <MP3Singer>WOOGIE(우기)</MP3Singer>
+                            <MP3Singer>
+                                {musicMetadata.artist || "artist"}
+                            </MP3Singer>
                         </MusicTitleView>
                         <Wrap>
                             {/* <MP3Img source={require("../assets/mp3_image1.png")} /> */}
