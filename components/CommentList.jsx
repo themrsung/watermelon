@@ -1,10 +1,26 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styled from "@emotion/native"
 import { MaterialIcons } from "@expo/vector-icons"
 import { AntDesign } from "@expo/vector-icons"
 import { SimpleLineIcons } from "@expo/vector-icons"
+import { getComments } from "../api/commentsApi"
+import { useSelector } from "react-redux"
 
-export default function CommentList() {
+const Comments = () => {
+    const [comments, setComments] = useState([])
+    const currentPlaylist = useSelector(
+        (state) => state.currentPlaylist.playlist
+    )
+
+    const fetchComments = async () => {
+        const data = await getComments(currentPlaylist)
+        setComments(data)
+    }
+
+    useEffect(() => {
+        fetchComments()
+    }, [currentPlaylist])
+
     const data = [
         {
             image: <LogoImg source={require("../assets/LightBG.png")} />,
@@ -100,29 +116,47 @@ export default function CommentList() {
 
             <CommentListFlatList
                 showsVerticalScrollIndicator={false}
-                data={data}
+                data={comments}
                 renderItem={({ item, i }) => (
-                    <CommentListWrap key={i}>
+                    <CommentListWrap key={item.uuid}>
                         <CommentListBoxHeader>
                             <UserNameBtn>
-                                {item.image}
-                                <UserNameText>{item.userName}</UserNameText>
+                                <LogoImg
+                                    source={require("../assets/LightBG.png")}
+                                />
+                                <UserNameText>{item.createdBy}</UserNameText>
                             </UserNameBtn>
-                            <DateText>{item.date}</DateText>
-                            <MoreIcon>{item.moreIcon}</MoreIcon>
+                            <DateText>{item.createdAt}</DateText>
+                            <MoreIcon>
+                                <MaterialIcons
+                                    name="more-vert"
+                                    size={20}
+                                    color="#5aa469"
+                                />
+                            </MoreIcon>
                         </CommentListBoxHeader>
 
                         <CommentText>{item.content}</CommentText>
 
                         <CommentListBoxBottom>
                             <ReplyCommentBtn>
-                                <ReplyCommentText>
-                                    {item.bottomText}
-                                </ReplyCommentText>
+                                <ReplyCommentText>답글</ReplyCommentText>
                             </ReplyCommentBtn>
                             <IconView>
-                                <EditIconBtn>{item.editIcon}</EditIconBtn>
-                                <DeleteIconBtn>{item.deleteIcon}</DeleteIconBtn>
+                                <EditIconBtn>
+                                    <SimpleLineIcons
+                                        name="pencil"
+                                        size={15}
+                                        color="#5aa469cc"
+                                    />
+                                </EditIconBtn>
+                                <DeleteIconBtn>
+                                    <AntDesign
+                                        name="delete"
+                                        size={15}
+                                        color="#5aa469cc"
+                                    />
+                                </DeleteIconBtn>
                             </IconView>
                         </CommentListBoxBottom>
                     </CommentListWrap>
@@ -131,6 +165,8 @@ export default function CommentList() {
         </CommentListScrollView>
     )
 }
+
+export default Comments
 
 const CommentListScrollView = styled.ScrollView`
     padding: 10px;
