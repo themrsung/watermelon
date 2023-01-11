@@ -61,8 +61,11 @@ export default function YouTubeVideo({ musicUuid, isPlaying }) {
 
     return (
         <WebView
-            mixedContentMode="always"
-            source={{ uri: music.musicLink }}
+            source={{
+                uri:
+                    music.musicLink ||
+                    "https://www.youtube.com/watch?v=f1J4dRTMy9A&list=RD_ffbcWy_oAU&index=2"
+            }}
             injectedJavaScript={runFirst}
         />
     )
