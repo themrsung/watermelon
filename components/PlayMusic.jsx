@@ -8,6 +8,8 @@ import {
     PLAYLIST_PAGE_NAME
 } from "../navigation/NavContainer"
 import { setPlaylist } from "../redux/slices/currentPlaylistSlice"
+import YouTubeVideo from "./YouTubeVideo"
+import { useSelector } from "react-redux"
 
 const Container = styled.View`
     width: 100%;
@@ -165,6 +167,8 @@ const MusicControl2IconImg = styled.Image`
 `
 
 export default function PlayMusic() {
+    const currentMusicUuid = useSelector((state) => state.currentMusic.music)
+
     const navigation = useNavigation()
     return (
         <Container>
@@ -194,7 +198,17 @@ export default function PlayMusic() {
                         <MP3Singer>WOOGIE(우기)</MP3Singer>
                     </MusicTitleView>
                     <Wrap>
-                        <MP3Img source={require("../assets/mp3_image1.png")} />
+                        {/* <MP3Img source={require("../assets/mp3_image1.png")} /> */}
+                        {currentMusicUuid && (
+                            <YouTubeVideo
+                                musicUuid={currentMusicUuid}
+                                style={{
+                                    width: 270,
+                                    height: 270,
+                                    marginTop: 80
+                                }}
+                            />
+                        )}
 
                         <TimeWrap>
                             <Time>0:58</Time>
