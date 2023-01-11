@@ -16,7 +16,7 @@ export default function Comment() {
 
     const [commentContent, setCommentContent] = useState("")
     const onWriteComment = async () => {
-        const isLoggedIn = store.getState().currentSession.loggedIn
+        const isLoggedIn = store.getState().currentSession.isLoggedIn
         if (!isLoggedIn) {
             return
         }

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     id: "",
-    loggedIn: false
+    isLoggedIn: false
 }
 
 export const currentSessionSlice = createSlice({
@@ -11,11 +11,11 @@ export const currentSessionSlice = createSlice({
     reducers: {
         setId: (state, action) => {
             state.id = action.payload
-            state.loggedIn = true
+            state.isLoggedIn = true
         },
         clear: (state) => {
             state.id = ""
-            state.loggedIn = false
+            state.isLoggedIn = false
         }
     }
 })
