@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import { PLAYLIST_INFO_NAME } from "../navigation/NavContainer"
@@ -7,9 +7,36 @@ import { AntDesign } from "@expo/vector-icons"
 import CommentList from "./CommentList"
 import MusicControl from "./MusicControl"
 import BottomNav from "./BottomNav"
+import { store } from "../redux/stores"
+import { writeComment } from "../api/commentsApi"
+import { setPlaylist } from "../redux/slices/currentPlaylistSlice"
 
 export default function Comment() {
     const navigation = useNavigation()
+
+    const [commentContent, setCommentContent] = useState("")
+    const onWriteComment = async () => {
+        const isLoggedIn = store.getState().currentSession.loggedIn
+        if (!isLoggedIn) {
+            return
+        }
+
+        const comment = {
+            title: "댓글",
+            content: commentContent,
+            createdBy: store.getState().currentSession.id,
+            createdAt: Date.now()
+        }
+
+        const response = await writeComment(
+            store.getState().currentPlaylist.playlist,
+            comment
+        )
+
+        const a = store.getState().currentPlaylist.playlist
+        store.dispatch(setPlaylist("-1"))
+        store.dispatch(setPlaylist(a))
+    }
 
     return (
         <Container>
@@ -29,6 +56,9 @@ export default function Comment() {
             <CommentInputView>
                 <CommentTextInput
                     placeholder="댓글을 입력해주세요."
+                    value={commentContent}
+                    onChangeText={setCommentContent}
+                    onSubmitEditing={onWriteComment}
                     placeholderTextColor={"#7da450"}
                 />
             </CommentInputView>
