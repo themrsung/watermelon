@@ -439,7 +439,7 @@ export default function PlaylistList() {
         <Container>
             <TopWrap>
                 <TopImgWrap>
-                    <TopImg source={require("../assets/image1.png")} />
+                    <TopImg source={{ uri: playlistMusics[0].thumbnail }} />
                 </TopImgWrap>
 
                 <PlayListTitle>{playlist.title}</PlayListTitle>
