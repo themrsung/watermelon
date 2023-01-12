@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { View, Image } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import { PLAYLIST_INFO_NAME } from "../navigation/NavContainer"
+import { getPlaylists } from "../api/playlistsApi"
+import { getMusicThumbnailLinkFromYouTube } from "../api/musicApi"
 
 const Wrap = styled.View`
     width: 100%;
@@ -40,22 +42,9 @@ const FavoriteMusicList = styled.View`
 
     position: relative;
 `
-const FavoriteMusicImage = styled.Text`
+const FavoriteMusicImage = styled.View`
     width: 160px;
     height: 160px;
-
-    position: absolute;
-    top: -16%;
-    left: 27%;
-`
-
-const TextWrap = styled.View`
-    margin-top: 130px;
-`
-
-const ContentTitle = styled.Text`
-    color: #5aa469;
-    text-align: center;
 `
 
 const ContentCategory = styled.Text`
@@ -89,6 +78,39 @@ const FlatListBtn = styled.TouchableOpacity``
 export default function FavoriteMusic() {
     const navigation = useNavigation()
 
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    const [plts, setPlts] = useState([])
+
+    const [playlists, setPlaylists] = useState([])
+
+    const fetchPlaylists = async () => {
+        const pls = await getPlaylists()
+        if (!pls) {
+            return
+        }
+
+        setPlaylists(pls)
+
+        const setLoadedAt = pls.length - 1
+
+        pls.forEach(async (pl, i) => {
+            const t = await getMusicThumbnailLinkFromYouTube(pl.content[0])
+
+            if (!t) {
+                return
+            }
+            setPlts([...plts, t])
+            if (i === setLoadedAt) {
+                setIsLoaded(true)
+            }
+        })
+    }
+
+    useEffect(() => {
+        fetchPlaylists()
+    }, [])
+
     const data = [
         {
             image: <Image source={require("../assets/image1.png")} />,
@@ -115,6 +137,9 @@ export default function FavoriteMusic() {
             category: "#겨울 #연말"
         }
     ] //길이가 긴 Array 라고 가정
+
+    console.log(isLoaded, playlists, plts[0])
+
     return (
         <Wrap>
             <TitleWrap>
@@ -127,7 +152,7 @@ export default function FavoriteMusic() {
                     //showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}
                     ItemSeparatorComponent={<View style={{ margin: 6 }} />}
-                    data={data}
+                    data={playlists}
                     renderItem={({ item, i }) => (
                         <FlatListWrap
                             key={i}
@@ -146,15 +171,13 @@ export default function FavoriteMusic() {
                                 </PlayButton>
 
                                 <FavoriteMusicImage>
-                                    {item.image}
+                                    {plts.length - 1 > i && (
+                                        <Image
+                                            source={{ uri: plts[i] }}
+                                            style={{ width: 160, height: 160 }}
+                                        />
+                                    )}
                                 </FavoriteMusicImage>
-
-                                <TextWrap>
-                                    <ContentTitle>{item.content}</ContentTitle>
-                                    <ContentCategory>
-                                        {item.category}
-                                    </ContentCategory>
-                                </TextWrap>
                             </FavoriteMusicList>
                         </FlatListWrap>
                     )}
