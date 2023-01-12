@@ -345,8 +345,10 @@ export default function PlaylistList() {
 
         setPlaylist(playlist)
 
+        const setLoadedAt = playlist.content.length - 1
+
         let musics = []
-        playlist.content.forEach(async (c) => {
+        playlist.content.forEach(async (c, i) => {
             const md = await getMusicMetadataFromYouTube(c)
             if (!md) {
                 return
@@ -366,6 +368,10 @@ export default function PlaylistList() {
             })
 
             setPlaylistMusics(musics)
+
+            if (i === setLoadedAt) {
+                setIsLoaded(true)
+            }
         })
     }
 
@@ -373,15 +379,15 @@ export default function PlaylistList() {
         fetchPlaylistAndMusics()
     }, [currentPlaylistUuid])
 
-    const setIsLoadedAfterOneSecond = async () => {
-        setTimeout(() => {
-            setIsLoaded(true)
-        }, 1000)
-    }
+    // const setIsLoadedAfterOneSecond = async () => {
+    //     setTimeout(() => {
+    //         setIsLoaded(true)
+    //     }, 1000)
+    // }
 
-    useEffect(() => {
-        setIsLoadedAfterOneSecond()
-    }, [])
+    // useEffect(() => {
+    //     setIsLoadedAfterOneSecond()
+    // }, [])
 
     // useEffect(() => {
     //     if (!playlist) {
