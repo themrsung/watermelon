@@ -415,6 +415,8 @@ const MyPlayListMusicTitle = styled.Text`
 `
 
 const MyPlayListMusicSinger = styled.Text`
+    width: 200px;
+
     color: #9a9e96;
     font-size: 12px;
 `
