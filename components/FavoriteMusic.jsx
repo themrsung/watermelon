@@ -47,12 +47,6 @@ const FavoriteMusicImage = styled.View`
     height: 160px;
 `
 
-const ContentCategory = styled.Text`
-    color: #80ae4b;
-    font-size: 11px;
-    text-align: center;
-`
-
 const PlayButton = styled.TouchableOpacity`
     position: absolute;
     top: 10px;
