@@ -174,6 +174,16 @@ export const getMusicThumbnailLinkFromYouTube = async (musicUuid) => {
     return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
 }
 
+export const getMusicThumbnailLinkFromYouTubeNotAsync = (music) => {
+    const videoId = music.musicLink.slice(-11)
+
+    if (!videoId) {
+        return ""
+    }
+
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+}
+
 // musicUuid로 Google에서 lyrics를 가져옵니다.
 export const getMusicLyricsFromGoogle = async (musicUuid) => {
     // const musicMetadata = await getMusicMetadataFromYouTube(musicUuid)
