@@ -42,6 +42,10 @@ export default function YouTubeVideo({ musicUuid = "10", isPlaying }) {
         setTimeout(clickPlayer, 100)
         setTimeout(clickPlayPauseButton, 200)
 
+        document.getElementById("header-bar").style.display = "none"
+        document.getElementById("player").style.height = "25vh"
+        document.getElementById("app").style.paddingTop = "0px"
+
     }
     `
 
