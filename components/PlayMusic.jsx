@@ -139,6 +139,7 @@ const MusicControlIconImg = styled.Image``
 
 const MusicTitleView = styled.View`
     width: 100%;
+    min-height: 130px;
 
     display: flex;
     flex-direction: row;
