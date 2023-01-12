@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Alert, Image } from "react-native"
+import { Alert, Image, Text } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import { PLAY_MUSIC_NAME } from "../navigation/NavContainer"
@@ -332,10 +332,10 @@ export default function PlaylistList() {
         (state) => state.currentPlaylist.playlist
     )
 
+    const [a, setA] = useState(false)
+
     const [playlist, setPlaylist] = useState({})
     const [playlistMusics, setPlaylistMusics] = useState([])
-
-    const [a, setA] = useState(false)
 
     const fetchPlaylistAndMusics = async () => {
         const playlist = await getPlaylist(currentPlaylistUuid)
@@ -373,9 +373,31 @@ export default function PlaylistList() {
         fetchPlaylistAndMusics()
     }, [currentPlaylistUuid])
 
+    const setIsLoadedAfterOneSecond = async () => {
+        setTimeout(() => {
+            setIsLoaded(true)
+        }, 1000)
+    }
+
+    useEffect(() => {
+        setIsLoadedAfterOneSecond()
+    }, [])
+
+    // useEffect(() => {
+    //     if (!playlist) {
+    //         return
+    //     }
+
+    //     if (playlist.content.length === playlistMusics.length) {
+    //         setIsLoaded(true)
+    //     }
+    // }, [playlistMusics])
+
     const onUnsupportedAction = () => {
         Alert.alert("지원되지 않는 기능입니다.")
     }
+
+    const [isLoaded, setIsLoaded] = useState(false)
 
     // const data = [
     //     {
@@ -435,11 +457,15 @@ export default function PlaylistList() {
     //     }
     // ]
     //길이가 긴 Array 라고 가정
-    return (
+    return isLoaded ? (
         <Container>
             <TopWrap>
                 <TopImgWrap>
-                    <TopImg source={{ uri: playlistMusics[0].thumbnail }} />
+                    <TopImg
+                        source={{
+                            uri: playlistMusics[0].thumbnail
+                        }}
+                    />
                 </TopImgWrap>
 
                 <PlayListTitle>{playlist.title}</PlayListTitle>
@@ -608,5 +634,7 @@ export default function PlaylistList() {
                 />
             </PlaylistWrap>
         </Container>
+    ) : (
+        <Text>Loading...</Text>
     )
 }
