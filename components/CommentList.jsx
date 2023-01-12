@@ -173,7 +173,9 @@ const Comments = () => {
                             <TextInput
                                 value={newCommentContent}
                                 onChangeText={setNewCommentContent}
-                                onSubmitEditing={onEditComment(item.uuid)}
+                                onSubmitEditing={() => {
+                                    onEditComment(item.uuid)
+                                }}
                             ></TextInput>
                         ) : (
                             <CommentText>{item.content}</CommentText>
