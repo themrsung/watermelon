@@ -63,7 +63,7 @@ const Profile = styled.View`
 `
 
 const ProfileLeft = styled.View`
-    width: 48%;
+    width: 40%;
 
     display: flex;
     flex-direction: row;
@@ -269,7 +269,7 @@ const FlatList = styled.FlatList`
 
 const FlatListWrap = styled.View`
     width: 100%;
-    height: 100px;
+
     padding: 4px 10px;
     margin-bottom: 10px;
     background-color: rgba(214, 323, 195, 0.6);
@@ -290,14 +290,16 @@ const FlatListLeft = styled.View`
 `
 
 const FlatListImg = styled.View`
-    width: 90px;
-    height: 90px;
-    margin-top: -14%;
+    width: 70px;
+    height: 70px;
+    margin-top: 6px;
 `
 
 const FlatListTextBtn = styled.TouchableOpacity``
 
-const FlatListTextWrap = styled.View``
+const FlatListTextWrap = styled.View`
+    width: 200px;
+`
 
 const PlayListMusicTitle = styled.Text`
     color: #276e38;
@@ -462,6 +464,7 @@ export default function PlaylistList() {
             <TopWrap>
                 <TopImgWrap>
                     <TopImg
+                        style={{ borderRadius: 14 }}
                         source={{
                             uri: playlistMusics[0].thumbnail
                         }}
@@ -593,7 +596,8 @@ export default function PlaylistList() {
                                     <Image
                                         style={{
                                             width: "90%",
-                                            height: "90%"
+                                            height: "90%",
+                                            borderRadius: 6
                                         }}
                                         source={{ uri: item.thumbnail }}
                                     />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {} from "react-native"
+import { View } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import {
@@ -11,10 +11,10 @@ import { store } from "../redux/stores"
 import { setPlaylist } from "../redux/slices/currentPlaylistSlice"
 import { useSelector } from "react-redux"
 import { getMusicMetadataFromYouTube } from "../api/musicApi"
+import TextTicker from "react-native-text-ticker"
 
 const Container = styled.View`
     width: 100%;
-    height: 70px;
     padding: 14px 20px;
     box-sizing: border-box;
     background-color: #5aa469;
@@ -54,6 +54,7 @@ const TopWrap = styled.View`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 `
 
 const MusicPlaylistBtn = styled.TouchableOpacity``
@@ -67,11 +68,6 @@ const MusicWrap = styled.View`
 
     display: flex;
     flex-direction: column;
-`
-
-const MusicTitle = styled.Text`
-    color: #e5f8cf;
-    font-size: 18px;
 `
 
 const MusicSinger = styled.Text`
@@ -137,7 +133,25 @@ export default function MusicControl() {
                     }}
                 >
                     <MusicWrap>
-                        <MusicTitle>{musicMetadata.title}</MusicTitle>
+                        <View
+                            style={{
+                                width: 200,
+                                paddingRight: 15
+                            }}
+                        >
+                            <TextTicker
+                                scrollSpeed={50}
+                                loop
+                                bounce
+                                numberOfLines={1}
+                                style={{
+                                    color: "#e5f8cf",
+                                    fontSize: 17
+                                }}
+                            >
+                                {musicMetadata.title}
+                            </TextTicker>
+                        </View>
                         <MusicSinger>{musicMetadata.artist}</MusicSinger>
                     </MusicWrap>
                 </MusicWrapBtn>
@@ -151,7 +165,11 @@ export default function MusicControl() {
                     />
                 </MusicControlBtn>
 
-                <MusicControlBtn>
+                <MusicControlBtn
+                    onPress={() => {
+                        navigation.navigate(PLAY_MUSIC_NAME)
+                    }}
+                >
                     <MusicControlIconImg
                         source={require("../assets/play3.png")}
                     />

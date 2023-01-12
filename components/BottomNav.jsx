@@ -4,6 +4,7 @@ import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import { HOME_NAME, USER_PROFILE_NAME } from "../navigation/NavContainer"
 import { logout } from "../api/authApi"
+import { AntDesign } from "@expo/vector-icons"
 
 const Container = styled.View`
     width: 100%;
@@ -50,7 +51,11 @@ export default function BottomNav() {
                     navigation.navigate(HOME_NAME)
                 }}
             >
-                <IconImage source={require("../assets/search.png")} />
+                <AntDesign
+                    name="logout"
+                    size={24}
+                    color="rgba(255,255,255,0.8)"
+                />
             </IconBtn>
 
             <IconBtn

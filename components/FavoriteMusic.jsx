@@ -80,7 +80,7 @@ const PlayIconImg = styled.Image`
     height: 100%;
 `
 
-const FlatListWrap = styled.View``
+const FlatListWrap = styled.TouchableOpacity``
 
 const FlatList = styled.FlatList``
 
@@ -121,11 +121,7 @@ export default function FavoriteMusic() {
                 <Title>내가 좋아할 음악</Title>
             </TitleWrap>
 
-            <FlatListBtn
-                onPress={() => {
-                    navigation.navigate(PLAYLIST_INFO_NAME)
-                }}
-            >
+            <FlatListBtn>
                 <FlatList
                     horizontal
                     //showsVerticalScrollIndicator={false}
@@ -133,7 +129,12 @@ export default function FavoriteMusic() {
                     ItemSeparatorComponent={<View style={{ margin: 6 }} />}
                     data={data}
                     renderItem={({ item, i }) => (
-                        <FlatListWrap key={i}>
+                        <FlatListWrap
+                            key={i}
+                            onPress={() => {
+                                navigation.navigate(PLAYLIST_INFO_NAME)
+                            }}
+                        >
                             <FavoriteMusicTitle>
                                 {item.title}
                             </FavoriteMusicTitle>
