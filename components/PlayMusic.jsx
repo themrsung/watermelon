@@ -12,6 +12,7 @@ import YouTubeVideo from "./YouTubeVideo"
 import { useSelector } from "react-redux"
 import { getMusic, getMusicMetadataFromYouTube } from "../api/musicApi"
 import { useEffect, useState } from "react"
+import TextTicker from "react-native-text-ticker"
 
 const Container = styled.View`
     width: 100%;
@@ -54,19 +55,6 @@ const MP3Text = styled.Text`
     font-size: 10px;
 `
 
-const MP3Title = styled.Text`
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 22px;
-`
-
-const HorizontalView = styled.View`
-    width: 200px;
-
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-`
-
 const MP3Singer = styled.Text`
     color: #32d536;
     text-align: left;
@@ -75,28 +63,6 @@ const MP3Singer = styled.Text`
 
 const Wrap = styled.View`
     position: relative;
-`
-
-const MP3Img = styled.Image`
-    width: 100%;
-    height: 270px;
-    margin-top: 80px;
-`
-
-const TimeWrap = styled.View`
-    position: absolute;
-    top: 24%;
-    left: 38%;
-
-    display: flex;
-    flex-direction: row;
-`
-
-const Time = styled.Text`
-    color: #33d53a;
-`
-const Time2 = styled.Text`
-    color: white;
 `
 
 const BtnWrap = styled.View`
@@ -139,7 +105,6 @@ const MusicControlIconImg = styled.Image``
 
 const MusicTitleView = styled.View`
     width: 100%;
-    min-height: 130px;
 
     display: flex;
     flex-direction: row;
@@ -204,7 +169,7 @@ export default function PlayMusic() {
                                 width: 220,
                                 height: 220,
                                 position: "relative",
-                                top: 392,
+                                top: 320,
                                 left: "50%",
                                 marginLeft: -110,
                                 zIndex: 99999
@@ -218,9 +183,14 @@ export default function PlayMusic() {
                             </MP3Wrap>
 
                             <View style={{ width: 216 }}>
-                                <MP3Title>
+                                <TextTicker
+                                    style={{
+                                        color: "rgba(255, 255, 255, 0.7)",
+                                        fontSize: 22
+                                    }}
+                                >
                                     {musicMetadata.title || "title"}
-                                </MP3Title>
+                                </TextTicker>
 
                                 <MP3Singer>
                                     {musicMetadata.artist || "artist"}
