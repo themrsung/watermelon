@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { View, Image } from "react-native"
+import { View, Image, Text } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import { PLAYLIST_INFO_NAME } from "../navigation/NavContainer"
 import { getPlaylists } from "../api/playlistsApi"
 import { getMusicThumbnailLinkFromYouTube } from "../api/musicApi"
+import { store } from "../redux/stores"
+import { setPlaylist } from "../redux/slices/currentPlaylistSlice"
 
 const Wrap = styled.View`
     width: 100%;
@@ -85,14 +87,20 @@ export default function FavoriteMusic() {
     const [playlists, setPlaylists] = useState([])
 
     const fetchPlaylists = async () => {
-        const pls = await getPlaylists()
+        let pls = await getPlaylists()
         if (!pls) {
             return
         }
 
+        pls.forEach((pl, i) => {
+            pl.i = i
+        })
+
         setPlaylists(pls)
 
         const setLoadedAt = pls.length - 1
+
+        let ts = []
 
         pls.forEach(async (pl, i) => {
             const t = await getMusicThumbnailLinkFromYouTube(pl.content[0])
@@ -100,9 +108,11 @@ export default function FavoriteMusic() {
             if (!t) {
                 return
             }
-            setPlts([...plts, t])
+            ts.push(t)
+
             if (i === setLoadedAt) {
                 setIsLoaded(true)
+                setPlts(ts)
             }
         })
     }
@@ -111,34 +121,8 @@ export default function FavoriteMusic() {
         fetchPlaylists()
     }, [])
 
-    const data = [
-        {
-            image: <Image source={require("../assets/image1.png")} />,
-            title: "이번주 인기 플레이리스트",
-            content: "깊어 가는 하얀 겨울, 따뜻...",
-            category: "#겨울 #연말"
-        },
-        {
-            image: <Image source={require("../assets/image2.png")} />,
-            title: "오늘의 감상 테마 #재즈힙합",
-            content: "깊어 가는 하얀 겨울, 따뜻...",
-            category: "#겨울 #연말"
-        },
-        {
-            image: <Image source={require("../assets/image1.png")} />,
-            title: "이번주 인기 플레이리스트",
-            content: "깊어 가는 하얀 겨울, 따뜻...",
-            category: "#겨울 #연말"
-        },
-        {
-            image: <Image source={require("../assets/image2.png")} />,
-            title: "오늘의 감상 테마 #재즈힙합",
-            content: "깊어 가는 하얀 겨울, 따뜻...",
-            category: "#겨울 #연말"
-        }
-    ] //길이가 긴 Array 라고 가정
-
-    console.log(isLoaded, playlists, plts[0])
+    // console.log(isLoaded, playlists, plts[0])
+    // console.log(playlists, plts)
 
     return (
         <Wrap>
@@ -158,11 +142,13 @@ export default function FavoriteMusic() {
                             key={i}
                             onPress={() => {
                                 navigation.navigate(PLAYLIST_INFO_NAME)
+                                store.dispatch(setPlaylist(item.uuid))
                             }}
                         >
                             <FavoriteMusicTitle>
                                 {item.title}
                             </FavoriteMusicTitle>
+
                             <FavoriteMusicList>
                                 <PlayButton>
                                     <PlayIconImg
@@ -171,10 +157,15 @@ export default function FavoriteMusic() {
                                 </PlayButton>
 
                                 <FavoriteMusicImage>
-                                    {plts.length - 1 > i && (
+                                    {isLoaded && (
                                         <Image
-                                            source={{ uri: plts[i] }}
-                                            style={{ width: 160, height: 160 }}
+                                            source={{
+                                                uri: plts[item.i]
+                                            }}
+                                            style={{
+                                                width: 160,
+                                                height: 160
+                                            }}
                                         />
                                     )}
                                 </FavoriteMusicImage>
