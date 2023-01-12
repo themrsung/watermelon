@@ -71,6 +71,8 @@ const MusicWrap = styled.View`
 `
 
 const MusicSinger = styled.Text`
+    width: 200px;
+
     color: #e5f8cf;
     font-size: 10px;
 `
