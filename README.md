@@ -2,4 +2,4 @@
 
 수박
 
-![eas-update.svg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0d56ffe5-8ffc-495f-840c-efcf9bd62362/eas-update.svg)
+https://qr.expo.dev/eas-update?updateId=f525770f-99e3-4e54-bd78-a2bc905e0687&appScheme=exp&host=u.expo.dev
