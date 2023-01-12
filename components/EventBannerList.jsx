@@ -1,5 +1,5 @@
 import React from "react"
-import {} from "react-native"
+import { Image } from "react-native"
 import styled from "@emotion/native"
 
 const Wrap = styled.View`
@@ -11,6 +11,7 @@ const Wrap = styled.View`
 
 const EventBannerTitleWrap = styled.View`
     width: 100%;
+    height: 100px;
 `
 
 const EventBannerTitle = styled.Text`
@@ -18,19 +19,27 @@ const EventBannerTitle = styled.Text`
     font-size: 13px;
 `
 
-const EventBannerImg = styled.Image`
+const EventBannerImg = styled.View`
     width: 100%;
-    height: 100px;
+    height: 100%;
     margin-top: 10px;
-    border-radius: 6px;
 `
 
-export default function EventBannerList() {
+export default function EventBannerList({ b }) {
     return (
         <Wrap>
             <EventBannerTitleWrap>
-                <EventBannerTitle>2023년 신년운쏭 이벤트</EventBannerTitle>
-                <EventBannerImg source={require("../assets/banner1.gif")} />
+                <EventBannerTitle>{b.title}</EventBannerTitle>
+                <EventBannerImg>
+                    <Image
+                        source={b.image}
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            resizeMode: "stretch"
+                        }}
+                    />
+                </EventBannerImg>
             </EventBannerTitleWrap>
         </Wrap>
     )
