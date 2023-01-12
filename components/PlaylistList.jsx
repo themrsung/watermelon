@@ -617,13 +617,22 @@ export default function PlaylistList() {
                             </FlatListLeft>
 
                             <FlatListIconWrap>
-                                <FlatListIconBtn>
+                                <FlatListIconBtn
+                                    onPress={() => {
+                                        navigation.navigate(PLAY_MUSIC_NAME)
+                                        store.dispatch(setMusic(item.uuid))
+                                    }}
+                                >
                                     <FlatListIconImg
                                         source={require("../assets/play.png")}
                                     />
                                 </FlatListIconBtn>
 
-                                <FlatListIconBtn>
+                                <FlatListIconBtn
+                                    onPress={() => {
+                                        onUnsupportedAction()
+                                    }}
+                                >
                                     <FlatListIconImg
                                         source={require("../assets/more2.png")}
                                     />
