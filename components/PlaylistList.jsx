@@ -1,9 +1,17 @@
-import React from "react"
-import { Image } from "react-native"
+import React, { useEffect, useState } from "react"
+import { Alert, Image, Text } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
 import { PLAY_MUSIC_NAME } from "../navigation/NavContainer"
-import Comment from './Comment'
+import Comment from "./Comment"
+import { useSelector } from "react-redux"
+import { getPlaylist } from "../api/playlistsApi"
+import {
+    getMusicMetadataFromYouTube,
+    getMusicThumbnailLinkFromYouTube
+} from "../api/musicApi"
+import { store } from "../redux/stores"
+import { setMusic } from "../redux/slices/currentMusicSlice"
 
 const Container = styled.ScrollView`
     width: 100%;
@@ -281,7 +289,7 @@ const FlatListLeft = styled.View`
     align-items: center;
 `
 
-const FlatListImg = styled.Text`
+const FlatListImg = styled.View`
     width: 90px;
     height: 90px;
     margin-top: -14%;
@@ -320,75 +328,149 @@ const FlatListIconImg = styled.Image`
 export default function PlaylistList() {
     const navigation = useNavigation()
 
-    const data = [
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Sequence",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "Hype boy",
-            singer: "NewJeans"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Mise-en-Scene",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "Black Mamba",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Island",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "Beware",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Forever",
-            singer: "asspa"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "Sequence",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Sequence",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image10.png")} />,
-            title: "Sequence",
-            singer: "IZ*ONE"
-        },
-        {
-            image: <Image source={require("../assets/image9.png")} />,
-            title: "Sequence",
-            singer: "IZ*ONE"
+    const currentPlaylistUuid = useSelector(
+        (state) => state.currentPlaylist.playlist
+    )
+
+    const [a, setA] = useState(false)
+
+    const [playlist, setPlaylist] = useState({})
+    const [playlistMusics, setPlaylistMusics] = useState([])
+
+    const fetchPlaylistAndMusics = async () => {
+        const playlist = await getPlaylist(currentPlaylistUuid)
+        if (!playlist) {
+            return
         }
-    ] //길이가 긴 Array 라고 가정
-    return (
+
+        setPlaylist(playlist)
+
+        let musics = []
+        playlist.content.forEach(async (c) => {
+            const md = await getMusicMetadataFromYouTube(c)
+            if (!md) {
+                return
+            }
+
+            const t = await getMusicThumbnailLinkFromYouTube(c)
+            if (!t) {
+                return
+            }
+
+            musics.push({
+                uuid: c,
+                title: md.title,
+                artist: md.artist,
+                artistAndTitle: md.artistAndTitle,
+                thumbnail: t
+            })
+
+            setPlaylistMusics(musics)
+        })
+    }
+
+    useEffect(() => {
+        fetchPlaylistAndMusics()
+    }, [currentPlaylistUuid])
+
+    const setIsLoadedAfterOneSecond = async () => {
+        setTimeout(() => {
+            setIsLoaded(true)
+        }, 1000)
+    }
+
+    useEffect(() => {
+        setIsLoadedAfterOneSecond()
+    }, [])
+
+    // useEffect(() => {
+    //     if (!playlist) {
+    //         return
+    //     }
+
+    //     if (playlist.content.length === playlistMusics.length) {
+    //         setIsLoaded(true)
+    //     }
+    // }, [playlistMusics])
+
+    const onUnsupportedAction = () => {
+        Alert.alert("지원되지 않는 기능입니다.")
+    }
+
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    // const data = [
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Sequence",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "Hype boy",
+    //         singer: "NewJeans"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Mise-en-Scene",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "Black Mamba",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Island",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "Beware",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Forever",
+    //         singer: "asspa"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "Sequence",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Sequence",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image10.png")} />,
+    //         title: "Sequence",
+    //         singer: "IZ*ONE"
+    //     },
+    //     {
+    //         image: <Image source={require("../assets/image9.png")} />,
+    //         title: "Sequence",
+    //         singer: "IZ*ONE"
+    //     }
+    // ]
+    //길이가 긴 Array 라고 가정
+    return isLoaded ? (
         <Container>
             <TopWrap>
                 <TopImgWrap>
-                    <TopImg source={require("../assets/image1.png")} />
+                    <TopImg
+                        source={{
+                            uri: playlistMusics[0].thumbnail
+                        }}
+                    />
                 </TopImgWrap>
 
-                <PlayListTitle>
-                    깊어 가는 하얀 겨울, 따뜻한 플레이리스트
-                </PlayListTitle>
+                <PlayListTitle>{playlist.title}</PlayListTitle>
 
-                <EditDate>3일 전 업데이트</EditDate>
+                {/* <EditDate>3일 전 업데이트</EditDate> */}
 
                 <Profile>
                     <ProfileLeft>
@@ -396,7 +478,7 @@ export default function PlaylistList() {
 
                         <Editor>
                             <ProfileDJ1>DJ</ProfileDJ1>
-                            <ProfileDJ2>멜론TOP100</ProfileDJ2>
+                            <ProfileDJ2>워터멜론</ProfileDJ2>
                         </Editor>
 
                         <EditorCheckImg
@@ -404,7 +486,11 @@ export default function PlaylistList() {
                         />
                     </ProfileLeft>
 
-                    <FollowBtn>
+                    <FollowBtn
+                        onPress={() => {
+                            onUnsupportedAction()
+                        }}
+                    >
                         <PlusIconImg source={require("../assets/plus.png")} />
                         <PlusText>팔로우</PlusText>
                     </FollowBtn>
@@ -412,14 +498,18 @@ export default function PlaylistList() {
 
                 <DesWrap>
                     <PlayListDes>
-                        {`추운 겨울, 사랑하는 사람과 함께\n플레이리스트를 들으면서 따뜻하게 보내세요!\n나도 하고 싶다.. 사랑...`}
+                        {`${playlist.content.length}곡을 포함하고 있는 플레이리스트로, ${playlistMusics[0].artistAndTitle}로 시작하는 플레이리스트입니다.`}
                     </PlayListDes>
                 </DesWrap>
 
                 <IconWrap>
                     <IconLeft>
                         <IconBtnWrap>
-                            <IconBtn>
+                            <IconBtn
+                                onPress={() => {
+                                    onUnsupportedAction()
+                                }}
+                            >
                                 <IconImg
                                     source={require("../assets/heart2.png")}
                                 />
@@ -429,7 +519,7 @@ export default function PlaylistList() {
 
                         <IconBtnWrap>
                             <IconBtn
-                                 onPress={() => {
+                                onPress={() => {
                                     navigation.navigate(Comment)
                                 }}
                             >
@@ -447,14 +537,22 @@ export default function PlaylistList() {
                 </IconWrap>
 
                 <PlayWrap>
-                    <PlayBtnWrap>
+                    <PlayBtnWrap
+                        onPress={() => {
+                            onUnsupportedAction()
+                        }}
+                    >
                         <PlayBtnIcon
                             source={require("../assets/shuffle3.png")}
                         />
                         <PlayText>셔플재생</PlayText>
                     </PlayBtnWrap>
 
-                    <PlayBtnWrap>
+                    <PlayBtnWrap
+                        onPress={() => {
+                            onUnsupportedAction()
+                        }}
+                    >
                         <PlayBtnIcon source={require("../assets/play.png")} />
                         <PlayText>전체재생</PlayText>
                     </PlayBtnWrap>
@@ -463,7 +561,11 @@ export default function PlaylistList() {
 
             <PlaylistWrap>
                 <PlayListTop>
-                    <AllSelectBtn>
+                    <AllSelectBtn
+                        onPress={() => {
+                            onUnsupportedAction()
+                        }}
+                    >
                         <AllSelectBtnImg
                             source={require("../assets/check.png")}
                         />
@@ -471,23 +573,36 @@ export default function PlaylistList() {
                     </AllSelectBtn>
 
                     <PlayListTopLeft>
-                        <PlayListNumber>132곡</PlayListNumber>
-                        <PlayListTime>· 7시간 45분</PlayListTime>
+                        <PlayListNumber>
+                            {playlist.content.length}곡
+                        </PlayListNumber>
+                        <PlayListTime>
+                            · 약 {playlist.content.length * 3.5}분
+                        </PlayListTime>
                     </PlayListTopLeft>
                 </PlayListTop>
 
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     // ItemSeparatorComponent={<View style={{ height: 5 }} />}
-                    data={data}
+                    data={playlistMusics}
                     renderItem={({ item, i }) => (
                         <FlatListWrap key={i}>
                             <FlatListLeft>
-                                <FlatListImg>{item.image}</FlatListImg>
+                                <FlatListImg>
+                                    <Image
+                                        style={{
+                                            width: "90%",
+                                            height: "90%"
+                                        }}
+                                        source={{ uri: item.thumbnail }}
+                                    />
+                                </FlatListImg>
 
                                 <FlatListTextBtn
                                     onPress={() => {
                                         navigation.navigate(PLAY_MUSIC_NAME)
+                                        store.dispatch(setMusic(item.uuid))
                                     }}
                                 >
                                     <FlatListTextWrap>
@@ -495,7 +610,7 @@ export default function PlaylistList() {
                                             {item.title}
                                         </PlayListMusicTitle>
                                         <PlayListMusicSinger>
-                                            {item.singer}
+                                            {item.artist}
                                         </PlayListMusicSinger>
                                     </FlatListTextWrap>
                                 </FlatListTextBtn>
@@ -519,5 +634,7 @@ export default function PlaylistList() {
                 />
             </PlaylistWrap>
         </Container>
+    ) : (
+        <Text>Loading...</Text>
     )
 }
