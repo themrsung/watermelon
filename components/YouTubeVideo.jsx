@@ -61,6 +61,7 @@ export default function YouTubeVideo({ musicUuid = "10", isPlaying }) {
 
     return (
         <WebView
+            scalesPageToFit
             source={{
                 uri: music.musicLink
             }}

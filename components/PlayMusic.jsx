@@ -15,6 +15,7 @@ import { useEffect, useState } from "react"
 
 const Container = styled.View`
     width: 100%;
+    margin-top: -180px;
 
     display: flex;
     flex-direction: column;
@@ -191,19 +192,23 @@ export default function PlayMusic() {
     const navigation = useNavigation()
     return (
         <>
-            <YouTubeVideo
-                musicUuid={currentMusicUuid}
-                style={{
-                    flex: 3
-                }}
-            />
-
-            <Container style={{ flex: 4 }}>
+            <Container>
                 <ImageBackground
                     source={require("../assets/bg1.png")}
                     style={{ width: "100%", height: "100%" }}
                 >
                     <BgDark>
+                        <View
+                            style={{
+                                width: 200,
+                                height: 200,
+                                position: "relative",
+                                top: 300,
+                                zIndex: 99999
+                            }}
+                        >
+                            <YouTubeVideo musicUuid={currentMusicUuid} />
+                        </View>
                         <MusicTitleView>
                             <MP3Wrap>
                                 <MP3Text>MP3</MP3Text>
@@ -245,6 +250,8 @@ export default function PlayMusic() {
                                 <Time2>· 3:58</Time2>
                             </TimeWrap>
 
+                            <View style={{ width: 200, height: 200 }}></View>
+
                             <BtnWrap>
                                 <MusicControlIconBtn1>
                                     <MusicControlIconImg
@@ -269,9 +276,7 @@ export default function PlayMusic() {
                                 </MusicControlIconBtn3>
                             </BtnWrap>
                         </Wrap>
-
                         <Lyric />
-
                         <MusicControlView>
                             <MusicControl2IconBtn
                                 onPress={() => {
