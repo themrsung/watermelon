@@ -33,6 +33,8 @@ export default function Comment() {
             comment
         )
 
+        setCommentContent("")
+
         const a = store.getState().currentPlaylist.playlist
         store.dispatch(setPlaylist("-1"))
         store.dispatch(setPlaylist(a))
