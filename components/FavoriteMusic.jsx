@@ -49,12 +49,6 @@ const FavoriteMusicImage = styled.View`
     height: 160px;
 `
 
-const ContentCategory = styled.Text`
-    color: #80ae4b;
-    font-size: 11px;
-    text-align: center;
-`
-
 const PlayButton = styled.TouchableOpacity`
     position: absolute;
     top: 10px;
@@ -163,8 +157,10 @@ export default function FavoriteMusic() {
                                                 uri: plts[item.i]
                                             }}
                                             style={{
-                                                width: 160,
-                                                height: 160
+                                                marginTop: 9,
+                                                width: 150,
+                                                height: 150,
+                                                borderRadius: 6
                                             }}
                                         />
                                     )}

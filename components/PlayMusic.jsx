@@ -20,15 +20,9 @@ const Container = styled.View`
     flex-direction: column;
     justify-content: center;
     flex: 1;
-
-    position: relative;
 `
 
 const BottomIconBtn = styled.TouchableOpacity`
-    position: absolute;
-    top: 10%;
-    right: 24%;
-
     z-index: 999999;
 `
 
@@ -40,7 +34,7 @@ const BottomIconImg = styled.Image`
 const BgDark = styled.View`
     width: 100%;
     height: 100%;
-    padding: 60px;
+    padding: 60px 40px;
     box-sizing: border-box;
     background-color: rgba(0, 0, 0, 0.7);
 `
@@ -48,7 +42,7 @@ const BgDark = styled.View`
 const MP3Wrap = styled.View`
     padding: 4px 14px;
     box-sizing: border-box;
-    margin-right: 10px;
+    margin-right: 20px;
     border-width: 1px;
     border-color: rgba(255, 255, 255, 0.6);
     border-style: solid;
@@ -61,10 +55,12 @@ const MP3Text = styled.Text`
 
 const MP3Title = styled.Text`
     color: rgba(255, 255, 255, 0.7);
-    font-size: 24px;
+    font-size: 22px;
 `
 
 const HorizontalView = styled.View`
+    width: 200px;
+
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -72,7 +68,7 @@ const HorizontalView = styled.View`
 
 const MP3Singer = styled.Text`
     color: #32d536;
-    text-align: center;
+    text-align: left;
     margin-top: 12px;
 `
 
@@ -141,6 +137,12 @@ const MusicControlIconBtn3 = styled.TouchableOpacity`
 const MusicControlIconImg = styled.Image``
 
 const MusicTitleView = styled.View`
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     z-index: 99999;
 `
 const MusicControlView = styled.View`
@@ -189,7 +191,12 @@ export default function PlayMusic() {
     const navigation = useNavigation()
     return (
         <>
-            <YouTubeVideo musicUuid={currentMusicUuid} style={{ flex: 3 }} />
+            <YouTubeVideo
+                musicUuid={currentMusicUuid}
+                style={{
+                    flex: 3
+                }}
+            />
 
             <Container style={{ flex: 4 }}>
                 <ImageBackground
@@ -197,29 +204,30 @@ export default function PlayMusic() {
                     style={{ width: "100%", height: "100%" }}
                 >
                     <BgDark>
-                        <BottomIconBtn
-                            onPress={() => {
-                                navigation.navigate(HOME_NAME)
-                            }}
-                        >
-                            <BottomIconImg
-                                source={require("../assets/bottom.png")}
-                            />
-                        </BottomIconBtn>
-
                         <MusicTitleView>
-                            <HorizontalView>
-                                <MP3Wrap>
-                                    <MP3Text>MP3</MP3Text>
-                                </MP3Wrap>
+                            <MP3Wrap>
+                                <MP3Text>MP3</MP3Text>
+                            </MP3Wrap>
 
+                            <View style={{ width: 216 }}>
                                 <MP3Title>
                                     {musicMetadata.title || "title"}
                                 </MP3Title>
-                            </HorizontalView>
-                            <MP3Singer>
-                                {musicMetadata.artist || "artist"}
-                            </MP3Singer>
+
+                                <MP3Singer>
+                                    {musicMetadata.artist || "artist"}
+                                </MP3Singer>
+                            </View>
+
+                            <BottomIconBtn
+                                onPress={() => {
+                                    navigation.navigate(HOME_NAME)
+                                }}
+                            >
+                                <BottomIconImg
+                                    source={require("../assets/bottom.png")}
+                                />
+                            </BottomIconBtn>
                         </MusicTitleView>
                         <Wrap>
                             {/* <MP3Img source={require("../assets/mp3_image1.png")} /> */}
