@@ -27,7 +27,7 @@ const Container = styled.View`
 const AlbumImg = styled.Image`
     width: 40px;
     height: 40px;
-    margin-right: 14px;
+    margin-right: 20px;
 `
 
 const Wrap = styled.View`
@@ -35,11 +35,12 @@ const Wrap = styled.View`
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 `
 
 const PlayListGroupTitle = styled.Text`
+    width: 140px;
     margin-right: 10px;
 
     color: white;

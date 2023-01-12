@@ -157,8 +157,10 @@ export default function FavoriteMusic() {
                                                 uri: plts[item.i]
                                             }}
                                             style={{
-                                                width: 160,
-                                                height: 160
+                                                marginTop: 9,
+                                                width: 150,
+                                                height: 150,
+                                                borderRadius: 6
                                             }}
                                         />
                                     )}
