@@ -42,12 +42,7 @@ export default function Lyric() {
 
     return (
         <Container>
-            <ScrollView
-                ref={(ref) => (this.scrollView = ref)}
-                onContentSizeChange={(contentWidth, contentHeight) => {
-                    this.scrollView.scrollToEnd({ animated: true })
-                }}
-            >
+            <ScrollView>
                 <LyricText>
                     {`${music.lyrics || "가사가 지원되지 않는 곡입니다."}`}
                 </LyricText>

@@ -15,7 +15,7 @@ import { useEffect, useState } from "react"
 
 const Container = styled.View`
     width: 100%;
-    margin-top: -180px;
+    margin-top: -200px;
 
     display: flex;
     flex-direction: column;
@@ -200,10 +200,12 @@ export default function PlayMusic() {
                     <BgDark>
                         <View
                             style={{
-                                width: 200,
-                                height: 200,
+                                width: 220,
+                                height: 220,
                                 position: "relative",
-                                top: 300,
+                                top: 392,
+                                left: "50%",
+                                marginLeft: -110,
                                 zIndex: 99999
                             }}
                         >
@@ -245,12 +247,7 @@ export default function PlayMusic() {
                             }}
                         /> */}
 
-                            <TimeWrap>
-                                <Time>0:58</Time>
-                                <Time2>· 3:58</Time2>
-                            </TimeWrap>
-
-                            <View style={{ width: 200, height: 200 }}></View>
+                            <View style={{ width: 260, height: 260 }}></View>
 
                             <BtnWrap>
                                 <MusicControlIconBtn1>
