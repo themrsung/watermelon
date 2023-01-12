@@ -207,7 +207,11 @@ export default function PlaylistList() {
                             renderItem={({ item, i }) => (
                                 <FlatListMyPlay key={i}>
                                     <Image
-                                        style={{ width: 50, height: 50 }}
+                                        style={{
+                                            width: 50,
+                                            height: 50,
+                                            borderRadius: 6
+                                        }}
                                         source={{ uri: item.tu }}
                                     />
 
@@ -404,6 +408,8 @@ const FlatListMyPlayImg = styled.Text`
 const FlatListMyPlayWrap = styled.TouchableOpacity``
 
 const MyPlayListMusicTitle = styled.Text`
+    width: 200px;
+
     color: white;
     font-size: 14px;
 `
