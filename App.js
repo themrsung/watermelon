@@ -6,6 +6,7 @@ import NavContainer from "./navigation/NavContainer"
 import { Provider } from "react-redux"
 import { store } from "./redux/stores"
 import YouTubeVideo from "./components/YouTubeVideo"
+import { LogBox } from "react-native"
 
 const SafeAreaView = styled.SafeAreaView`
     width: 100%;
@@ -17,6 +18,8 @@ const SafeAreaView = styled.SafeAreaView`
 `
 
 export default function App() {
+    LogBox.ignoreAllLogs()
+
     const [musics, setMusics] = useState([])
     const [musicTitle, setMusicTitle] = useState("")
 
