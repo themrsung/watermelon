@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Alert, Image, Text } from "react-native"
 import styled from "@emotion/native"
 import { useNavigation } from "@react-navigation/core"
-import { PLAY_MUSIC_NAME } from "../navigation/NavContainer"
+import { COMMENT_NAME, PLAY_MUSIC_NAME } from "../navigation/NavContainer"
 import Comment from "./Comment"
 import { useSelector } from "react-redux"
 import { getPlaylist } from "../api/playlistsApi"
@@ -529,7 +529,7 @@ export default function PlaylistList() {
                         <IconBtnWrap>
                             <IconBtn
                                 onPress={() => {
-                                    navigation.navigate(Comment)
+                                    navigation.navigate(COMMENT_NAME)
                                 }}
                             >
                                 <IconImg
